@@ -1,8 +1,5 @@
 map <- read.delim("http://www.genenames.org/cgi-bin/hgnc_downloads?col=gd_hgnc_id&col=gd_app_sym&col=gd_prev_sym&col=gd_aliases&status=Approved&status=Entry+Withdrawn&status_opt=2&where=&order_by=gd_hgnc_id&format=text&limit=&hgnc_dbtag=on&submit=submit", as.is=TRUE)
 
-if(file.exists("extdata/"))
-    save(map, file="extdata/genenames_org.rda", compress="bzip2")
-
 M  <- do.call(rbind, apply(map[nchar(map[, 3])>0 | nchar(map[, 4])>0 , ], 1,
 function(x) {
     y <- strsplit(paste(x[3:4], collapse=", "), ", ")[[1]]
