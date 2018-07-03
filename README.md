@@ -3,8 +3,7 @@
 To update the symbols map (data/hgnc.table.rda):
 
 1. Download this repository, change to the "inst/" subdirectory
-2. Run:
-
+2. Run from the command line:
 ```
 cd inst/
 Rscript --vanilla "Rscript hgncLookup.R"
