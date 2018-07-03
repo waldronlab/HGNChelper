@@ -1,0 +1,15 @@
+language: r
+cache:
+  directories:
+    - $TRAVIS_BUILD_DIR/packrat/src
+    - $TRAVIS_BUILD_DIR/packrat/lib
+  packages: true
+sudo: false
+warnings_are_errors: true
+env:
+  global:
+    secure: IUIIpYsQIH1B2dO2N4tte3MTYxLa4ulq8rJK9jfd3zkb1SdiEFwPr4E8p1v/iJ2/DeECYU+YbyNqbAzDQosG5bd1AYQBZgYHG8rxw6n7y5eO0a4qerXTCPeHBkGrizE0h9SYjqc6eF/6PaXy4e81gXzNn6VDvjLoYJd5kp4syWb9JeovcDxqGRsQqvXMEo1buM/9KFIgToHD1310YVOLX6CyTGlrUPtwztTsPqHM4hFJ0YVHJhfz9BsiHyqPAI+412j0F1Nnt7EuRmnJM1glOlvwZTkkZRKQanaoh/JrgCMlxXH4jGu3Z3QZxc/yKFulC8m2QFlgK8MVaCUAHblbgdV1yrOax635ZNQ3BWGDvVEsGCPxcCoU9mUJaoipNZlnwb0PPOb4pGu5gHFMReDT0XBrkmpW11M1vKmx6mElUwZNPBUFFMyZ+vMUuTOTrSR4kNc4E2xVDNANAMiRNFeQmJxgGkUU9SIk8lbVuNBYDsY8gc9fikQpyLCkbG6kzLV/HffpF60a9pX9LeJWcNXxkTPGkyA6XCG+ZRSr0rd8LtZaIPbo8C533AmgMhtiS4JeQsLsOFs5c434EVbT8043GsqAa3iQ4MtfNN7noBjWvgUaryzJ+ZFc8mY9Q+2I63g450fIv3kN7TLBSdnZwhO+Z9AvOA80eb1LWi7eYdFIX7A=
+before_install:
+  - chmod 755 ./.pre_script_build.sh
+before_script:
+  - ./.pre_script_build.sh
