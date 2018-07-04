@@ -1,4 +1,6 @@
+## ============================
 ## Human
+## ============================
 map <- read.delim("http://www.genenames.org/cgi-bin/hgnc_downloads?col=gd_hgnc_id&col=gd_app_sym&col=gd_prev_sym&col=gd_aliases&status=Approved&status=Entry+Withdrawn&status_opt=2&where=&order_by=gd_hgnc_id&format=text&limit=&hgnc_dbtag=on&submit=submit", as.is=TRUE)
 
 M  <- do.call(rbind, apply(map[nchar(map[, 3])>0 | nchar(map[, 4])>0 , ], 1,
@@ -38,10 +40,13 @@ hgnc.table <- hgnc.table[complete.cases(hgnc.table), ]
 is.ascii <- iconv(hgnc.table[, 1], to="ASCII", sub=".") == hgnc.table[, 1]
 hgnc.table <- hgnc.table[is.ascii, ]
 
-save(hgnc.table, file="../data/hgnc.table.rda", compress="bzip2")
+if(dir.exists("../data/"))
+  save(hgnc.table, file="../data/hgnc.table.rda", compress="bzip2")
+rm("id", "is.ascii", "M", "map", "N", "O")
 
+## ============================
 ## Mouse
-rm(list=ls())
+## ============================
 O <- read.csv("extdata/HGNChelper_mog_map_MGI_AMC_2016_03_30.csv", as.is=TRUE)[, 2:1]
 colnames(O) <- c("Symbol", "Approved.Symbol")
 
@@ -62,4 +67,7 @@ mouse.table <- mouse.table[complete.cases(mouse.table), ]
 rownames(mouse.table) <- NULL
 mouse.table[!is.na(iconv(mouse.table[, 1], "ASCII")), ]
 
-save(mouse.table, file="../data/mouse.table.rda", compress="bzip2")
+if(dir.exists("../data"))
+  save(mouse.table, file="../data/mouse.table.rda", compress="bzip2")
+
+rm("map", "map.ok", "map.withdrawn", "O")
