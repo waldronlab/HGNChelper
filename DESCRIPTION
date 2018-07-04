@@ -2,8 +2,8 @@ Package: HGNChelper
 Maintainer: Levi Waldron <lwaldron.research@gmail.com>
 Depends: R (>= 2.10), methods, utils
 Author: Levi Waldron and Markus Riester
-Version: 0.3.8
-Date: 2018-07-03
+Version: 0.4.0
+Date: 2018-07-04
 License: GPL (>=2.0)
 Title: Handy Functions for Working with HGNC Gene Symbols and
  Affymetrix Probeset Identifiers

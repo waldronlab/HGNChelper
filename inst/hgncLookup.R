@@ -1,3 +1,4 @@
+## Human
 map <- read.delim("http://www.genenames.org/cgi-bin/hgnc_downloads?col=gd_hgnc_id&col=gd_app_sym&col=gd_prev_sym&col=gd_aliases&status=Approved&status=Entry+Withdrawn&status_opt=2&where=&order_by=gd_hgnc_id&format=text&limit=&hgnc_dbtag=on&submit=submit", as.is=TRUE)
 
 M  <- do.call(rbind, apply(map[nchar(map[, 3])>0 | nchar(map[, 4])>0 , ], 1,
@@ -26,13 +27,39 @@ hgnc.table <- hgnc.table[order(hgnc.table$Symbol), ]
 
 hgnc.table$Symbol <- as.character(hgnc.table$Symbol)
 hgnc.table$Approved.Symbol <- as.character(hgnc.table$Approved.Symbol)
-rownames(hgnc.table) <- 1:nrow(hgnc.table)
+rownames(hgnc.table) <- NULL
 
 ## In the un-approved column, convert everything but orfs to upper-case:
 hgnc.table$Symbol <- toupper(hgnc.table$Symbol)
 hgnc.table$Symbol <- sub("(.*C[0-9XY]+)ORF(.+)", "\\1orf\\2", hgnc.table$Symbol)
 
 hgnc.table <- unique(hgnc.table)
+hgnc.table <- hgnc.table[complete.cases(hgnc.table), ]
+is.ascii <- iconv(hgnc.table[, 1], to="ASCII", sub=".") == hgnc.table[, 1]
+hgnc.table <- hgnc.table[is.ascii, ]
 
-if(file.exists("../data/"))
-    save(hgnc.table, file="../data/hgnc.table.rda", compress="bzip2")
+save(hgnc.table, file="../data/hgnc.table.rda", compress="bzip2")
+
+## Mouse
+rm(list=ls())
+O <- read.csv("extdata/HGNChelper_mog_map_MGI_AMC_2016_03_30.csv", as.is=TRUE)[, 2:1]
+colnames(O) <- c("Symbol", "Approved.Symbol")
+
+map <- read.delim("http://www.informatics.jax.org/downloads/reports/MGI_EntrezGene.rpt", as.is=TRUE, header = FALSE)
+map <- map[, c(2, 4)]
+map.withdrawn <- map[grep("withdrawn", map[, 2]), ]
+map.ok <- map[-grep("withdrawn", map[, 2]), ]
+map.ok <- data.frame(Symbol=unique(map.ok[, 1]), Approved.Symbol=unique(map.ok[, 1]), stringsAsFactors = FALSE)
+
+map.withdrawn[, 2] <- sub("^withdrawn, ", "", map.withdrawn[, 2])
+map.withdrawn[, 2] <- sub("^= ", "", map.withdrawn[, 2])
+map.withdrawn <- map.withdrawn[, 2:1]
+colnames(map.withdrawn) <- c("Symbol", "Approved.Symbol")
+
+mouse.table <- rbind(O, map.withdrawn, map.ok)
+mouse.table <- unique(mouse.table)
+mouse.table <- mouse.table[complete.cases(mouse.table), ]
+rownames(mouse.table) <- NULL
+mouse.table[!is.na(iconv(mouse.table[, 1], "ASCII")), ]
+
+save(mouse.table, file="../data/mouse.table.rda", compress="bzip2")
