@@ -16,3 +16,4 @@ Description: Contains functions for
 URL: https://github.com/waldronlab/HGNChelper
 BugReports: https://github.com/waldronlab/HGNChelper/issues
 RoxygenNote: 6.0.1
+Suggests: testthat
