@@ -1,2 +1,6 @@
 inst/analyses
 ^.*\.Rout$
+.pre_script_build.sh
+.travis.yml
+^.*\.Rproj$
+^\.Rproj\.user$
