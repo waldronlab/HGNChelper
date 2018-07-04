@@ -1,6 +1,4 @@
-library(HGNChelper)
-
-##test 1
+## human test 1
 x = c("FN1", "TP53", "UNKNOWNGENE","7-Sep", "9/7", "1-Mar", "Oct4", "4-Oct",
       "OCT4-PG4", "C19ORF71", "C19orf71")
 
@@ -15,14 +13,7 @@ expected.correct <- c("FN1","TP53",NA,"SEPT7","SEPT7","MARC1 /// MARCH1",
 
 expect_equal(as.character(res[,3]), expected.correct)
 
-if (!identical(all.equal(as.character(res[,3]), expected.correct), TRUE)){
-  problem.res <- cbind(res, expected.correct)
-  problem.res <- problem.res[na.omit(which(res[, 3] != expected.correct)), ]
-  print(problem.res)
-  stop("The above Suggested.Symbol does not match expected.correct")
-}
-
-##test 2
+## human test 2
 x = c("C21orf62-AS1", "c21orf62-as1",
       "MORF4L1P7", "Morf4L1P7",
       "Fn1", "FN1",
@@ -46,3 +37,10 @@ expect_equal(as.character(res[,3]), c("C21orf62-AS1", "C21orf62-AS1",
                                               NA,
                                               "SEPT7", "MARC1 /// MARCH1", "MARC1 /// MARCH1"))
 
+# mouse test 1
+data(mouse.table)
+orig <- c("1-Feb", "A2m", "A2mr", "UNKNOWNGENE")
+correct <- c("Feb1", "AI893533", "A2mr", NA)
+expect_warning(res <- checkGeneSymbols(orig, map=mouse.table))
+expect_equal(res$Approved, c(FALSE, FALSE, TRUE, FALSE))
+expect_equal(res$Suggested.Symbol, correct)
