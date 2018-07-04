@@ -1,21 +1,55 @@
+#' Title Identify outdated or Excel-mogrified gene symbols
+#'
+#' @param x Vector of gene symbols to check for mogrified or outdated values
+#' @param unmapped.as.na 
+#'  If TRUE (default), unmapped symbols will appear as NA in the
+#'  Suggested.Symbol column.  If FALSE, the original unmapped symbol
+#'  will be kept.
+#' @param hgnc.table 
+#'  HGNChelper provides two maps of valid / invalid symbols: 
+#'  hgnc.table (default) and mouse.table. Specify hgnc.table=mouse.table
+#'  if you are checking mouse gene symbols.
+#'  If hgnc.table can also be any other data.frame with colnames(hgnc.table) identical
+#'  to c("Symbol", "Approved.Symbol").
+#' @description 
+#' This function identifies gene symbols which are outdated or may have been
+#' mogrified by Excel or other spreadsheet programs.  If output is
+#' assigned to a variable, it returns a data.frame of the same number of
+#' rows as the input, with a second column indicating whether the symbols
+#' are valid and a third column with a corrected gene list.
+#' @return
+#' The function will return a data.frame of the same number of rows as the input,
+#' with corrections possible from hgnc.table.
+#' @seealso \code{\link{mouse.table}} for the mouse lookup table, 
+#' \code{\link{hgnc.table}} for the human lookup table
+#' @importFrom methods is
+#' @importFrom utils read.csv data
+#' @export
+#'
+#' @examples
+#' library(HGNChelper)
+#' human = c("FN1", "TP53", "UNKNOWNGENE","7-Sep", "9/7", "1-Mar", "Oct4", "4-Oct",
+#'       "OCT4-PG4", "C19ORF71", "C19orf71")
+#' checkGeneSymbols(human)
+#' ## mouse
+#' data(mouse.table)
+#' mouse <- c("1-Feb", "Pzp", "A2m")
+#' checkGeneSymbols(mouse, hgnc.table=mouse.table)
+#' if (interactive()){
+#'   ##Run checkGeneSymbols with a brand-new map downloaded from HGNC:
+#'   source(system.file("hgncLookup.R", package = "HGNChelper"))
+#'   ##You should save this if you are going to use it multiple times,
+#'   ##then load it from file rather than burdening HGNC's servers.
+#'   ## save(hgnc.table, file="hgnc.table.rda", compress="bzip2")
+#'   ## load("hgnc.table.rda")
+#'   res <- checkGeneSymbols(x, hgnc.table=hgnc.table)
+#' }
+
 checkGeneSymbols <-
-function  #function to identify outdated or Excel-mogrified gene symbols
-### This function identifies gene symbols which are outdated or may have been
-### mogrified by Excel or other spreadsheet programs.  If output is
-### assigned to a variable, it returns a data.frame of the same number of
-### rows as the input, with a second column indicating whether the symbols
-### are valid and a third column with a corrected gene list.
+function  #function to 
 (x,
- ### Vector of gene symbols to check for mogrified or outdated values
  unmapped.as.na=TRUE,
- ### If TRUE, unmapped symbols will appear as NA in the
- ### Suggested.Symbol column.  If FALSE, the original unmapped symbol
- ### will be kept.
  hgnc.table=NULL
- ### If hgnc.table is a data.frame with colnames(hgnc.table) identical
- ### to c("Symbol", "Approved.Symbol"), it will be used to correct
- ### gene symbols.  Otherwise, the default table data("hgnc.table",
- ### package="HGNChelper") is used.
  ){
     if(class(x) != "character"){
         x <- as.character(x)
@@ -54,6 +88,4 @@ function  #function to identify outdated or Excel-mogrified gene symbols
     if (sum(df$Approved) != nrow(df))
         warning("x contains non-approved gene symbols")
     return(df)
-### The function will return a data.frame of the same number of rows as the input,
-### with corrections possible from hgnc.table.
 }
