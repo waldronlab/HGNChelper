@@ -51,11 +51,12 @@ O <- read.csv("extdata/HGNChelper_mog_map_MGI_AMC_2016_03_30.csv", as.is=TRUE)[,
 colnames(O) <- c("Symbol", "Approved.Symbol")
 
 map <- read.delim("http://www.informatics.jax.org/downloads/reports/MGI_EntrezGene.rpt", as.is=TRUE, header = FALSE)
-map <- map[, c(2, 4)]
-map.withdrawn <- map[grep("withdrawn", map[, 2]), ]
-map.ok <- map[-grep("withdrawn", map[, 2]), ]
+map <- map[, 2:4]
+
+map.ok <- map[-grep("^O$", map[, 2]), c(1, 3)]
 map.ok <- data.frame(Symbol=unique(map.ok[, 1]), Approved.Symbol=unique(map.ok[, 1]), stringsAsFactors = FALSE)
 
+map.withdrawn <- map[grep("^W$", map[, 2]), c(1, 3)]
 map.withdrawn[, 2] <- sub("^withdrawn, ", "", map.withdrawn[, 2])
 map.withdrawn[, 2] <- sub("^= ", "", map.withdrawn[, 2])
 map.withdrawn <- map.withdrawn[, 2:1]
@@ -65,7 +66,7 @@ mouse.table <- rbind(O, map.withdrawn, map.ok)
 mouse.table <- unique(mouse.table)
 mouse.table <- mouse.table[complete.cases(mouse.table), ]
 rownames(mouse.table) <- NULL
-mouse.table[!is.na(iconv(mouse.table[, 1], "ASCII")), ]
+mouse.table <- mouse.table[!is.na(iconv(mouse.table[, 1], "ASCII")), ]
 
 if(dir.exists("../data"))
   save(mouse.table, file="../data/mouse.table.rda", compress="bzip2")

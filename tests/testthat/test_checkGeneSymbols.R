@@ -41,6 +41,6 @@ expect_equal(as.character(res[,3]), c("C21orf62-AS1", "C21orf62-AS1",
 data(mouse.table)
 orig <- c("1-Feb", "A2m", "A2mr", "UNKNOWNGENE")
 correct <- c("Feb1", "AI893533", "A2mr", NA)
-expect_warning(res <- checkGeneSymbols(orig, map=mouse.table))
+expect_warning(res <- checkGeneSymbols(orig, species="mouse"))
 expect_equal(res$Approved, c(FALSE, FALSE, TRUE, FALSE))
 expect_equal(res$Suggested.Symbol, correct)
