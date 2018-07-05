@@ -63,7 +63,7 @@ checkGeneSymbols <-function(x,
     if(is.null(map)){
       map <- HGNChelper::hgnc.table
     }
-  }else if(identical(species, "mouse")){
+  }else if(identical(species, "mouse") & is.null(map)){
     map <- HGNChelper::mouse.table
   }else{
     if(is.null(map)){
