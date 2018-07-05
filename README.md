@@ -7,6 +7,7 @@ To update the symbols maps for human and mouse, download this repository and run
 
 `./update.sh`
 
-from its root directory.
+from its root directory. Note that this script uses the "roxygen2" 
+R library to update the documentation.
 
 Alternatively, you can use updated maps without updating the package, see `?getCurrentMaps`.
