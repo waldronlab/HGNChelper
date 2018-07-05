@@ -1,6 +1,9 @@
 # HGNChelper
 ----------------------------------------------------------------
 
+## Changes in version 0.5.0
+* Add getCurrentHumanMap and getCurrentMouseMap
+
 ## Changes in version 0.4.2
 * Support for checking mouse symbols added. See ?checkGeneSymbols and ?mouse.table
 
