@@ -37,9 +37,9 @@ where symbols which could be mapped have been mapped.
 \examples{
 ## Available maps from this package:
 human <- read.csv(system.file("extdata/mog_map.csv", 
-                              package = "HGNChelper"), as.is=TRUE)[, 2:1]
+                              package = "HGNChelper"), as.is=TRUE)
 mouse <- read.csv(system.file("extdata/HGNChelper_mog_map_MGI_AMC_2016_03_30.csv", 
-                              package = "HGNChelper"), as.is=TRUE)[, 2:1]
+                              package = "HGNChelper"), as.is=TRUE)
 ## This regex is based that provided by Zeeberg et al.,
 ##  Mistaken Identifiers: Gene name errors can be introduced
 ## inadvertently when using Excel in bioinformatics.  BMC
