@@ -44,3 +44,24 @@ correct <- c("Feb1", "AI893533", "A2mr", NA)
 expect_warning(res <- checkGeneSymbols(orig, species="mouse"))
 expect_equal(res$Approved, c(FALSE, FALSE, TRUE, FALSE))
 expect_equal(res$Suggested.Symbol, correct)
+
+# check capitalization behavior
+orig <- c("tp53", "TP53")
+data("hgnc.table", package="HGNChelper", envir = environment())
+expect_warning(res <- checkGeneSymbols(orig, species=NULL, map=hgnc.table))
+expect_equal(res$Suggested.Symbol, c(NA, "TP53"))
+expect_warning(res <- checkGeneSymbols(orig, species="human", map=hgnc.table))
+expect_equal(res$Suggested.Symbol, c("TP53", "TP53"))
+expect_warning(res <- checkGeneSymbols(orig, map=hgnc.table))
+expect_equal(res$Suggested.Symbol, c("TP53", "TP53"))
+
+# check specifying manual map
+mymap <- data.frame(Symbol=c("A", "B", "BB"), Approved.Symbol=c("A", "BB", "BB"), stringsAsFactors = FALSE)
+# with no human capitalization help
+expect_warning(res <- checkGeneSymbols(c("a", "b", "A", "B", "BB"), map=mymap, species=NULL))
+expect_equal(res$Approved, c(FALSE, FALSE, TRUE, FALSE, TRUE))
+expect_equal(res$Suggested.Symbol, c(NA, NA, "A", "BB", "BB"))
+# with human capitalization help
+expect_warning(res <- checkGeneSymbols(c("a", "b", "A", "B", "BB"), map=mymap, species="human"))
+expect_equal(res$Approved, c(FALSE, FALSE, TRUE, FALSE, TRUE))
+expect_equal(res$Suggested.Symbol, c("A", "BB", "A", "BB", "BB"))
