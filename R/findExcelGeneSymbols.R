@@ -45,12 +45,12 @@ findExcelGeneSymbols <- function(x,
         x <- as.character(x)
         warning("coercing x to character.")
     }
-    if(!is.null(mog.map) & class(mog.map) != "data.frame"){
-        mog.map <- data.frame(mog.map)
-        warning("coercing mog.map to data.frame")
+    if(!is(mog.map, "data.frame") || !identical(colnames(mog.map), c("original", "mogrified"))){
+      stop("mog.map must be a data.frame with colnames 'original' and 'mogrified'")
     }
-    mog.symbols <- grep(pattern=regex, x, ignore.case=TRUE, value=TRUE)
-    if(!is.null(mog.map) & length(mog.symbols) > 0){
+    mog.symbols <- grepl(pattern=regex, x, ignore.case=TRUE) | x %in% mog.map$mogrified
+    mog.symbols <- x[mog.symbols]
+    if(length(mog.symbols) > 0){
         mog.mapped <- data.frame(mogrified=mog.symbols,
                                  corrected=mog.map$original[ match(toupper(mog.symbols), toupper(mog.map$mogrified)) ],
                                  stringsAsFactors=FALSE)
