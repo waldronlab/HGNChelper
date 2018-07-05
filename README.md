@@ -3,12 +3,10 @@
 [![Travis-CI Build Status](https://travis-ci.org/waldronlab/HGNChelper.svg?branch=master)](https://travis-ci.org/waldronlab/HGNChelper)
 [![Coverage Status](https://codecov.io/github/waldronlab/HGNChelper/coverage.svg?branch=master)](https://codecov.io/github/waldronlab/HGNChelper?branch=master)
 
-To update the symbols map (data/hgnc.table.rda):
+To update the symbols maps for human and mouse, download this repository and run:
 
-1. Download this repository, change to the "inst/" subdirectory
-2. Run from the command line:
-```
-cd inst/
-Rscript --vanilla "Rscript hgncLookup.R"
-R CMD INSTALL ..
-```
+`./update.sh`
+
+from its root directory.
+
+Alternatively, you can use updated maps without updating the package, see `?getCurrentMaps`.
