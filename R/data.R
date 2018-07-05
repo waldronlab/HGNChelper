@@ -13,7 +13,6 @@
 #' @source Extracted from \url{http://www.informatics.jax.org/downloads/reports/MGI_EntrezGene.rpt} and 
 #' system.file("extdata/HGNChelper_mog_map_MGI_AMC_2016_03_30.csv", package="HGNChelper")
 "mouse.table"
-#> [1] "mouse.table"
 
 #' All current and withdrawn HGNC gene symbols and Excel mogrifications.
 #'
@@ -33,4 +32,4 @@
 #'  and 
 #' system.file("extdata/mog_map.csv", package="HGNChelper")
 "hgnc.table"
-#> [1] "hgnc.table"
+
