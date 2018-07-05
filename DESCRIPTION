@@ -2,17 +2,15 @@ Package: HGNChelper
 Maintainer: Levi Waldron <lwaldron.research@gmail.com>
 Depends: R (>= 2.10), methods, utils
 Author: Levi Waldron and Markus Riester
-Version: 0.5.1
+Version: 0.5.2
 Date: 2018-07-05
 License: GPL (>=2.0)
-Title: Handy Functions for Working with HGNC Gene Symbols and
- Affymetrix Probeset Identifiers
+Title: Identify and Correct Invalid HGNC Human Gene Symbols and MGI Mouse Gene Symbols
 Description: Contains functions for
- identifying and correcting HGNC gene symbols which have been converted
- to date format by Excel, for reversibly converting between HGNC
- symbols and valid R names, identifying invalid HGNC symbols and
- correcting synonyms and outdated symbols which can be mapped to an
- official symbol.
+ identifying and correcting HGNC human gene symbols and MGI mouse gene symbols 
+ which have been converted to date format by Excel, withdrawn, or aliased.
+ Also contains functions for reversibly converting between HGNC
+ symbols and valid R names.
 URL: https://github.com/waldronlab/HGNChelper
 BugReports: https://github.com/waldronlab/HGNChelper/issues
 LazyData: TRUE

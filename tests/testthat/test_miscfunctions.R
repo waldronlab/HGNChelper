@@ -14,4 +14,6 @@ expect_warning(findExcelGeneSymbols("9-dec", mog.map=human, regex=re))
 
 mouse <- read.csv(system.file("extdata/HGNChelper_mog_map_MGI_AMC_2016_03_30.csv", 
                               package = "HGNChelper"), as.is=TRUE)
-expect_warning(findExcelGeneSymbols(c("1-Feb", "1-dec"), mog.map=mouse))
+expect_warning(res1 <- findExcelGeneSymbols(c("1-Feb", "1-dec"), mog.map=mouse))
+expect_warning(res2 <- findExcelGeneSymbols(factor(c("1-Feb", "1-dec")), mog.map=mouse))
+expect_identical(res1, res2)
