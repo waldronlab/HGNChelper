@@ -13,6 +13,11 @@ expected.correct <- c("FN1","TP53",NA,"SEPT7","SEPT7","MARC1 /// MARCH1",
 
 expect_equal(as.character(res[,3]), expected.correct)
 
+expect_warning(res2 <- checkGeneSymbols(x, unmapped.as.na = FALSE))
+expect_identical(res[, 1:2], res2[, 1:2])
+unmapped <- is.na(res[, 3])
+expect_identical(res2[unmapped, 3], res2[unmapped, 1])
+
 ## human test 2
 x = c("C21orf62-AS1", "c21orf62-as1",
       "MORF4L1P7", "Morf4L1P7",
@@ -65,3 +70,8 @@ expect_equal(res$Suggested.Symbol, c(NA, NA, "A", "BB", "BB"))
 expect_warning(res <- checkGeneSymbols(c("a", "b", "A", "B", "BB"), map=mymap, species="human"))
 expect_equal(res$Approved, c(FALSE, FALSE, TRUE, FALSE, TRUE))
 expect_equal(res$Suggested.Symbol, c("A", "BB", "A", "BB", "BB"))
+
+expect_error(checkGeneSymbols(c("a", "b", "A", "B", "BB"), map=as.matrix(mymap)))
+expect_error(checkGeneSymbols(c("a", "b", "A", "B", "BB"), map=NULL, species=NULL))
+expect_warning(res2 <- checkGeneSymbols(factor(c("a", "b", "A", "B", "BB")), map=mymap, species="human"))
+expect(identical(res, res2))
