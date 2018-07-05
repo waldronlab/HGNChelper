@@ -58,28 +58,21 @@ checkGeneSymbols <-function(x,
     warning("coercing x to character.")
   }
   casecorrection <- FALSE
-  if(!is.null(map))
-    species <- NULL
   if(identical(species, "human")){
     casecorrection <- TRUE
     if(is.null(map)){
-      data("hgnc.table", package = "HGNChelper")
-      map <- hgnc.table
+      map <- HGNChelper::hgnc.table
     }
   }else if(identical(species, "mouse")){
-    data("mouse.table", package = "HGNChelper")
-    map <- mouse.table
+    map <- HGNChelper::mouse.table
   }else{
     if(is.null(map)){
-      error("If species is not 'human' or 'mouse' then map argument must be specified")
+      stop("If species is not 'human' or 'mouse' then map argument must be specified")
     }
   }
   if(!is(map, "data.frame") | !identical(colnames(map), c("Symbol", "Approved.Symbol")))
     stop("If map is specified, it must be a dataframe with two columns named 'Symbol' and 'Approved.Symbol'")
   approved <- x %in% map$Approved.Symbol
-  data("hgnc.table")
-  if(is.null(casecorrection) & identical(map, hgnc.table))
-    casecorrection <- TRUE
   if(casecorrection){
     ##change to upper case, then change orfs back to lower case:
     x.casecorrected <- toupper(x)
