@@ -22,7 +22,7 @@ Physicians and biologists like gene symbols and bioinformaticians hate'em. Why? 
 
 ![](0DaysSince.png)
 
-Myself, I don't mind them. It's way easier to remember [TP53](http://www.genenames.org/cgi-bin/gene_symbol_report?hgnc_id=11998) than to remember [7157](http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?db=gene&cmd=Retrieve&dopt=full_report&list_uids=7157) or [ENSG00000141510](http://www.ensembl.org/Homo_sapiens/geneview?gene=ENSG00000141510). They're a fact of life. So Markus Riester and I wrote HGNChelper to make them a little more pleasant to bioinformaticians. 
+Myself (Levi speaking), I don't mind them. It's way easier to remember [TP53](http://www.genenames.org/cgi-bin/gene_symbol_report?hgnc_id=11998) than to remember [7157](http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?db=gene&cmd=Retrieve&dopt=full_report&list_uids=7157) or [ENSG00000141510](http://www.ensembl.org/Homo_sapiens/geneview?gene=ENSG00000141510). They're a fact of life. So Markus Riester and I wrote HGNChelper to make them a little more pleasant to bioinformaticians. 
 
 # HGNChelper functionality
 
