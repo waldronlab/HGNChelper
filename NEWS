@@ -1,6 +1,9 @@
 # HGNChelper
 ----------------------------------------------------------------
 
+## Changes in version 0.6.0
+* Add vignette
+
 ## Changes in version 0.5.0
 * Add getCurrentHumanMap and getCurrentMouseMap
 

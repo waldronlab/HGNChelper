@@ -1,9 +1,11 @@
-# HGNChelper: Identify and correct invalid gene symbols
-
 [![Travis-CI Build Status](https://travis-ci.org/waldronlab/HGNChelper.svg?branch=master)](https://travis-ci.org/waldronlab/HGNChelper)
 [![Coverage Status](https://codecov.io/github/waldronlab/HGNChelper/coverage.svg?branch=master)](https://codecov.io/github/waldronlab/HGNChelper?branch=master)
 
-To update the symbols maps for human and mouse, download this repository and run:
+# HGNChelper: Identify and correct invalid gene symbols
+
+## Updating
+
+To update the symbols maps for human and mouse yourself, download this repository and run:
 
 `./update.sh`
 

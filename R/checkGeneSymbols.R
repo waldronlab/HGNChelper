@@ -82,9 +82,8 @@ checkGeneSymbols <-function(x,
   }
   approvedaftercasecorrection <- x.casecorrected %in% map$Approved.Symbol
   if (!identical(all.equal(x, x.casecorrected), TRUE))
-    warning("Some lower-case letters were found and converted to upper-case.
-                 HGNChelper is intended for human symbols only, which should be all
-                 upper-case except for open reading frames (orf).")
+    warning("Human gene symbols should be all upper-case except for the 'orf' in 
+            open reading frames. The case of some letters was corrected.")
   alias <- x.casecorrected %in% map$Symbol
   df <- data.frame(x=x,
                    Approved=approved,
