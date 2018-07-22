@@ -13,3 +13,14 @@ from its root directory. Note that this script uses the "roxygen2"
 R library to update the documentation.
 
 Alternatively, you can use updated maps without updating the package, see `?getCurrentMaps`.
+
+## Updating gh-pages
+
+Note to self - when updating the vignette, update the gh-pages website 
+(https://waldronlab.github.io/HGNChelper/) like this:
+
+```
+# pip install ghp-import
+Rscript -e "devtools::build_vignettes()"
+ghp-import inst/doc
+```

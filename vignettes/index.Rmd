@@ -18,7 +18,7 @@ knitr::opts_chunk$set(
 
 # Why HGNChelper?
 
-Physicians and biologists like gene symbols and bioinformaticians hate'em. Why? For one thing, they change constantly and are given new names or aliases. For another, some get munged munged into dates when imported into spreadsheet programs - and not only Excel (Thank you [\@karawoo](https://twitter.com/kara_woo) for the [picture](https://twitter.com/kara_woo/status/1020054225022173184)!):
+Physicians and biologists like gene symbols and bioinformaticians hate'em. Why? For one thing, they change constantly and are given new names or aliases. For another, some get munged into dates when imported into spreadsheet programs - and not only Excel (Thank you [\@karawoo](https://twitter.com/kara_woo) for the [picture](https://twitter.com/kara_woo/status/1020054225022173184)!):
 
 ![](0DaysSince.png)
 
@@ -41,7 +41,7 @@ human = c("FN1", "tp53", "UNKNOWNGENE","7-Sep", "9/7", "1-Mar", "Oct4", "4-Oct",
 checkGeneSymbols(human)
 ```
 
-As you see, it even helps fix capitalization. How does it fix those Excel dates? I imported a column of all human gene symbols into Excel, then exported using a whole bunch of available date formats. Then I kept any that differed from the original for HGNChelper's map. 
+As you see, it even helps fix capitalization. How does it fix those Excel dates? I imported a column of all human gene symbols into Excel, then exported using a whole bunch of available date formats. Then I kept any that differed from the originals for HGNChelper's map. 
 
 # Mouse gene symbols
 
