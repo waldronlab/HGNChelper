@@ -16,7 +16,7 @@ knitr::opts_chunk$set(
 )
 ```
 
-# Why HGNChelper?
+## Why HGNChelper?
 
 Physicians and biologists like gene symbols and bioinformaticians hate'em. Why? For one thing, they change constantly and are given new names or aliases. For another, some get munged into dates when imported into spreadsheet programs - and not only Excel (Thank you [\@karawoo](https://twitter.com/kara_woo) for the [picture](https://twitter.com/kara_woo/status/1020054225022173184)!):
 
@@ -24,7 +24,7 @@ Physicians and biologists like gene symbols and bioinformaticians hate'em. Why? 
 
 Myself (Levi speaking), I don't mind them. It's way easier to remember [TP53](http://www.genenames.org/cgi-bin/gene_symbol_report?hgnc_id=11998) than to remember [7157](http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?db=gene&cmd=Retrieve&dopt=full_report&list_uids=7157) or [ENSG00000141510](http://www.ensembl.org/Homo_sapiens/geneview?gene=ENSG00000141510). They're a fact of life. So Markus Riester and I wrote HGNChelper to make them a little more pleasant to bioinformaticians. 
 
-# HGNChelper functionality
+## HGNChelper functionality
 
 HGNChelper has several functions that seemed useful back in the day when we first wrote it, but really one has withstood the test of time and remained useful:
 
@@ -43,7 +43,7 @@ checkGeneSymbols(human)
 
 As you see, it even helps fix capitalization. How does it fix those Excel dates? I imported a column of all human gene symbols into Excel, then exported using a whole bunch of available date formats. Then I kept any that differed from the originals for HGNChelper's map. 
 
-# Mouse gene symbols
+## Mouse gene symbols
 
 **Warning** the list of valid mouse symbols seems to be incomplete, see below. Mouse genes work the same way, but you need to specify the argument `species=mouse`:
 
@@ -53,7 +53,7 @@ checkGeneSymbols(c("1-Feb", "Pzp", "A2m"), species="mouse")
 
 I don't work with mouse data, so use this functionality with care and please let me know if you have any suggestions. For one thing, [Pzp](http://www.informatics.jax.org/marker/MGI:87854) in the above example is a valid gene symbol, but it is not in the [MGI_EntrezGene.rpt](http://www.informatics.jax.org/downloads/reports/MGI_EntrezGene.rpt) file I used to build a map. [Suggestions welcome](https://github.com/waldronlab/HGNChelper/issues) about how to build a more complete map of valid symbols. To be on the safe side, you could set `unmapped.as.na = FALSE` to keep unrecognized symbols as-is and only correct ones that have a definitive correction.
 
-# What exactly checkGeneSymbols does
+## What exactly checkGeneSymbols does
 
 HGNChelper does the following corrections:
 
@@ -70,14 +70,14 @@ dim(hgnc.table)
 
 These are a combination of manually generated Excel mogrifications that remain constant, and aliases that can become out of date with time.
 
-# Updating maps of aliased gene symbols
+## Updating maps of aliased gene symbols
 
 Gene symbols are aliased much more frequently than I can update this package, like every day. If you want the most current maps of aliases, you can either:
 
 1. use the `getCurrentHumanMap()` or `getCurrentMouseMap()` function, and provide the returned result through the `map=` argument of `checkGeneSymbols()`, or
 2. See the instructions for updating the package at https://github.com/waldronlab/HGNChelper (it's just one command-line command as long as you have R and [roxygen2](https://cran.r-project.org/package=roxygen2) installed)
 
-# Where do I find HGNChelper?
+## Where do I find HGNChelper?
 
 * CRAN: https://cran.r-project.org/web/packages/HGNChelper/index.html
 * GitHub: https://github.com/waldronlab/HGNChelper
