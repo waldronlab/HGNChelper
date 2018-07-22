@@ -76,3 +76,10 @@ Gene symbols are aliased much more frequently than I can update this package, li
 
 1. use the `getCurrentHumanMap()` or `getCurrentMouseMap()` function, and provide the returned result through the `map=` argument of `checkGeneSymbols()`, or
 2. See the instructions for updating the package at https://github.com/waldronlab/HGNChelper (it's just one command-line command as long as you have R and [roxygen2](https://cran.r-project.org/package=roxygen2) installed)
+
+# Where do I find HGNChelper?
+
+* CRAN: https://cran.r-project.org/web/packages/HGNChelper/index.html
+* GitHub: https://github.com/waldronlab/HGNChelper
+
+Please report any issues at https://github.com/waldronlab/HGNChelper/issues
