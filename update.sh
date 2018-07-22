@@ -8,3 +8,4 @@ roxygen2::roxygenize()"
 # for publishing the vignette to gh-pages
 # Rscript --vanilla -e "devtools::build_vignettes()"
 # ghp-import inst/doc
+# git push

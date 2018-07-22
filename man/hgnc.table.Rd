@@ -4,7 +4,7 @@
 \name{hgnc.table}
 \alias{hgnc.table}
 \title{All current and withdrawn HGNC gene symbols and Excel mogrifications.}
-\format{An object of class \code{data.frame} with 85232 rows and 2 columns.}
+\format{An object of class \code{data.frame} with 85272 rows and 2 columns.}
 \source{
 Extracted from 
 \url{http://www.genenames.org/cgi-bin/hgnc_downloads?col=gd_hgnc_id&col=gd_app_sym&col=gd_prev_sym&col=gd_aliases&status=Approved&status=Entry+Withdrawn&status_opt=2&where=&order_by=gd_hgnc_id&format=text&limit=&hgnc_dbtag=on&submit=submit}

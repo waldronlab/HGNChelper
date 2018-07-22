@@ -82,8 +82,7 @@ checkGeneSymbols <-function(x,
   }
   approvedaftercasecorrection <- x.casecorrected %in% map$Approved.Symbol
   if (!identical(all.equal(x, x.casecorrected), TRUE))
-    warning("Human gene symbols should be all upper-case except for the 'orf' in 
-            open reading frames. The case of some letters was corrected.")
+    warning("Human gene symbols should be all upper-case except for the 'orf' in open reading frames. The case of some letters was corrected.")
   alias <- x.casecorrected %in% map$Symbol
   df <- data.frame(x=x,
                    Approved=approved,

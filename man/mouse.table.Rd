@@ -4,7 +4,7 @@
 \name{mouse.table}
 \alias{mouse.table}
 \title{All current and withdrawn MGI mouse symbols and Excel mogrifications.}
-\format{An object of class \code{data.frame} with 134072 rows and 2 columns.}
+\format{An object of class \code{data.frame} with 134076 rows and 2 columns.}
 \source{
 Extracted from \url{http://www.informatics.jax.org/downloads/reports/MGI_EntrezGene.rpt} and 
 system.file("extdata/HGNChelper_mog_map_MGI_AMC_2016_03_30.csv", package="HGNChelper")
