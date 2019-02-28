@@ -27,17 +27,23 @@
 #' }
 #' 
 getCurrentHumanMap <- function(){
-  map <- read.delim("http://www.genenames.org/cgi-bin/hgnc_downloads?col=gd_hgnc_id&col=gd_app_sym&col=gd_prev_sym&col=gd_aliases&status=Approved&status=Entry+Withdrawn&status_opt=2&where=&order_by=gd_hgnc_id&format=text&limit=&hgnc_dbtag=on&submit=submit", as.is=TRUE)
-  M  <- do.call(rbind, apply(map[nchar(map[, 3])>0 | nchar(map[, 4])>0 , ], 1,
+  url <- "ftp://ftp.ebi.ac.uk/pub/databases/genenames/new/tsv/hgnc_complete_set.txt"
+  message(paste("Fetching gene symbols from", url))
+  map <- read.delim(url, as.is=TRUE)
+  # 2 = symbol, 3=alias_symbol, 4=prev_symbol
+  # corrections
+  has.corrections <- nchar(map$alias_symbol)>0 | nchar(map$prev_symbol)>0
+  M  <- do.call(rbind, apply(map[has.corrections & map$status == "Approved", ], 1,
                              function(x) {
-                               y <- strsplit(paste(x[3:4], collapse=", "), ", ")[[1]]
-                               cbind(y[y!=""], x[2])
+                               y <- strsplit(paste(x[c("alias_symbol", "prev_symbol")], collapse="|"), "|", fixed = TRUE)[[1]]
+                               cbind(y[y!=""], x["symbol"])
                              }))
-  N <- map[nchar(map[, 3])==0, c(2, 2)]
-  id <- grep("withdrawn", N[, 1])
-  N[id, 2] <- NA
-  N[, 1] <- gsub("~withdrawn", "", N[, 1])
-  
+  rownames(M) <- NULL
+  # valid symbols
+  N <- map[, c("symbol", "symbol", "status")]
+  N[N$status=="Entry Withdrawn", 2] <- NA
+  N <- N[, 1:2]
+
   O = read.csv(system.file("extdata/mog_map.csv", package = "HGNChelper"),
                as.is=TRUE)[, 2:1]
   O$mogrified <- toupper(O$mogrified)

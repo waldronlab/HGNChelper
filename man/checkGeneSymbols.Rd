@@ -4,7 +4,8 @@
 \alias{checkGeneSymbols}
 \title{Title Identify outdated or Excel-mogrified gene symbols}
 \usage{
-checkGeneSymbols(x, unmapped.as.na = TRUE, map = NULL, species = "human")
+checkGeneSymbols(x, unmapped.as.na = TRUE, map = NULL,
+  species = "human")
 }
 \arguments{
 \item{x}{Vector of gene symbols to check for mogrified or outdated values}

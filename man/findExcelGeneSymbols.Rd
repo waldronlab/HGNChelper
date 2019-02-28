@@ -4,8 +4,9 @@
 \alias{findExcelGeneSymbols}
 \title{Title function to identify Excel-mogrified gene symbols}
 \usage{
-findExcelGeneSymbols(x, mog.map = read.csv(system.file("extdata/mog_map.csv",
-  package = "HGNChelper"), as.is = TRUE), regex = "impossibletomatch^")
+findExcelGeneSymbols(x,
+  mog.map = read.csv(system.file("extdata/mog_map.csv", package =
+  "HGNChelper"), as.is = TRUE), regex = "impossibletomatch^")
 }
 \arguments{
 \item{x}{Vector of gene symbols to check for mogrified values}
