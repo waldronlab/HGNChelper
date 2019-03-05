@@ -79,7 +79,7 @@ Gene symbols are aliased much more frequently than I can update this package, li
 
 ## Where do I find HGNChelper?
 
-* CRAN: https://cran.r-project.org/web/packages/HGNChelper/index.html
+* CRAN: https://cran.r-project.org/package=HGNChelper
 * GitHub: https://github.com/waldronlab/HGNChelper
 
 Please report any issues at https://github.com/waldronlab/HGNChelper/issues
