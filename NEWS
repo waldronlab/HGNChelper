@@ -1,6 +1,10 @@
 # HGNChelper
 ----------------------------------------------------------------
 
+## Changes in version 0.8.0
+* Important bugfix: outdated symbols in extdata/mog_map.csv - those mogrified by Excel - were not being corrected. e.g. these corrections now work: MARC1 -> MTARC1, MARCH6 -> MARCHF6). Thank you to Richard Heery for the bug report. 
+* Built-in maps updated to Oct 17 2019
+
 ## Changes in version 0.7.0
 * Use new genenames.org download URL (ftp://ftp.ebi.ac.uk/pub/databases/genenames/new/tsv/hgnc_complete_set.txt)
 * This includes non-coding RNA, "phenotype", pseudogene, protein-coding gene, and "other"

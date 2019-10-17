@@ -27,6 +27,30 @@
 #' }
 #' 
 getCurrentHumanMap <- function(){
+  .fixttable <- function(hgnc.table) {
+    ## remove withdrawn symbols with known new name
+    hgnc.table <-
+      hgnc.table[!(duplicated(hgnc.table$Symbol) &
+                     is.na(hgnc.table$Approved.Symbol)), ]
+    hgnc.table <- hgnc.table[order(hgnc.table$Symbol), ]
+    
+    hgnc.table$Symbol <- as.character(hgnc.table$Symbol)
+    hgnc.table$Approved.Symbol <-
+      as.character(hgnc.table$Approved.Symbol)
+    rownames(hgnc.table) <- NULL
+    
+    ## In the un-approved column, convert everything but orfs to upper-case:
+    hgnc.table$Symbol <- toupper(hgnc.table$Symbol)
+    hgnc.table$Symbol <-
+      sub("(.*C[0-9XY]+)ORF(.+)", "\\1orf\\2", hgnc.table$Symbol)
+    
+    hgnc.table <- unique(hgnc.table)
+    hgnc.table <- hgnc.table[complete.cases(hgnc.table), ]
+    is.ascii <-
+      iconv(hgnc.table[, 1], to = "ASCII", sub = ".") == hgnc.table[, 1]
+    hgnc.table <- hgnc.table[is.ascii, ]
+    return(hgnc.table)
+  }
   url <- "ftp://ftp.ebi.ac.uk/pub/databases/genenames/new/tsv/hgnc_complete_set.txt"
   message(paste("Fetching gene symbols from", url))
   map <- read.delim(url, as.is=TRUE)
@@ -52,25 +76,14 @@ getCurrentHumanMap <- function(){
   colnames(N) <- c("Symbol", "Approved.Symbol")
   colnames(O) <- c("Symbol", "Approved.Symbol")
   
-  hgnc.table <- rbind(M, N, O)
-  
-  ## remove withdrawn symbols with known new name
-  hgnc.table <- hgnc.table[!(duplicated(hgnc.table$Symbol) & is.na(hgnc.table$Approved.Symbol)), ]
-  hgnc.table <- hgnc.table[order(hgnc.table$Symbol), ]
-  
-  hgnc.table$Symbol <- as.character(hgnc.table$Symbol)
-  hgnc.table$Approved.Symbol <- as.character(hgnc.table$Approved.Symbol)
-  rownames(hgnc.table) <- NULL
-  
-  ## In the un-approved column, convert everything but orfs to upper-case:
-  hgnc.table$Symbol <- toupper(hgnc.table$Symbol)
-  hgnc.table$Symbol <- sub("(.*C[0-9XY]+)ORF(.+)", "\\1orf\\2", hgnc.table$Symbol)
-  
-  hgnc.table <- unique(hgnc.table)
-  hgnc.table <- hgnc.table[complete.cases(hgnc.table), ]
-  is.ascii <- iconv(hgnc.table[, 1], to="ASCII", sub=".") == hgnc.table[, 1]
-  hgnc.table <- hgnc.table[is.ascii, ]
-  return(hgnc.table)
+  external.table <- rbind(M, N)
+  ## Correct outdated symbols in extdata/mog_map.csv
+  O_corrected <-
+    suppressWarnings(checkGeneSymbols(O[, "Approved.Symbol"], map = external.table))
+  O[, "Approved.Symbol"] <- O_corrected[, "Suggested.Symbol"]
+  output <- rbind(external.table, O)
+  output <- .fixttable(output)
+  return(output)
 }
 
 getCurrentMouseMap <- function(){

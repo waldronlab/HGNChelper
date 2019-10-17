@@ -8,7 +8,7 @@ expect_equal(sum(res[,1] != x), 0)
 expect_equal(res[,2],
   c(TRUE,TRUE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,TRUE))
 
-expected.correct <- c("FN1","TP53",NA,"SEPT7","SEPT7","MARC1 /// MARCH1",
+expected.correct <- c("FN1","TP53",NA,"SEPTIN7","SEPTIN7","MTARC1 /// MARCHF1",
                       "POU5F1","POU5F1","POU5F1P4","C19orf71","C19orf71")
 
 expect_equal(as.character(res[,3]), expected.correct)
@@ -40,7 +40,7 @@ expect_equal(as.character(res[,3]), c("C21orf62-AS1", "C21orf62-AS1",
                                               "FN1", "FN1",
                                               "TP53",
                                               NA,
-                                              "SEPT7", "MARC1 /// MARCH1", "MARC1 /// MARCH1"))
+                                              "SEPTIN7", "MTARC1 /// MARCHF1", "MTARC1 /// MARCHF1"))
 
 # mouse test 1
 data(mouse.table)
@@ -74,4 +74,11 @@ expect_equal(res$Suggested.Symbol, c("A", "BB", "A", "BB", "BB"))
 expect_error(checkGeneSymbols(c("a", "b", "A", "B", "BB"), map=as.matrix(mymap)))
 expect_error(checkGeneSymbols(c("a", "b", "A", "B", "BB"), map=NULL, species=NULL))
 expect_warning(res2 <- checkGeneSymbols(factor(c("a", "b", "A", "B", "BB")), map=mymap, species="human"))
-expect(identical(res, res2))
+expect_identical(res, res2)
+
+# check for outdated symbols from extdata/mog_map.csv
+expect_warning(res3 <-
+                 checkGeneSymbols(c("MARC1", "MARC2", "MARCH6")))
+expect_equal(res3$Approved, rep(FALSE, 3))
+expect_equal(res3$Suggested.Symbol, c("MTARC1", "MTARC2", "MARCHF6"))
+
