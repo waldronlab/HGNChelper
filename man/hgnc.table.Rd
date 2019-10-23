@@ -4,7 +4,7 @@
 \name{hgnc.table}
 \alias{hgnc.table}
 \title{All current and withdrawn HGNC gene symbols and Excel mogrifications.}
-\format{An object of class \code{data.frame} with 98365 rows and 2 columns.}
+\format{An object of class \code{data.frame} with 98431 rows and 2 columns.}
 \source{
 Extracted from 
 \url{ftp://ftp.ebi.ac.uk/pub/databases/genenames/new/tsv/hgnc_complete_set.txt}
