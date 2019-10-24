@@ -6,3 +6,5 @@ update.sh
 .travis.yml
 ^.*\.Rproj$
 ^\.Rproj\.user$
+^doc$
+^Meta$

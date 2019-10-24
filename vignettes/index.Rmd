@@ -75,7 +75,7 @@ These are a combination of manually generated Excel mogrifications that remain c
 Gene symbols are aliased much more frequently than I can update this package, like every day. If you want the most current maps of aliases, you can either:
 
 1. use the `getCurrentHumanMap()` or `getCurrentMouseMap()` function, and provide the returned result through the `map=` argument of `checkGeneSymbols()`, or
-2. See the instructions for updating the package at https://github.com/waldronlab/HGNChelper (it's just one command-line command as long as you have R and [roxygen2](https://cran.r-project.org/package=roxygen2) installed)
+2. See the instructions for updating your package locally at https://github.com/waldronlab/HGNChelper (it's just one command-line command as long as you have R and [roxygen2](https://cran.r-project.org/package=roxygen2) installed)
 
 ## Where do I find HGNChelper?
 
