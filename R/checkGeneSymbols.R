@@ -53,6 +53,9 @@ checkGeneSymbols <-function(x,
                             map=NULL,
                             species="human"
 ){
+  lastupdate <-
+    readLines(system.file(file.path("extdata", "date_of_last_update.txt"), package =
+                            "HGNChelper"))
   if(class(x) != "character"){
     x <- as.character(x)
     warning("coercing x to character.")
@@ -61,9 +64,11 @@ checkGeneSymbols <-function(x,
   if(identical(species, "human")){
     casecorrection <- TRUE
     if(is.null(map)){
+      message(paste("Maps last updated on:", lastupdate, collapse = " "))
       map <- HGNChelper::hgnc.table
     }
   }else if(identical(species, "mouse") & is.null(map)){
+    message(paste("Maps last updated on:", lastupdate, collapse = " "))
     map <- HGNChelper::mouse.table
   }else{
     if(is.null(map)){
