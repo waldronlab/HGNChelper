@@ -11,16 +11,16 @@ correcting synonyms and outdated symbols which can be mapped to an
 official symbol.}
 \details{
 \tabular{ll}{Package: \tab HGNChelper\cr
-Maintainer: \tab Levi Waldron <lwaldron@hsph.harvard.edu>\cr
-Depends: \tab R (>= 2.10)\cr
-Author: \tab Levi Waldron and Markus Riester\cr
+Authors: \tab Levi Waldron and Markus Riester\cr
+Maintainer: \tab Levi Waldron <lwaldron.research@gmail.com>\cr
+Depends: \tab R (>= 3.5.0)\cr
 Version: \tab \Sexpr{packageDescription("HGNChelper")$Version}\cr
 Date: \tab \Sexpr{packageDescription("HGNChelper")$Date}\cr
 License: \tab GPL (>2.0)\cr
 Title: \tab Handy functions for working with HGNC gene symbols and
 Affymetrix probeset identifiers.\cr
-URL: \tab https://bitbucket.org/lwaldron/hgnchelper\cr
-BugReports: \tab https://bitbucket.org/lwaldron/hgnchelper\cr}
+URL: \tab https://waldronlab.io/HGNChelper/\cr
+BugReports: \tab https://github.com/waldronlab/hgnchelper/issues \cr}
 }
 \author{Levi Waldron and Markus Riester}
 
