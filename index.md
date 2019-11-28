@@ -10,7 +10,7 @@ Physicians and biologists like gene symbols and bioinformaticians
 hate'em. Why? For one thing, they change constantly and are given new
 names or aliases. For another, some get munged into dates when
 imported into spreadsheet programs - and not only Excel (Thank you
-[\@karawoo](https://twitter.com/kara_woo) for the
+[@karawoo](https://twitter.com/kara_woo) for the
 [picture](https://twitter.com/kara_woo/status/1020054225022173184)!):
 
 ![](articles/0DaysSince.png)
