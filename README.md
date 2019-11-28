@@ -22,7 +22,7 @@ Note to self - when updating the vignette, update the gh-pages website
 
 ```
 # pip install ghp-import
-Rscript -e "devtools::build_vignettes()"
-ghp-import doc/
+R -e "pkgdown::build_site()"
+ghp-import docs/
 git push
 ```
