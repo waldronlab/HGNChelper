@@ -18,7 +18,7 @@ Alternatively, you can use updated maps without updating the package, see `?getC
 ## Updating gh-pages
 
 Note to self - when updating the vignette, update the gh-pages website 
-(https://waldronlab.github.io/HGNChelper/) like this:
+(https://waldronlab.io/HGNChelper/) like this:
 
 ```
 # pip install ghp-import
