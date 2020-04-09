@@ -1,4 +1,4 @@
-#' Title Identify outdated or Excel-mogrified gene symbols
+#' @title Identify outdated or Excel-mogrified gene symbols
 #'
 #' @param x Vector of gene symbols to check for mogrified or outdated values
 #' @param unmapped.as.na 
@@ -8,8 +8,8 @@
 #' @param map 
 #'  Specify if you do not want to use the default maps provided 
 #'  by setting species equal to "mouse" or "human". 
-#'  map can be any other data.frame with colnames(map) identical
-#'  to c("Symbol", "Approved.Symbol"). The default maps can be updated 
+#'  Map can be any other data.frame with colnames(map) identical
+#'  to \code{c("Symbol", "Approved.Symbol")}. The default maps can be updated 
 #'  by running the interactive example below.
 #' @param species
 #'  A character vector of length 1, either "human" (default) or "mouse". 
@@ -32,12 +32,17 @@
 #'
 #' @examples
 #' library(HGNChelper)
+#' 
+#' ## human
 #' human = c("FN1", "TP53", "UNKNOWNGENE","7-Sep", "9/7", "1-Mar", "Oct4", "4-Oct",
 #'       "OCT4-PG4", "C19ORF71", "C19orf71")
 #' checkGeneSymbols(human)
+#' 
 #' ## mouse
 #' mouse <- c("1-Feb", "Pzp", "A2m")
 #' checkGeneSymbols(mouse, species="mouse")
+#' 
+#' ## updating the map
 #' if (interactive()){
 #'   ##Run checkGeneSymbols with a brand-new map downloaded from HGNC:
 #'   source(system.file("hgncLookup.R", package = "HGNChelper"))
@@ -48,45 +53,59 @@
 #'   checkGeneSymbols(human, species=NULL, map=hgnc.table)
 #'   checkGeneSymbols(human, species=NULL, map=mouse.table)
 #' }
-checkGeneSymbols <-function(x,
-                            unmapped.as.na=TRUE,
-                            map=NULL,
-                            species="human"
-){
-  lastupdate <-
-    readLines(system.file(file.path("extdata", "date_of_last_update.txt"), package =
-                            "HGNChelper"))
-  if(class(x) != "character"){
+checkGeneSymbols <- function(x,
+                             unmapped.as.na = TRUE,
+                             map = NULL,
+                             species = "human") {
+
+  lastupdate <- readLines(system.file(file.path("extdata", "date_of_last_update.txt"), 
+                          package = "HGNChelper"))
+  
+  # check input class
+  if (class(x) != "character") {
     x <- as.character(x)
     warning("coercing x to character.")
   }
-  casecorrection <- FALSE
-  if(identical(species, "human")){
-    casecorrection <- TRUE
-    if(is.null(map)){
-      message(paste("Maps last updated on:", lastupdate, collapse = " "))
-      map <- HGNChelper::hgnc.table
-    }
-  }else if(identical(species, "mouse") & is.null(map)){
+  
+  # load map for correct species
+  if (identical(species, "human") & is.null(map)) {
+    message(paste("Maps last updated on:", lastupdate, collapse = " "))
+    map <- HGNChelper::hgnc.table
+  } else if (identical(species, "mouse") & is.null(map)) {
     message(paste("Maps last updated on:", lastupdate, collapse = " "))
     map <- HGNChelper::mouse.table
-  }else{
-    if(is.null(map)){
+  } else {
+    if (is.null(map)){
       stop("If species is not 'human' or 'mouse' then map argument must be specified")
     }
   }
-  if(!is(map, "data.frame") | !identical(colnames(map), c("Symbol", "Approved.Symbol")))
+  
+  if (!is(map, "data.frame") | !identical(colnames(map), c("Symbol", "Approved.Symbol")))
     stop("If map is specified, it must be a dataframe with two columns named 'Symbol' and 'Approved.Symbol'")
+  
   approved <- x %in% map$Approved.Symbol
-  if(casecorrection){
-    ##change to upper case, then change orfs back to lower case:
+  
+  if (identical(species, "human")) {
+    # change to uppercase, then change orfs back to lowercase
     x.casecorrected <- toupper(x)
     x.casecorrected <- sub("(.*C[0-9XY]+)ORF(.+)", "\\1orf\\2", x.casecorrected)
-  }else{
+  } else if (identical(species, "mouse")) {
     x.casecorrected <- x
+    for (i in seq_along(x)) {
+      # don't correct if gene symbol starts with non-alphabet
+      alphabetPrefix <- substring(x[i], 1, 1) %in% c(LETTERS, letters)
+      
+      # make it begin with an uppercase, followed by all lowercase
+      if (isTRUE(alphabetPrefix)) {
+        x.casecorrected[i] <- tolower(x[i])
+        x.casecorrected[i] <- paste0(toupper(substr(x.casecorrected[i], 1, 1)), 
+                                  substr(x.casecorrected[i], 2, nchar(x.casecorrected[i])))
+      }
+    }
   }
+  
   approvedaftercasecorrection <- x.casecorrected %in% map$Approved.Symbol
-  if (!identical(all.equal(x, x.casecorrected), TRUE))
+  if (!identical(all.equal(x, x.casecorrected), TRUE) & identical(species, "human"))
     warning("Human gene symbols should be all upper-case except for the 'orf' in open reading frames. The case of some letters was corrected.")
   alias <- x.casecorrected %in% map$Symbol
   df <- data.frame(x=x,
