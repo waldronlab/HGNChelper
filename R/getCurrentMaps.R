@@ -94,7 +94,7 @@ getCurrentMouseMap <- function(){
   map <- read.delim("http://www.informatics.jax.org/downloads/reports/MGI_EntrezGene.rpt", as.is=TRUE, header = FALSE)
   map <- map[, 2:4]
   
-  map.ok <- map[-grep("^O$", map[, 2]), c(1, 3)]
+  map.ok <- map[grep("^O$", map[, 2]), c(1, 3)]
   map.ok <- data.frame(Symbol=unique(map.ok[, 1]), Approved.Symbol=unique(map.ok[, 1]), stringsAsFactors = FALSE)
   
   map.withdrawn <- map[grep("^W$", map[, 2]), c(1, 3)]
