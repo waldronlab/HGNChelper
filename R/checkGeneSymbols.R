@@ -75,7 +75,7 @@ checkGeneSymbols <- function(x,
     message(paste("Maps last updated on:", lastupdate, collapse = " "))
     map <- HGNChelper::mouse.table
   } else {
-    if (is.null(map)){
+    if (is.null(map)) {
       stop("If species is not 'human' or 'mouse' then map argument must be specified")
     }
   }
@@ -102,6 +102,8 @@ checkGeneSymbols <- function(x,
                                   substr(x.casecorrected[i], 2, nchar(x.casecorrected[i])))
       }
     }
+  } else {
+    x.casecorrected <- x
   }
   
   approvedaftercasecorrection <- x.casecorrected %in% map$Approved.Symbol
