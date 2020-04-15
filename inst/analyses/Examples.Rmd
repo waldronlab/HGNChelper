@@ -111,9 +111,9 @@ for (i in seq_along(gpl_files)) {
 write.csv(platform, "inst/extdata/platform.csv", row.names = FALSE)
 ```
 
-Fetch all the gene symbols found in GPL,  store in column 1 of `platforms.csv`.
+Fetch all the gene symbols found in GPL,  store in column 1 of `platform.csv`.
 
-```{r platform.R, eval=FALSE}
+```{r test_GPLs_1, eval=FALSE}
 library(GEOquery)
 all.platforms <- read.csv("platform.csv", as.is=TRUE)
 
@@ -124,8 +124,8 @@ names(hgnc.reference) <- NULL
 ```
 
 ## Create `gpls_already_tested.csv` file
-
-```{r eval=FALSE}
+(This step takes long --> separate R script available as `test_GPLs.R`)
+```{r test_GPLs_2, eval=FALSE}
 library(HGNChelper)
 
 raw.platform.dir <- "platforms"
