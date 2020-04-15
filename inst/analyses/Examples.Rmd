@@ -1,0 +1,259 @@
+---
+title: "HGNChelper Usecases: MSigDB and GEO Platforms"
+author: "Sehyun Oh"
+date: "`r Sys.Date()`"
+output:
+  BiocStyle::html_document:
+    toc: true
+    toc_float: false
+    toc_depth: 2
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, collapse = TRUE)
+```
+
+# Gene symbols in MSigDB
+## Load MSigDB and Excel-modified gene symbols
+Excel-mogrified gene symbols (`mog_map.csv`) was catalogued by importing all gene
+symbols into Excel and exporting them in all available date formats. Also, 38,040
+gene symbols used in MSigDB database is downloaded and saved in `msigdb.v7.0.symbols.gmt`.
+
+```{r ExcellnGMT.R, warning=FALSE}
+library(HGNChelper)
+
+readGMT <- function (fname, name.column = 1) {
+    if (!(name.column == 1 | name.column == 2))
+        stop("name.column should be 1 or 2")
+    x <- readLines(fname)
+    x <- strsplit(x, split = "\t")
+    output <- lapply(x, function(y) y[-1:-2])
+    names(output) <- make.names(sapply(x, function(y) y[name.column]), unique = TRUE)
+    return(output)
+}
+
+# gmt.files <- dir(pattern = "\\.gmt$")
+# if(length(gmt.files) == 0) stop(paste("No .gmt files found in", getwd()))
+
+# Load all .gmt files
+gmt.files <- "msigdb.v7.0.symbols.gmt"
+all.sigs <- lapply(gmt.files, readGMT)
+all.sigs <- lapply(all.sigs, function(x) unique(unlist(x)))
+# all.sigs <- lapply(all.sigs, function(x) x[!grepl("^LOC", x)]) 
+names(all.sigs) <- gmt.files
+all.sigs$OVERALL <- unique(do.call(c, all.sigs))
+
+# Load Excel-mogrified gene symbols
+mog <- read.csv(system.file("extdata", "mog_map.csv", package = "HGNChelper"), 
+                as.is=TRUE)
+```
+
+
+## Update using `HGNChelper`
+
+Fetch the up-to-date human gene symbol map using `HGNChelper::getCurrentHumanMap`.
+```{r}
+CurrentHumanMap = getCurrentHumanMap()
+```
+
+Update gene symbols using HGNChelper and check any Excel-mogrified gene symbol.
+```{r warning=FALSE}
+simplecheck <- sapply(all.sigs, function(x){
+        tmp <- checkGeneSymbols(x, map = CurrentHumanMap)
+        output <- c(sum(tmp$Approved)/nrow(tmp), 
+                    sum(!is.na(tmp[, 3]))/nrow(tmp), 
+                    any(toupper(x) %in% toupper(mog[, 2])))
+        names(output) <- c("valid.frac", "valid.after.hgnchelper.frac", "any.excel")
+        return(output)
+    })
+simplecheck <- t(simplecheck)
+simplecheck
+
+# checkGeneSymbols
+tmp = checkGeneSymbols(all.sigs[[1]], map = CurrentHumanMap)
+
+# the number of invalid gene symbols before
+sum(tmp$Approved != "TRUE")   
+
+# the number of invalid gene symbols after
+sum(is.na(tmp$Suggested.Symbol))   
+
+# Example of gene symbols that can't be corrected by HGNGhelper
+unfixables <- sort(tmp[is.na(tmp[, 3]), 1])  
+set.seed(1)
+sample(unfixables, 10)
+```
+
+
+# Gene symbols in GPL
+
+- There are 20,716 unique platforms.    
+- *platforms* directory : there are 20,716 files saved in this folder          
+- *hgnc.vecs* directory : there are 2,044 files saved in this folder       
+
+## Fetch GPL files and update using `HGNChelper`
+GEO platform information is downloaded from https://www.ncbi.nlm.nih.gov/geo/browse/?view=platforms
+in five `.csv` files and combined/saved as `platforms.csv`. As of March 27th, 2020, 
+there are 20,716 platforms exist in GEO.
+
+```{r eval=FALSE, echo=FALSE}
+dir <- "inst/extdata/GPL_list"
+gpl_files <- list.files(dir)
+first <- read.csv(file.path(dir, gpl_files[1]), as.is=TRUE)
+platform <- as.data.frame(matrix(ncol = ncol(first), nrow = 0))
+colnames(platform) <- colnames(first)
+
+for (i in seq_along(gpl_files)) {
+  gpl = read.csv(file.path(dir, gpl_files[i]), as.is=TRUE)
+  platform = rbind(platform, gpl)
+}
+
+write.csv(platform, "inst/extdata/platform.csv", row.names = FALSE)
+```
+
+Fetch all the gene symbols found in GPL,  store in column 1 of `platforms.csv`.
+
+```{r platform.R, eval=FALSE}
+library(GEOquery)
+all.platforms <- read.csv("platform.csv", as.is=TRUE)
+
+# human Entrez Gene identifier symbols
+library(org.Hs.eg.db)
+hgnc.reference <- as.character(org.Hs.egSYMBOL)   
+names(hgnc.reference) <- NULL
+```
+
+## Create `gpls_already_tested.csv` file
+
+```{r eval=FALSE}
+library(HGNChelper)
+
+raw.platform.dir <- "platforms"
+dir.create(raw.platform.dir)
+hgnc.vec.dir <- "hgnc.vecs"
+dir.create(hgnc.vec.dir)
+
+if (file.exists("gpls_already_tested.csv")) {
+    gpls.already.tested <- read.csv("gpls_already_tested.csv", header=TRUE)
+} else {
+    write.table(t(c("platform", "colname", "frac.hgnc", "nrow", 
+                    "valid.frac", "valid.after.hgnchelper.frac", 
+                    "distribution", "submission_date")),
+                file="gpls_already_tested.csv", 
+                row.names=FALSE, col.names=FALSE, sep=",")
+}
+
+for (i in 1:nrow(all.platforms)){
+    gpl <- all.platforms[i, 1]
+    hgnc.vec.file <- paste(hgnc.vec.dir, "/", gpl, "_hgnc.vec.RData", sep="")
+    
+    if(exists("gpls.already.tested") && gpl %in% gpls.already.tested$platform) next
+    gpldat <- try(getGEO(gpl, destdir=raw.platform.dir))   
+    if(class(gpldat) == "try-error") next
+    gpltable <- try(Table(gpldat))
+    if(class(gpltable) == "try-error") next
+    hgnc.frac <- apply(gpltable, 2, function(x) sum(unique(x) %in% hgnc.reference) / length(unique(x)))
+    
+    # any column containing gene symbol will have >0 value
+    if(any(hgnc.frac > 0.5)) {   # updated from `hgnc.frac > 0`
+      
+        # assumed that there is only one 'symbol' column
+        hgnc.vec <- unique(as.character(gpltable[, which.max(hgnc.frac)]))  
+        # get rid of anything after a space
+        hgnc.vec <- gsub("[ ].+", "", hgnc.vec)  
+        # convert to ascii
+        HGNChelper.output <- checkGeneSymbols(iconv(hgnc.vec, "latin1", "ASCII", ""),
+                                              map = CurrentHumanMap)  
+        
+        # fraction of valid gene symbols BEFORE HGNChelper
+        valid.frac <- sum(HGNChelper.output$Approved) / length(hgnc.vec)  
+        # fraction of valid gene symbols AFTER HGNChelper
+        after.HGNChelper.valid.frac <- sum(!is.na(HGNChelper.output$Suggested.Symbol)) / length(hgnc.vec)  
+        
+        hgnc.vec <- c(gpldat@header$distribution, gpldat@header$submission_date, hgnc.vec)
+        save(hgnc.vec, file=hgnc.vec.file, compress="bzip2")
+        
+        info.for.file <- t(c(gpl, colnames(gpltable)[which.max(hgnc.frac)], 
+                             max(hgnc.frac), nrow(gpltable), 
+                             valid.frac, after.HGNChelper.valid.frac, 
+                             gpldat@header$distribution, 
+                             gpldat@header$submission_date))
+        
+        print(paste(i, gpl, length(hgnc.vec), "HGNC symbols found and saved."))
+        
+    } else {
+       info.for.file <- t(c(gpl, colnames(gpltable)[which.max(hgnc.frac)], 
+                            max(hgnc.frac), nrow(gpltable), NA, NA, 
+                            gpldat@header$distribution, 
+                            gpldat@header$submission_date))
+       print(paste(i, gpl, ": No HGNC symbols."))
+    }
+    
+    write.table(info.for.file, file="gpls_already_tested.csv", 
+                append=TRUE, row.names=FALSE, col.names=FALSE, sep=",")
+}
+```
+
+
+## Summary plots
+### Fraction of corrected gene symbols (by original prop. of valid symbols)
+```{r plot_gpls_already_tested.R}
+x <- read.csv("gpls_already_tested.csv", as.is=TRUE)
+x$valid.after.hgnchelper.frac <- as.numeric(x$valid.after.hgnchelper.frac)
+x <- x[!is.na(x$valid.frac), ]
+x <- x[x$valid.frac > 0, ]
+
+df <- data.frame(before=cut(100*x$valid.frac, breaks=seq(0, 100, by=20)),
+                 fixed=(x$valid.after.hgnchelper.frac - x$valid.frac)/(1-x$valid.frac))
+
+par(mar=c(4,5,2,0.5))
+boxplot(fixed ~ before, data=df,
+        main=paste("Correcting the annotations of", 
+                   nrow(df), "GEO platforms"),
+        xlab="% Valid Before HGNChelper",
+        ylab="Fraction of invalid \n gene symbols fixed",
+        col="grey", boxwex=1.1, varwidth=TRUE)
+```
+
+
+
+### Fraction of valid gene symbols (by submission dates)
+
+```{r valid_vs_year, fig.width=10, fig.height=4.5}
+raw <- read.csv("gpls_already_tested.csv", as.is=TRUE)  # 20,713 raws
+raw$valid.after.hgnchelper.frac <- as.numeric(raw$valid.after.hgnchelper.frac)
+raw <- raw[!is.na(raw$valid.frac), ]   # 2,044 rows
+raw <- raw[raw$valid.frac > 0.2, ]   # 2,043 rows
+
+raw$year <- as.numeric(gsub(".+[ ]+", "", raw$submission_date))
+n.years <- length(unique(raw$year))
+
+boxplot(valid.frac ~ year, data=raw, boxwex=0.3, ylim = c(0.4, 1),
+        main="Fig 2. Valid gene symbols for submission year",
+        xlab="Submission Year", ylab="Fraction of valid gene symbols", 
+        names=sub("20", "'", sort(unique(raw$year))))
+boxplot(valid.after.hgnchelper.frac ~ year, data=raw, ylim = c(0.4, 1),
+        boxwex=0.3, xaxt='n', at=(1:n.years)+0.35, add=TRUE, col="grey")
+legend("bottomleft", legend=c("Before", "After"), pch=c(0, 15), 
+       col=c("black", "grey"), lty=-1, bty='n', cex=1)
+```
+
+The number of unique platforms (= each dot in the above plot) each year
+```{r}
+table(raw$year)
+```
+
+
+# Mouse Gene Symbol
+Mouse gene symbols begin with an uppercase letter followed by all lowercase letters 
+except for recessive mutations, which begin with a lowercaase letter.
+
+```{r}
+source('~/data2/HGNChelper/R/getCurrentMaps.R')
+source('~/data2/HGNChelper/R/checkGeneSymbols.R')
+
+currentMouseMap = getCurrentMouseMap()
+mouse = c("mug2", "Mug2", "Pzp", "A2m", "A2mr","SEPT7", "1-Feb", "9/7", "UNKNOWNGENE", "lrp1", "E430008G22Rik", "AI325092")
+checkGeneSymbols(mouse, species = "mouse", map = currentMouseMap)
+```
+
