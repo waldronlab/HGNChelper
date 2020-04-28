@@ -249,11 +249,16 @@ Mouse gene symbols begin with an uppercase letter followed by all lowercase lett
 except for recessive mutations, which begin with a lowercaase letter.
 
 ```{r}
-source('~/data2/HGNChelper/R/getCurrentMaps.R')
-source('~/data2/HGNChelper/R/checkGeneSymbols.R')
+mouse = c("Pzp", "A2m", "A2mr","SEPT7", "1-Feb", "lrp1", "9/7")
+checkGeneSymbols(mouse, species = "mouse")
+```
 
-currentMouseMap = getCurrentMouseMap()
-mouse = c("mug2", "Mug2", "Pzp", "A2m", "A2mr","SEPT7", "1-Feb", "9/7", "UNKNOWNGENE", "lrp1", "E430008G22Rik", "AI325092")
-checkGeneSymbols(mouse, species = "mouse", map = currentMouseMap)
+HGNChelper cannot fix mouse gene alias containing uppercase letter in the middle
+of gene name. For example, "E430008G22Rik" (valid symbol is "Abl1") or "AA536808"
+(valid symbol is "Abl2").
+
+```{r}
+mouse = c("abl2", "AA536808", "E430008G22Rik", "AbLl", "Cpamd8", "cpamd8", "mug2", "Mug2")
+checkGeneSymbols(mouse, species = "mouse")
 ```
 

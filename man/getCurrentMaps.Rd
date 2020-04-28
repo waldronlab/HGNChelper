@@ -10,25 +10,26 @@ getCurrentHumanMap()
 getCurrentMouseMap()
 }
 \value{
-a `data.frame` that can be used as the checkGeneSymbols "map" argument
+A \code{data.frame} that can be used for \code{map} argument of \code{checkGeneSymbols} function
 }
 \description{
 Valid human and mouse gene symbols can be updated frequently. Use
-these functions to get the most current lists of valid symbols, which you can then use
-as input to the "map" argument of checkGeneSymbols(). Make sure to change the default 
-species="human" argument to checkGeneSymbols() if you are doing this for mouse.
-getCurrentHumanMap() for HGNC human gene symbols from genenames.org
-getCurrentMouseMap() for MGI mouse gene symbols from www.informatics.jax.org/downloads/reports/MGI_EntrezGene.rpt
+these functions to get the most current lists of valid symbols, which you can 
+then use as an input to the \code{map} argument of \code{checkGeneSymbols}. 
+Make sure to change the default \code{species="human"} argument to \code{checkGeneSymbols} 
+if you are doing this for mouse. Use \code{getCurrentHumanMap} for HGNC human gene 
+symbols from \url{genenames.org} and \code{getCurrentMouseMap} for MGI mouse gene 
+symbols from \url{www.informatics.jax.org/downloads/reports/MGI_EntrezGene.rpt}.
 }
 \examples{
 \dontrun{
 ## human
 new.hgnc.table <- getCurrentHumanMap()
 checkGeneSymbols(c("3-Oct", "10-3", "tp53"), map=new.hgnc.table)
+
 ## mouse
 new.mouse.table <- getCurrentMouseMap()
 ## Set species to NULL or "mouse" 
-## so that human-like capitalization corrections aren't made
 checkGeneSymbols(c("Gm46568", "1-Feb"), map=new.mouse.table, species="mouse")
 }
 

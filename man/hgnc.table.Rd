@@ -3,30 +3,30 @@
 \docType{data}
 \name{hgnc.table}
 \alias{hgnc.table}
-\title{All current and withdrawn HGNC gene symbols and Excel mogrifications.}
-\format{An object of class \code{data.frame} with 98431 rows and 2 columns.}
+\title{All current and withdrawn HGNC gene symbols and Excel-mogrified symbols}
+\format{
+An object of class \code{data.frame} with 99068 rows and 2 columns.
+}
 \source{
-Extracted from 
-\url{ftp://ftp.ebi.ac.uk/pub/databases/genenames/new/tsv/hgnc_complete_set.txt}
- and 
-system.file("extdata/mog_map.csv", package="HGNChelper")
+Extracted from \url{ftp://ftp.ebi.ac.uk/pub/databases/genenames/new/tsv/hgnc_complete_set.txt}
+and system.file("extdata/mog_map.csv", package="HGNChelper")
 }
 \usage{
 hgnc.table
 }
 \description{
-A dataframe with the first column providing a gene symbol or known alias
-(including withdrawn symbols), second column providing the approved HGNC 
-human gene symbol.
-}
-\details{
+A \code{data.frame} with the first column providing a gene symbol or 
+known alias (including withdrawn symbols), second column providing the approved
+HGNC human gene symbol.
+
 \itemize{
-  \item Symbol. All valid, Excel-mogrified, and withdrawn symbols
-  \item Approved.Symbol. Approved symbols.
+  \item \code{Symbol}: All valid, Excel-mogrified, and withdrawn symbols
+  \item \code{Approved.Symbol}: Approved symbols
 }
 }
 \examples{
 data("hgnc.table", package="HGNChelper")
 head(hgnc.table)
+
 }
 \keyword{datasets}

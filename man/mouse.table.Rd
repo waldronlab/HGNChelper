@@ -3,8 +3,10 @@
 \docType{data}
 \name{mouse.table}
 \alias{mouse.table}
-\title{All current and withdrawn MGI mouse symbols and Excel mogrifications.}
-\format{An object of class \code{data.frame} with 135053 rows and 2 columns.}
+\title{All current and withdrawn MGI mouse symbols and Excel-mogrified symbols}
+\format{
+An object of class \code{data.frame} with 370661 rows and 2 columns.
+}
 \source{
 Extracted from \url{http://www.informatics.jax.org/downloads/reports/MGI_EntrezGene.rpt} and 
 system.file("extdata/HGNChelper_mog_map_MGI_AMC_2016_03_30.csv", package="HGNChelper")
@@ -13,17 +15,18 @@ system.file("extdata/HGNChelper_mog_map_MGI_AMC_2016_03_30.csv", package="HGNChe
 mouse.table
 }
 \description{
-A dataframe with the first column providing a gene symbol or known alias
-(including withdrawn symbols), second column providing the approved MOUSE symbol.
-}
-\details{
+A \code{data.frame} with the first column providing a gene symbol or 
+known alias (including withdrawn symbols), second column providing the approved 
+MGI mouse gene symbol.
+
 \itemize{
-  \item Symbol. All valid, Excel-mogrified, and withdrawn symbols
-  \item Approved.Symbol. Approved symbols.
+  \item \code{Symbol}: All valid, Excel-mogrified, and withdrawn symbols
+  \item \code{Approved.Symbol}: Approved symbols
 }
 }
 \examples{
 data("mouse.table", package="HGNChelper")
 head(mouse.table)
+
 }
 \keyword{datasets}
