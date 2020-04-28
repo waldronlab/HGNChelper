@@ -43,14 +43,16 @@
 #' checkGeneSymbols(mouse, species="mouse")
 #' 
 #' ## Updating the map
-#' currentHumanMap <- getCurrentHumanMap()
-#' checkGeneSymbols(human, map=currentHumanMap)
+#' if (interactive()) {
+#'     currentHumanMap <- getCurrentHumanMap()
+#'     checkGeneSymbols(human, map=currentHumanMap)
 #' 
-#' # You should save this if you are going to use it multiple times,   
-#' # then load it from file rather than burdening HGNC's servers.
-#' save(hgnc.table, file="hgnc.table.rda", compress="bzip2")
-#' load("hgnc.table.rda")
-#' checkGeneSymbols(human, map=hgnc.table)
+#'     # You should save this if you are going to use it multiple times,   
+#'     # then load it from file rather than burdening HGNC's servers.
+#'     save(hgnc.table, file="hgnc.table.rda", compress="bzip2")
+#'     load("hgnc.table.rda")
+#'     checkGeneSymbols(human, map=hgnc.table)
+#' }
 #'   
 #' @export
 checkGeneSymbols <- function(x,
