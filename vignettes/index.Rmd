@@ -45,19 +45,20 @@ As you see, it even helps fix capitalization. How does it fix those Excel dates?
 
 ## Mouse gene symbols
 
-**Warning** the list of valid mouse symbols seems to be incomplete, see below. Mouse genes work the same way, but you need to specify the argument `species=mouse`:
+Mouse genes work the same way, but you need to specify the argument `species=mouse`:
 
 ```{r}
-checkGeneSymbols(c("1-Feb", "Pzp", "A2m"), species="mouse")
+checkGeneSymbols(c("1-Feb", "Pzp", "A2m", "E430008G22Rik"), species="mouse")
 ```
 
-I don't work with mouse data, so use this functionality with care and please let me know if you have any suggestions. For one thing, [Pzp](http://www.informatics.jax.org/marker/MGI:87854) in the above example is a valid gene symbol, but it is not in the [MGI_EntrezGene.rpt](http://www.informatics.jax.org/downloads/reports/MGI_EntrezGene.rpt) file I used to build a map. [Suggestions welcome](https://github.com/waldronlab/HGNChelper/issues) about how to build a more complete map of valid symbols. To be on the safe side, you could set `unmapped.as.na = FALSE` to keep unrecognized symbols as-is and only correct ones that have a definitive correction.
+Mouse gene symbols containing any capital letter, except the first character, can not be
+fixed. For example, 'E430008G22Rik' is a symbol for [Abl1](http://www.informatics.jax.org/marker/MGI:87859) gene, but we couldn't fix it. [Suggestions welcome](https://github.com/waldronlab/HGNChelper/issues) about how to build a more complete map of valid symbols. To be on the safe side, you could set `unmapped.as.na = FALSE` to keep unrecognized symbols as-is and only correct ones that have a definitive correction.
 
 ## What exactly checkGeneSymbols does
 
 HGNChelper does the following corrections:
 
-1. fix capitalization (for human only). Only **orf** genes are allowed to have lower-case letters.
+1. fix capitalization. For human, only **orf** genes are allowed to have lower-case letters.   
 2. fix Excel-mogrified symbols
 3. fix symbols that are listed as aliases to a more recent symbol in the [HGNC](https://www.genenames.org/) or [MGI](http://www.informatics.jax.org/) (MGI_EntrezGene_rpt) database.
 

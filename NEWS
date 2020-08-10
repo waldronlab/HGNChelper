@@ -1,6 +1,10 @@
 # HGNChelper
 ----------------------------------------------------------------
 
+## Changes in version 0.8.4
+* Importnat bugfix in mouse gene symbol correction process. 
+* Built-in maps updated to Aug 10 2020
+
 ## Changes in version 0.8.1
 * Important bugfix: outdated symbols in extdata/mog_map.csv - those
   mogrified by Excel - were not being corrected. e.g. these
