@@ -82,7 +82,7 @@
       <h1 data-toc-skip>HGNChelper Introduction</h1>
                         <h4 class="author">Levi Waldron and Markus Riester</h4>
             
-            <h4 class="date">2020-08-10</h4>
+            <h4 class="date">2020-09-03</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/waldronlab/HGNChelper/blob/master/vignettes/index.Rmd"><code>vignettes/index.Rmd</code></a></small>
       <div class="hidden name"><code>index.Rmd</code></div>
@@ -108,7 +108,7 @@
 <span class="no">human</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"FN1"</span>, <span class="st">"tp53"</span>, <span class="st">"UNKNOWNGENE"</span>,<span class="st">"7-Sep"</span>, <span class="st">"9/7"</span>, <span class="st">"1-Mar"</span>, <span class="st">"Oct4"</span>, <span class="st">"4-Oct"</span>,
       <span class="st">"OCT4-PG4"</span>, <span class="st">"C19ORF71"</span>, <span class="st">"C19orf71"</span>)
 <span class="fu"><a href="../reference/checkGeneSymbols.html">checkGeneSymbols</a></span>(<span class="no">human</span>)
-<span class="co">#&gt; Maps last updated on: Mon Aug 10 17:28:24 2020</span>
+<span class="co">#&gt; Maps last updated on: Thu Sep  3 09:37:08 2020</span>
 <span class="co">#&gt; Warning in checkGeneSymbols(human): Human gene symbols should be all upper-</span>
 <span class="co">#&gt; case except for the 'orf' in open reading frames. The case of some letters was</span>
 <span class="co">#&gt; corrected.</span>
@@ -132,7 +132,7 @@
 <a href="#mouse-gene-symbols" class="anchor"></a>Mouse gene symbols</h2>
 <p>Mouse genes work the same way, but you need to specify the argument <code>species=mouse</code>:</p>
 <div class="sourceCode" id="cb3"><html><body><pre class="r"><span class="fu"><a href="../reference/checkGeneSymbols.html">checkGeneSymbols</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"1-Feb"</span>, <span class="st">"Pzp"</span>, <span class="st">"A2m"</span>, <span class="st">"E430008G22Rik"</span>), <span class="kw">species</span><span class="kw">=</span><span class="st">"mouse"</span>)
-<span class="co">#&gt; Maps last updated on: Mon Aug 10 17:28:24 2020</span>
+<span class="co">#&gt; Maps last updated on: Thu Sep  3 09:37:08 2020</span>
 <span class="co">#&gt; Warning in checkGeneSymbols(c("1-Feb", "Pzp", "A2m", "E430008G22Rik"), species =</span>
 <span class="co">#&gt; "mouse"): x contains non-approved gene symbols</span>
 <span class="co">#&gt;               x Approved Suggested.Symbol</span>
@@ -154,9 +154,9 @@
 </ol>
 <p>Numbers 2 and 3 are done by comparing to a complete map of both valid and invalid but mappable symbols, shipped with HGNChelper:</p>
 <div class="sourceCode" id="cb4"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/dim.html">dim</a></span>(<span class="no">mouse.table</span>)
-<span class="co">#&gt; [1] 370661      2</span>
+<span class="co">#&gt; [1] 371315      2</span>
 <span class="fu"><a href="https://rdrr.io/r/base/dim.html">dim</a></span>(<span class="no">hgnc.table</span>)
-<span class="co">#&gt; [1] 99068     2</span></pre></body></html></div>
+<span class="co">#&gt; [1] 99432     2</span></pre></body></html></div>
 <p>These are a combination of manually generated Excel mogrifications that remain constant, and aliases that can become out of date with time.</p>
 </div>
 <div id="updating-maps-of-aliased-gene-symbols" class="section level2">
