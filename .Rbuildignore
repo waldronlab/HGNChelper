@@ -7,4 +7,6 @@ update.sh
 ^.*\.Rproj$
 ^\.Rproj\.user$
 ^doc$
+^docs$
+index.md
 ^Meta$
