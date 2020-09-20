@@ -53,9 +53,18 @@
 #'     load("hgnc.table.rda")
 #'     checkGeneSymbols(human, map=hgnc.table)
 #' }
+#' 
+#' ## Human with chromosome location
+#' checkGeneSymbols("Sip1", chromosome=14, map=currentHumanMap)
+#' 
+#' checkGeneSymbols("Sip1", chromosome=12, map=currentHumanMap)
+#' 
+#' checkGeneSymbols("Sip1", chromosome=2, map=currentHumanMap)
+#' 
 #'   
 #' @export
 checkGeneSymbols <- function(x,
+                             chromosome = NULL,
                              unmapped.as.na = TRUE,
                              map = NULL,
                              species = "human") {
@@ -82,8 +91,15 @@ checkGeneSymbols <- function(x,
     }
   }
   
-  if (!is(map, "data.frame") | !identical(colnames(map), c("Symbol", "Approved.Symbol")))
-    stop("If map is specified, it must be a dataframe with two columns named 'Symbol' and 'Approved.Symbol'")
+  if (!is.null(chromosome)) {
+    if (!is(map, "data.frame") | !identical(colnames(map), c("Symbol", "Approved.Symbol", "chromosome")))
+      stop("If map is specified, it must be a dataframe with three columns named 'Symbol', 'Approved.Symbol' and 'chromosome'") 
+  }
+  
+  else {
+    if (!is(map, "data.frame") | !identical(colnames(map), c("Symbol", "Approved.Symbol")))
+      stop("If map is specified, it must be a dataframe with two columns named 'Symbol' and 'Approved.Symbol'")
+  }
   
   approved <- x %in% map$Approved.Symbol
   
@@ -108,6 +124,13 @@ checkGeneSymbols <- function(x,
     x.casecorrected <- x
   }
   
+  if (!is.null(chromosome)) {
+    chromosome.check <- chromosome %in% map$chromosome[map$Symbol %in% x.casecorrected]
+    
+    if (sum(chromosome.check) != length(chromosome))
+      warning("chromosome contains wrong chromosome location for some genes. NA will be returned.")
+  }
+  
   approvedaftercasecorrection <- x.casecorrected %in% map$Approved.Symbol
   if (!identical(all.equal(x, x.casecorrected), TRUE) & identical(species, "human"))
     warning("Human gene symbols should be all upper-case except for the 'orf' in open reading frames. The case of some letters was corrected.")
@@ -118,12 +141,16 @@ checkGeneSymbols <- function(x,
                      ifelse(approved[i],
                             x[i],
                             ifelse(alias[i],
-                                   paste(map$Approved.Symbol[x.casecorrected[i] == map$Symbol], collapse=" /// "),
+                                   ifelse(!(is.null(chromosome)), 
+                                          paste(map$Approved.Symbol[x.casecorrected[i] == map$Symbol
+                                                                    & chromosome[i] == map$chromosome], collapse=" /// "),
+                                          paste(map$Approved.Symbol[x.casecorrected[i] == map$Symbol], collapse=" /// ")), 
                                    ifelse(approvedaftercasecorrection[i],
                                           x.casecorrected[i],
                                           NA)))),
                    stringsAsFactors=FALSE)
   df$Approved[is.na(df$x)] <- FALSE
+  df$Suggested.Symbol[nchar(df$Suggested.Symbol) == 0] <- NA
   if(!unmapped.as.na){
     df[is.na(df$Suggested.Symbol), "Suggested.Symbol"] <- df[is.na(df$Suggested.Symbol), "x"]
   }
