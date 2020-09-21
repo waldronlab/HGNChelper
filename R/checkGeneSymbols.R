@@ -57,18 +57,20 @@
 #' ## Unit Tests
 #' currentHumanMap <- getCurrentHumanMap()
 #' 
-#' ### Line 106 to 114
+#' ### Line 108 to 116
 #' checkGeneSymbols("Sip1")  # should work as before
 #' checkGeneSymbols("Sip1", chromosome=14) # should give error
 #' checkGeneSymbols("Sip1", chromosome=14, map=currentHumanMap) # should give approved symbol only for chromosome 14
 #' 
-#' ### Line 139 to 144
+#' ### Line 141 to 149
 #' checkGeneSymbols(rep("Sip1", 3), chromosome=c(14, 12, 3), map=currentHumanMap) # output with a warning for wrong chromosome number
 #' checkGeneSymbols(rep("Sip1", 3), chromosome=c(14, 12, 2), map=currentHumanMap) # output without a warning for wrong chromosome number
 #' 
-#' ### Line 150 to 165
+#' ### Line 155 to 168
 #' checkGeneSymbols("Sip1") # output as before  
-#' checkGeneSymbols(rep("Sip1", 3), chromosome=c(14, 12, 2), map=currentHumanMap) # new output for correctly specified chromosome numbers
+#' checkGeneSymbols(rep("Sip1", 3), chromosome=c(14, 12, 2), map=currentHumanMap) # one suggested symbol for correctly specified chromosome numbers
+#' checkGeneSymbols(human, c(1:5, 1, 7:11), map = currentHumanMap) # returns MTARC1 (at chromosome 1) for 1-MAR
+#' checkGeneSymbols(human, c(1:5, 4, 7:11), map = currentHumanMap) # returns MARCHF1 (at chromosome 4) for 1-MAR
 #' 
 #'  
 #'   
@@ -137,11 +139,14 @@ checkGeneSymbols <- function(x,
   }
   
   if (!is.null(chromosome)) {
-    chromosome.check <- chromosome %in% map$chromosome[map$Symbol %in% x.casecorrected]
+    chromosome.check <- sapply(1:length(chromosome), function(i) 
+      ifelse(x.casecorrected[i] %in% map$Symbol, 
+             sum(chromosome[i] == map$chromosome[map$Symbol %in% x.casecorrected[i]])>0, 
+             FALSE))
     
     if (sum(chromosome.check) != length(chromosome))
-      warning("chromosome contains wrong chromosome number for some genes. NA will be returned.")
-  }
+      warning("chromosome contains wrong chromosome number for some genes.")
+  } else chromosome.check <- F
   
   approvedaftercasecorrection <- x.casecorrected %in% map$Approved.Symbol
   if (!identical(all.equal(x, x.casecorrected), TRUE) & identical(species, "human"))
@@ -153,7 +158,7 @@ checkGeneSymbols <- function(x,
                      ifelse(approved[i],
                             x[i],
                             ifelse(alias[i],
-                                   ifelse(chromosome.check[i], 
+                                   ifelse(!(is.null(chromosome)) & chromosome.check[i], 
                                           paste(map$Approved.Symbol[x.casecorrected[i] == map$Symbol
                                                                     & chromosome[i] == map$chromosome], collapse=" /// "),
                                           paste(map$Approved.Symbol[x.casecorrected[i] == map$Symbol], collapse=" /// ")), 
@@ -162,7 +167,6 @@ checkGeneSymbols <- function(x,
                                           NA)))),
                    stringsAsFactors=FALSE)
   df$Approved[is.na(df$x)] <- FALSE
-  df$Suggested.Symbol[nchar(df$Suggested.Symbol) == 0] <- NA
   if(!unmapped.as.na){
     df[is.na(df$Suggested.Symbol), "Suggested.Symbol"] <- df[is.na(df$Suggested.Symbol), "x"]
   }
