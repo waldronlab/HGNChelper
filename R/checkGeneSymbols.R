@@ -54,13 +54,23 @@
 #'     checkGeneSymbols(human, map=hgnc.table)
 #' }
 #' 
-#' ## Human with chromosome location
-#' checkGeneSymbols("Sip1", chromosome=14, map=currentHumanMap)
+#' ## Unit Tests
+#' currentHumanMap <- getCurrentHumanMap()
 #' 
-#' checkGeneSymbols("Sip1", chromosome=12, map=currentHumanMap)
+#' ### Line 106 to 114
+#' checkGeneSymbols("Sip1")  # should work as before
+#' checkGeneSymbols("Sip1", chromosome=14) # should give error
+#' checkGeneSymbols("Sip1", chromosome=14, map=currentHumanMap) # should give approved symbol only for chromosome 14
 #' 
-#' checkGeneSymbols("Sip1", chromosome=2, map=currentHumanMap)
+#' ### Line 139 to 144
+#' checkGeneSymbols(rep("Sip1", 3), chromosome=c(14, 12, 3), map=currentHumanMap) # output with a warning for wrong chromosome number
+#' checkGeneSymbols(rep("Sip1", 3), chromosome=c(14, 12, 2), map=currentHumanMap) # output without a warning for wrong chromosome number
 #' 
+#' ### Line 150 to 165
+#' checkGeneSymbols("Sip1") # output as before  
+#' checkGeneSymbols(rep("Sip1", 3), chromosome=c(14, 12, 2), map=currentHumanMap) # new output for correctly specified chromosome numbers
+#' 
+#'  
 #'   
 #' @export
 checkGeneSymbols <- function(x,
@@ -81,7 +91,9 @@ checkGeneSymbols <- function(x,
   # load map for correct species
   if (identical(species, "human") & is.null(map)) {
     message(paste("Maps last updated on:", lastupdate, collapse = " "))
-    map <- HGNChelper::hgnc.table
+    if (!is.null(chromosome)) {
+      map <- HGNChelper::hgnc.table
+    } else map <- HGNChelper::hgnc.table[, 1:2]
   } else if (identical(species, "mouse") & is.null(map)) {
     message(paste("Maps last updated on:", lastupdate, collapse = " "))
     map <- HGNChelper::mouse.table
@@ -128,7 +140,7 @@ checkGeneSymbols <- function(x,
     chromosome.check <- chromosome %in% map$chromosome[map$Symbol %in% x.casecorrected]
     
     if (sum(chromosome.check) != length(chromosome))
-      warning("chromosome contains wrong chromosome location for some genes. NA will be returned.")
+      warning("chromosome contains wrong chromosome number for some genes. NA will be returned.")
   }
   
   approvedaftercasecorrection <- x.casecorrected %in% map$Approved.Symbol
