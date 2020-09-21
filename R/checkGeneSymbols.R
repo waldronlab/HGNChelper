@@ -153,7 +153,7 @@ checkGeneSymbols <- function(x,
                      ifelse(approved[i],
                             x[i],
                             ifelse(alias[i],
-                                   ifelse(!(is.null(chromosome)), 
+                                   ifelse(chromosome.check[i], 
                                           paste(map$Approved.Symbol[x.casecorrected[i] == map$Symbol
                                                                     & chromosome[i] == map$chromosome], collapse=" /// "),
                                           paste(map$Approved.Symbol[x.casecorrected[i] == map$Symbol], collapse=" /// ")), 
