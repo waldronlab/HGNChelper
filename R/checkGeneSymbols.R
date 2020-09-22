@@ -57,16 +57,16 @@
 #' ## Unit Tests
 #' currentHumanMap <- getCurrentHumanMap()
 #' 
-#' ### Line 108 to 116
+#' ### Line 106 to 116
 #' checkGeneSymbols("Sip1")  # should work as before
-#' checkGeneSymbols("Sip1", chromosome=14) # should give error
+#' checkGeneSymbols("Sip1", chromosome=14) # should give error when hgnc.table does not contain chromosome
 #' checkGeneSymbols("Sip1", chromosome=14, map=currentHumanMap) # should give approved symbol only for chromosome 14
 #' 
 #' ### Line 141 to 149
 #' checkGeneSymbols(rep("Sip1", 3), chromosome=c(14, 12, 3), map=currentHumanMap) # output with a warning for wrong chromosome number
 #' checkGeneSymbols(rep("Sip1", 3), chromosome=c(14, 12, 2), map=currentHumanMap) # output without a warning for wrong chromosome number
 #' 
-#' ### Line 155 to 168
+#' ### Line 155 to 178
 #' checkGeneSymbols("Sip1") # output as before  
 #' checkGeneSymbols(rep("Sip1", 3), chromosome=c(14, 12, 2), map=currentHumanMap) # one suggested symbol for correctly specified chromosome numbers
 #' checkGeneSymbols(human, c(1:5, 1, 7:11), map = currentHumanMap) # returns MTARC1 (at chromosome 1) for 1-MAR
@@ -93,9 +93,7 @@ checkGeneSymbols <- function(x,
   # load map for correct species
   if (identical(species, "human") & is.null(map)) {
     message(paste("Maps last updated on:", lastupdate, collapse = " "))
-    if (!is.null(chromosome)) {
-      map <- HGNChelper::hgnc.table
-    } else map <- HGNChelper::hgnc.table[, 1:2]
+    map <- HGNChelper::hgnc.table
   } else if (identical(species, "mouse") & is.null(map)) {
     message(paste("Maps last updated on:", lastupdate, collapse = " "))
     map <- HGNChelper::mouse.table
@@ -106,11 +104,13 @@ checkGeneSymbols <- function(x,
   }
   
   if (!is.null(chromosome)) {
+    map <- map
     if (!is(map, "data.frame") | !identical(colnames(map), c("Symbol", "Approved.Symbol", "chromosome")))
       stop("If map is specified, it must be a dataframe with three columns named 'Symbol', 'Approved.Symbol' and 'chromosome'") 
   }
   
   else {
+    map <- map[, 1:2]
     if (!is(map, "data.frame") | !identical(colnames(map), c("Symbol", "Approved.Symbol")))
       stop("If map is specified, it must be a dataframe with two columns named 'Symbol' and 'Approved.Symbol'")
   }
@@ -167,6 +167,15 @@ checkGeneSymbols <- function(x,
                                           NA)))),
                    stringsAsFactors=FALSE)
   df$Approved[is.na(df$x)] <- FALSE
+  if (!is.null(chromosome)) {
+    df$Input.chromosome = chromosome
+    df$Correct.chromosome = sapply(1:length(x), function(i)
+      ifelse(chromosome.check[i], 
+             chromosome[i], 
+             ifelse(alias[i], 
+                    paste(map$chromosome[x.casecorrected[i] == map$Symbol], collapse=" /// "), 
+                    NA)))
+  }
   if(!unmapped.as.na){
     df[is.na(df$Suggested.Symbol), "Suggested.Symbol"] <- df[is.na(df$Suggested.Symbol), "x"]
   }
