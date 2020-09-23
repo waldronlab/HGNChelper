@@ -53,7 +53,7 @@ getCurrentHumanMap <- function(){
   url <- "ftp://ftp.ebi.ac.uk/pub/databases/genenames/new/tsv/hgnc_complete_set.txt"
   message(paste("Fetching gene symbols from", url))
   map <- read.delim(url, as.is=TRUE)
-  # 2 = symbol, 3=alias_symbol, 4=prev_symbol
+  # 2 = symbol, 3=alias_symbol, 4=prev_symbol, 7=location
   # corrections
   has.corrections <- nchar(map$alias_symbol)>0 | nchar(map$prev_symbol)>0
   M  <- do.call(rbind, apply(map[has.corrections & map$status == "Approved", ], 1,
@@ -82,6 +82,11 @@ getCurrentHumanMap <- function(){
   O[, "Approved.Symbol"] <- O_corrected[, "Suggested.Symbol"]
   output <- rbind(external.table, O)
   output <- .fixttable(output)
+  output <- merge(output, map[, c("location", "symbol")], by = 2)
+  output <- output[, c(2, 1, 3)]
+  output <- splitstackshape::cSplit(splitstackshape::cSplit(output, 3, "p"), 3, "q")
+  output <- output[, c(1, 2, 5)]
+  colnames(output)[3] <- "chromosome"
   return(output)
 }
 
