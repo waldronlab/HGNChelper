@@ -4,7 +4,13 @@
 \alias{checkGeneSymbols}
 \title{Identify outdated or Excel-mogrified gene symbols}
 \usage{
-checkGeneSymbols(x, unmapped.as.na = TRUE, map = NULL, species = "human")
+checkGeneSymbols(
+  x,
+  chromosome = NULL,
+  unmapped.as.na = TRUE,
+  map = NULL,
+  species = "human"
+)
 }
 \arguments{
 \item{x}{A character vector of gene symbols to check for mogrified or outdated values}
@@ -57,6 +63,26 @@ if (interactive()) {
     load("hgnc.table.rda")
     checkGeneSymbols(human, map=hgnc.table)
 }
+
+## Unit Tests
+currentHumanMap <- getCurrentHumanMap()
+
+### Line 106 to 116
+checkGeneSymbols("Sip1")  # should work as before
+checkGeneSymbols("Sip1", chromosome=14) # should give error when hgnc.table does not contain chromosome
+checkGeneSymbols("Sip1", chromosome=14, map=currentHumanMap) # should give approved symbol only for chromosome 14
+
+### Line 141 to 149
+checkGeneSymbols(rep("Sip1", 3), chromosome=c(14, 12, 3), map=currentHumanMap) # output with a warning for wrong chromosome number
+checkGeneSymbols(rep("Sip1", 3), chromosome=c(14, 12, 2), map=currentHumanMap) # output without a warning for wrong chromosome number
+
+### Line 155 to 178
+checkGeneSymbols("Sip1") # output as before  
+checkGeneSymbols(rep("Sip1", 3), chromosome=c(14, 12, 2), map=currentHumanMap) # one suggested symbol for correctly specified chromosome numbers
+checkGeneSymbols(human, c(1:5, 1, 7:11), map = currentHumanMap) # returns MTARC1 (at chromosome 1) for 1-MAR
+checkGeneSymbols(human, c(1:5, 4, 7:11), map = currentHumanMap) # returns MARCHF1 (at chromosome 4) for 1-MAR
+
+ 
   
 }
 \seealso{
