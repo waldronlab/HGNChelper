@@ -10,3 +10,4 @@ update.sh
 ^docs$
 index.md
 ^Meta$
+^\.github$
