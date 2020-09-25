@@ -10,4 +10,7 @@ update.sh
 ^docs$
 index.md
 ^Meta$
-^\.github
+^\\.github$
+^_pkgdown\.yml$
+^pkgdown$
+^\.github$
