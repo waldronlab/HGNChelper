@@ -137,7 +137,13 @@
  are valid and a third column with a corrected gene list.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>checkGeneSymbols</span><span class='op'>(</span><span class='va'>x</span>, unmapped.as.na <span class='op'>=</span> <span class='cn'>TRUE</span>, map <span class='op'>=</span> <span class='cn'>NULL</span>, species <span class='op'>=</span> <span class='st'>"human"</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>checkGeneSymbols</span><span class='op'>(</span>
+  <span class='va'>x</span>,
+  chromosome <span class='op'>=</span> <span class='cn'>NULL</span>,
+  unmapped.as.na <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  map <span class='op'>=</span> <span class='cn'>NULL</span>,
+  species <span class='op'>=</span> <span class='st'>"human"</span>
+<span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -184,7 +190,7 @@ with corrections possible from map.</p>
 <span class='va'>human</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"FN1"</span>, <span class='st'>"TP53"</span>, <span class='st'>"UNKNOWNGENE"</span>,<span class='st'>"7-Sep"</span>, <span class='st'>"9/7"</span>, <span class='st'>"1-Mar"</span>, <span class='st'>"Oct4"</span>, <span class='st'>"4-Oct"</span>,
       <span class='st'>"OCT4-PG4"</span>, <span class='st'>"C19ORF71"</span>, <span class='st'>"C19orf71"</span><span class='op'>)</span>
 <span class='fu'>checkGeneSymbols</span><span class='op'>(</span><span class='va'>human</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span class='message'>Maps last updated on: Fri Sep 11 22:21:00 2020</span></div><div class='output co'>#&gt; <span class='warning'>Warning: Human gene symbols should be all upper-case except for the 'orf' in open reading frames. The case of some letters was corrected.</span></div><div class='output co'>#&gt; <span class='warning'>Warning: x contains non-approved gene symbols</span></div><div class='output co'>#&gt;              x Approved   Suggested.Symbol
+</div><div class='output co'>#&gt; <span class='message'>Maps last updated on: Fri Sep 25 16:15:48 2020</span></div><div class='output co'>#&gt; <span class='warning'>Warning: Human gene symbols should be all upper-case except for the 'orf' in open reading frames. The case of some letters was corrected.</span></div><div class='output co'>#&gt; <span class='warning'>Warning: x contains non-approved gene symbols</span></div><div class='output co'>#&gt;              x Approved   Suggested.Symbol
 #&gt; 1          FN1     TRUE                FN1
 #&gt; 2         TP53     TRUE               TP53
 #&gt; 3  UNKNOWNGENE    FALSE               &lt;NA&gt;
@@ -199,7 +205,7 @@ with corrections possible from map.</p>
 <span class='co'>## Mouse</span>
 <span class='va'>mouse</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"1-Feb"</span>, <span class='st'>"Pzp"</span>, <span class='st'>"A2m"</span><span class='op'>)</span>
 <span class='fu'>checkGeneSymbols</span><span class='op'>(</span><span class='va'>mouse</span>, species<span class='op'>=</span><span class='st'>"mouse"</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span class='message'>Maps last updated on: Fri Sep 11 22:21:00 2020</span></div><div class='output co'>#&gt; <span class='warning'>Warning: x contains non-approved gene symbols</span></div><div class='output co'>#&gt;       x Approved Suggested.Symbol
+</div><div class='output co'>#&gt; <span class='message'>Maps last updated on: Fri Sep 25 16:15:48 2020</span></div><div class='output co'>#&gt; <span class='warning'>Warning: x contains non-approved gene symbols</span></div><div class='output co'>#&gt;       x Approved Suggested.Symbol
 #&gt; 1 1-Feb    FALSE             Feb1
 #&gt; 2   Pzp     TRUE              Pzp
 #&gt; 3   A2m     TRUE              A2m</div><div class='input'>
@@ -214,6 +220,28 @@ with corrections possible from map.</p>
     <span class='fu'><a href='https://rdrr.io/r/base/load.html'>load</a></span><span class='op'>(</span><span class='st'>"hgnc.table.rda"</span><span class='op'>)</span>
     <span class='fu'>checkGeneSymbols</span><span class='op'>(</span><span class='va'>human</span>, map<span class='op'>=</span><span class='va'>hgnc.table</span><span class='op'>)</span>
 <span class='op'>}</span>
+
+<span class='co'>## Unit Tests</span>
+<span class='va'>currentHumanMap</span> <span class='op'>&lt;-</span> <span class='fu'><a href='getCurrentMaps.html'>getCurrentHumanMap</a></span><span class='op'>(</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; <span class='message'>Fetching gene symbols from ftp://ftp.ebi.ac.uk/pub/databases/genenames/new/tsv/hgnc_complete_set.txt</span></div><div class='output co'>#&gt; <span class='error'>Error in loadNamespace(name): there is no package called ‘splitstackshape’</span></div><div class='input'>
+<span class='co'>### Line 106 to 116</span>
+<span class='fu'>checkGeneSymbols</span><span class='op'>(</span><span class='st'>"Sip1"</span><span class='op'>)</span>  <span class='co'># should work as before</span>
+</div><div class='output co'>#&gt; <span class='message'>Maps last updated on: Fri Sep 25 16:15:48 2020</span></div><div class='output co'>#&gt; <span class='warning'>Warning: Human gene symbols should be all upper-case except for the 'orf' in open reading frames. The case of some letters was corrected.</span></div><div class='output co'>#&gt; <span class='warning'>Warning: x contains non-approved gene symbols</span></div><div class='output co'>#&gt;      x Approved           Suggested.Symbol
+#&gt; 1 Sip1    FALSE GEMIN2 /// SCAF11 /// ZEB2</div><div class='input'><span class='fu'>checkGeneSymbols</span><span class='op'>(</span><span class='st'>"Sip1"</span>, chromosome<span class='op'>=</span><span class='fl'>14</span><span class='op'>)</span> <span class='co'># should give error when hgnc.table does not contain chromosome</span>
+</div><div class='output co'>#&gt; <span class='message'>Maps last updated on: Fri Sep 25 16:15:48 2020</span></div><div class='output co'>#&gt; <span class='error'>Error in checkGeneSymbols("Sip1", chromosome = 14): If map is specified, it must be a dataframe with three columns named 'Symbol', 'Approved.Symbol' and 'chromosome'</span></div><div class='input'><span class='fu'>checkGeneSymbols</span><span class='op'>(</span><span class='st'>"Sip1"</span>, chromosome<span class='op'>=</span><span class='fl'>14</span>, map<span class='op'>=</span><span class='va'>currentHumanMap</span><span class='op'>)</span> <span class='co'># should give approved symbol only for chromosome 14</span>
+</div><div class='output co'>#&gt; <span class='error'>Error in checkGeneSymbols("Sip1", chromosome = 14, map = currentHumanMap): object 'currentHumanMap' not found</span></div><div class='input'>
+<span class='co'>### Line 141 to 149</span>
+<span class='fu'>checkGeneSymbols</span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span><span class='op'>(</span><span class='st'>"Sip1"</span>, <span class='fl'>3</span><span class='op'>)</span>, chromosome<span class='op'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>14</span>, <span class='fl'>12</span>, <span class='fl'>3</span><span class='op'>)</span>, map<span class='op'>=</span><span class='va'>currentHumanMap</span><span class='op'>)</span> <span class='co'># output with a warning for wrong chromosome number</span>
+</div><div class='output co'>#&gt; <span class='error'>Error in checkGeneSymbols(rep("Sip1", 3), chromosome = c(14, 12, 3), map = currentHumanMap): object 'currentHumanMap' not found</span></div><div class='input'><span class='fu'>checkGeneSymbols</span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span><span class='op'>(</span><span class='st'>"Sip1"</span>, <span class='fl'>3</span><span class='op'>)</span>, chromosome<span class='op'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>14</span>, <span class='fl'>12</span>, <span class='fl'>2</span><span class='op'>)</span>, map<span class='op'>=</span><span class='va'>currentHumanMap</span><span class='op'>)</span> <span class='co'># output without a warning for wrong chromosome number</span>
+</div><div class='output co'>#&gt; <span class='error'>Error in checkGeneSymbols(rep("Sip1", 3), chromosome = c(14, 12, 2), map = currentHumanMap): object 'currentHumanMap' not found</span></div><div class='input'>
+<span class='co'>### Line 155 to 178</span>
+<span class='fu'>checkGeneSymbols</span><span class='op'>(</span><span class='st'>"Sip1"</span><span class='op'>)</span> <span class='co'># output as before  </span>
+</div><div class='output co'>#&gt; <span class='message'>Maps last updated on: Fri Sep 25 16:15:48 2020</span></div><div class='output co'>#&gt; <span class='warning'>Warning: Human gene symbols should be all upper-case except for the 'orf' in open reading frames. The case of some letters was corrected.</span></div><div class='output co'>#&gt; <span class='warning'>Warning: x contains non-approved gene symbols</span></div><div class='output co'>#&gt;      x Approved           Suggested.Symbol
+#&gt; 1 Sip1    FALSE GEMIN2 /// SCAF11 /// ZEB2</div><div class='input'><span class='fu'>checkGeneSymbols</span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span><span class='op'>(</span><span class='st'>"Sip1"</span>, <span class='fl'>3</span><span class='op'>)</span>, chromosome<span class='op'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>14</span>, <span class='fl'>12</span>, <span class='fl'>2</span><span class='op'>)</span>, map<span class='op'>=</span><span class='va'>currentHumanMap</span><span class='op'>)</span> <span class='co'># one suggested symbol for correctly specified chromosome numbers</span>
+</div><div class='output co'>#&gt; <span class='error'>Error in checkGeneSymbols(rep("Sip1", 3), chromosome = c(14, 12, 2), map = currentHumanMap): object 'currentHumanMap' not found</span></div><div class='input'><span class='fu'>checkGeneSymbols</span><span class='op'>(</span><span class='va'>human</span>, <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>1</span><span class='op'>:</span><span class='fl'>5</span>, <span class='fl'>1</span>, <span class='fl'>7</span><span class='op'>:</span><span class='fl'>11</span><span class='op'>)</span>, map <span class='op'>=</span> <span class='va'>currentHumanMap</span><span class='op'>)</span> <span class='co'># returns MTARC1 (at chromosome 1) for 1-MAR</span>
+</div><div class='output co'>#&gt; <span class='error'>Error in checkGeneSymbols(human, c(1:5, 1, 7:11), map = currentHumanMap): object 'currentHumanMap' not found</span></div><div class='input'><span class='fu'>checkGeneSymbols</span><span class='op'>(</span><span class='va'>human</span>, <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>1</span><span class='op'>:</span><span class='fl'>5</span>, <span class='fl'>4</span>, <span class='fl'>7</span><span class='op'>:</span><span class='fl'>11</span><span class='op'>)</span>, map <span class='op'>=</span> <span class='va'>currentHumanMap</span><span class='op'>)</span> <span class='co'># returns MARCHF1 (at chromosome 4) for 1-MAR</span>
+</div><div class='output co'>#&gt; <span class='error'>Error in checkGeneSymbols(human, c(1:5, 4, 7:11), map = currentHumanMap): object 'currentHumanMap' not found</span></div><div class='input'>
+ 
   
 </div></pre>
   </div>
