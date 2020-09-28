@@ -1,15 +1,18 @@
 ## human test 1
-x = c("FN1", "TP53", "UNKNOWNGENE","7-Sep", "9/7", "1-Mar", "Oct4", "4-Oct",
-      "OCT4-PG4", "C19ORF71", "C19orf71")
+x = c("FN1", "TP53", "UNKNOWNGENE",
+      "7-Sep", "9/7", "1-Mar", "Oct4", "4-Oct", "OCT4-PG4", 
+      "C19ORF71", "C19orf71")
 
 expect_warning(res <- checkGeneSymbols(x))
 
 expect_equal(sum(res[,1] != x), 0)
-expect_equal(res[,2],
-  c(TRUE,TRUE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,TRUE))
+expect_equal(res[,2], c(TRUE, TRUE, FALSE,
+                        FALSE, FALSE, FALSE, FALSE, FALSE,
+                        FALSE, FALSE, TRUE))
 
-expected.correct <- c("FN1","TP53",NA,"SEPTIN7","SEPTIN7","MTARC1 /// MARCHF1",
-                      "POU5F1","POU5F1","POU5F1P4","C19orf71","C19orf71")
+expected.correct <- c("FN1", "TP53", NA,
+                      "SEPTIN7", "SEPTIN7", "MARCHF1 /// MTARC1",
+                      "POU5F1", "POU5F1", "POU5F1P4", "C19orf71", "C19orf71")
 
 expect_equal(as.character(res[,3]), expected.correct)
 
@@ -36,21 +39,43 @@ answers <- c(TRUE, FALSE,
 expect_equal(sum(res[,1] != x), 0)
 expect_equal(sum(res[,2] != answers), 0)
 expect_equal(as.character(res[,3]), c("C21orf62-AS1", "C21orf62-AS1",
-                                              "MORF4L1P7", "MORF4L1P7",
-                                              "FN1", "FN1",
-                                              "TP53",
-                                              NA,
-                                              "SEPTIN7", "MTARC1 /// MARCHF1", "MTARC1 /// MARCHF1"))
+                                      "MORF4L1P7", "MORF4L1P7",
+                                      "FN1", "FN1",
+                                      "TP53",
+                                      NA,
+                                      "SEPTIN7", "MARCHF1 /// MTARC1", "MARCHF1 /// MTARC1"))
 
-# mouse test 1
+
+## human test 3 - chromosome
+# check chromosome input
+expect_warning(res <- checkGeneSymbols("Sip1"))
+answer <- "GEMIN2 /// SCAF11 /// ZEB2"
+expect_equal(res[,3], answer)
+expect_error(checkGeneSymbols(rep("Sip1", 2), chromosome = c(14, 12, 2)),
+             "The length of gene symbols and chromosome lists should be same.")
+
+# wrong chromosome input
+expect_warning(res <- checkGeneSymbols(rep("Sip1", 3), chromosome = c(14, 12, 3)), 
+               "Specified chromosome list contains wrong chromosome number for some genes.") 
+expect_equal(res[,2], c(FALSE, FALSE, FALSE))
+expect_equal(res[,3], c("GEMIN2", "SCAF11", "GEMIN2 /// SCAF11 /// ZEB2"))
+expect_equal(res[,4], c(14, 12, 3))
+expect_equal(res[,5], c("14", "12", "14 /// 12 /// 2"))
+
+
+
+## mouse test 1
 data(mouse.table)
 orig <- c("1-Feb", "A2m", "A2mr", "lrp1", "UNKNOWNGENE", "AI893533")
 correct <- c("Feb1", "A2m", "Lrp", "Lrp1", NA, NA)
 expect_warning(res <- checkGeneSymbols(orig, species="mouse"))
+expect_warning(res2 <- checkGeneSymbols(orig, species="mouse", chromosome = c(1, 20)))
 expect_equal(res$Approved, c(FALSE, TRUE, FALSE, FALSE, FALSE, FALSE))
 expect_equal(res$Suggested.Symbol, correct)
+expect_equal(res2$Approved, c(FALSE, TRUE, FALSE, FALSE, FALSE, FALSE))
+expect_equal(res2$Suggested.Symbol, correct)
 
-# mouse test 2
+## mouse test 2
 orig <- c("abl2", "AbLl", "Abl2",
           "Cpamd8", "cpamd8", 
           "mug2", "Mug2")
@@ -74,10 +99,12 @@ expect_equal(res$Suggested.Symbol, c("TP53", "TP53"))
 
 # check specifying manual map
 mymap <- data.frame(Symbol=c("A", "B", "BB"), Approved.Symbol=c("A", "BB", "BB"), stringsAsFactors = FALSE)
+
 # with no human capitalization help
 expect_warning(res <- checkGeneSymbols(c("a", "b", "A", "B", "BB"), map=mymap, species=NULL))
 expect_equal(res$Approved, c(FALSE, FALSE, TRUE, FALSE, TRUE))
 expect_equal(res$Suggested.Symbol, c(NA, NA, "A", "BB", "BB"))
+
 # with human capitalization help
 expect_warning(res <- checkGeneSymbols(c("a", "b", "A", "B", "BB"), map=mymap, species="human"))
 expect_equal(res$Approved, c(FALSE, FALSE, TRUE, FALSE, TRUE))

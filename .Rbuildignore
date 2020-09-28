@@ -1,5 +1,6 @@
 README.md
 inst/analyses
+inst/extdata/GPL_list
 ^.*\.Rout$
 update.sh
 .pre_script_build.sh

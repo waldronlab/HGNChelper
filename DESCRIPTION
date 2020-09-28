@@ -16,6 +16,7 @@ BugReports: https://github.com/waldronlab/HGNChelper/issues
 LazyData: TRUE
 RoxygenNote: 7.1.1.9000
 Encoding: UTF-8
+Imports: splitstackshape
 Suggests: testthat,
     knitr,
     rmarkdown

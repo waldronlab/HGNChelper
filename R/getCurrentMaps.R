@@ -15,6 +15,7 @@
 #' getCurrentMouseMap()
 #' @importFrom stats complete.cases
 #' @importFrom utils read.delim
+#' @importFrom splitstackshape cSplit
 #' @examples
 #' \dontrun{
 #' ## human
