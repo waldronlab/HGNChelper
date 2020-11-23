@@ -2,7 +2,9 @@
 [![Coverage Status](https://codecov.io/github/waldronlab/HGNChelper/coverage.svg?branch=master)](https://codecov.io/github/waldronlab/HGNChelper?branch=master)
 [![](https://cranlogs.r-pkg.org/badges/HGNChelper)](https://cran.r-project.org/package=HGNChelper)
 
-# HGNChelper: Identify and correct invalid gene symbols
+# HGNChelper: Identification and correction of invalid gene symbols for human and mouse
+
+A [pre-print is available on bioRxiv](https://www.biorxiv.org/content/10.1101/2020.09.16.300632v2). 
 
 ## Why HGNChelper?
 
