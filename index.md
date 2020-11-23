@@ -23,7 +23,7 @@ than to remember
 [7157](http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?db=gene&cmd=Retrieve&dopt=full_report&list_uids=7157)
 or
 [ENSG00000141510](http://www.ensembl.org/Homo_sapiens/geneview?gene=ENSG00000141510). They're
-a fact of life. So Markus Riester and I wrote HGNChelper to make them
+a fact of life. So Sehyun Oh, Markus Riester, and I wrote HGNChelper to make them
 a little more pleasant to bioinformaticians.
 
 * See the [Articles](articles/index.html) link above for a vignette
