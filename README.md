@@ -4,7 +4,9 @@
 [![Travis-CI Build Status](https://travis-ci.org/waldronlab/HGNChelper.svg?branch=master)](https://travis-ci.org/waldronlab/HGNChelper)
 
 
-# HGNChelper: Identify and correct invalid gene symbols
+# HGNChelper: identification and correction of invalid gene symbols for human and mouse
+
+A [pre-print is available on bioRxiv](https://www.biorxiv.org/content/10.1101/2020.09.16.300632v2). 
 
 ## Updating
 
