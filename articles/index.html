@@ -76,13 +76,14 @@
 
       
 
-      </header><script src="index_files/accessible-code-block-0.0.1/empty-anchor.js"></script><div class="row">
+      </header><script src="index_files/accessible-code-block-0.0.1/empty-anchor.js"></script><link href="index_files/anchor-sections-1.0/anchor-sections.css" rel="stylesheet">
+<script src="index_files/anchor-sections-1.0/anchor-sections.js"></script><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>HGNChelper Introduction</h1>
                         <h4 class="author">Levi Waldron and Markus Riester</h4>
             
-            <h4 class="date">2020-10-01</h4>
+            <h4 class="date">2020-11-23</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/waldronlab/HGNChelper/blob/master/vignettes/index.Rmd"><code>vignettes/index.Rmd</code></a></small>
       <div class="hidden name"><code>index.Rmd</code></div>
@@ -102,11 +103,11 @@
 <h2 class="hasAnchor">
 <a href="#hgnchelper-functionality" class="anchor"></a>HGNChelper functionality</h2>
 <p>HGNChelper has several functions that seemed useful back in the day when we first wrote it, but really one has withstood the test of time and remained useful:</p>
-<div class="sourceCode" id="cb1"><pre class="downlit">
-<span class="fu"><a href="../reference/checkGeneSymbols.html">checkGeneSymbols</a></span><span class="op">(</span><span class="va">x</span>, unmapped.as.na <span class="op">=</span> <span class="cn">TRUE</span>, map <span class="op">=</span> <span class="cn">NULL</span>, species <span class="op">=</span> <span class="st">"human"</span><span class="op">)</span></pre></div>
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="../reference/checkGeneSymbols.html">checkGeneSymbols</a></span><span class="op">(</span><span class="va">x</span>, unmapped.as.na <span class="op">=</span> <span class="cn">TRUE</span>, map <span class="op">=</span> <span class="cn">NULL</span>, species <span class="op">=</span> <span class="st">"human"</span><span class="op">)</span></code></pre></div>
 <p><code>checkGeneSymbols</code> identifies HGNC human or MGI mouse gene symbols which are outdated or may have been mogrified by Excel or other spreadsheet programs. It returns a data.frame of the same number of rows as the input, with a second column indicating whether the symbols are valid and a third column with a corrected gene list.</p>
-<div class="sourceCode" id="cb2"><pre class="downlit">
-<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/waldronlab/HGNChelper">HGNChelper</a></span><span class="op">)</span>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/waldronlab/HGNChelper">HGNChelper</a></span><span class="op">)</span>
 <span class="va">human</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"FN1"</span>, <span class="st">"tp53"</span>, <span class="st">"UNKNOWNGENE"</span>,<span class="st">"7-Sep"</span>, <span class="st">"9/7"</span>, <span class="st">"1-Mar"</span>, <span class="st">"Oct4"</span>, <span class="st">"4-Oct"</span>,
       <span class="st">"OCT4-PG4"</span>, <span class="st">"C19ORF71"</span>, <span class="st">"C19orf71"</span><span class="op">)</span>
 <span class="fu"><a href="../reference/checkGeneSymbols.html">checkGeneSymbols</a></span><span class="op">(</span><span class="va">human</span><span class="op">)</span>
@@ -126,15 +127,15 @@
 <span class="co">#&gt; 8        4-Oct    FALSE             POU5F1</span>
 <span class="co">#&gt; 9     OCT4-PG4    FALSE           POU5F1P4</span>
 <span class="co">#&gt; 10    C19ORF71    FALSE           C19orf71</span>
-<span class="co">#&gt; 11    C19orf71     TRUE           C19orf71</span></pre></div>
+<span class="co">#&gt; 11    C19orf71     TRUE           C19orf71</span></code></pre></div>
 <p>As you see, it even helps fix capitalization. How does it fix those Excel dates? I imported a column of all human gene symbols into Excel, then exported using a whole bunch of available date formats. Then I kept any that differed from the originals for HGNChelper’s map.</p>
 </div>
 <div id="mouse-gene-symbols" class="section level2">
 <h2 class="hasAnchor">
 <a href="#mouse-gene-symbols" class="anchor"></a>Mouse gene symbols</h2>
 <p>Mouse genes work the same way, but you need to specify the argument <code>species=mouse</code>:</p>
-<div class="sourceCode" id="cb3"><pre class="downlit">
-<span class="fu"><a href="../reference/checkGeneSymbols.html">checkGeneSymbols</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"1-Feb"</span>, <span class="st">"Pzp"</span>, <span class="st">"A2m"</span>, <span class="st">"E430008G22Rik"</span><span class="op">)</span>, species<span class="op">=</span><span class="st">"mouse"</span><span class="op">)</span>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="../reference/checkGeneSymbols.html">checkGeneSymbols</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"1-Feb"</span>, <span class="st">"Pzp"</span>, <span class="st">"A2m"</span>, <span class="st">"E430008G22Rik"</span><span class="op">)</span>, species<span class="op">=</span><span class="st">"mouse"</span><span class="op">)</span>
 <span class="co">#&gt; Maps last updated on: Mon Sep 28 18:31:21 2020</span>
 <span class="co">#&gt; Warning in checkGeneSymbols(c("1-Feb", "Pzp", "A2m", "E430008G22Rik"), species =</span>
 <span class="co">#&gt; "mouse"): x contains non-approved gene symbols</span>
@@ -142,7 +143,7 @@
 <span class="co">#&gt; 1         1-Feb    FALSE             Feb1</span>
 <span class="co">#&gt; 2           Pzp     TRUE              Pzp</span>
 <span class="co">#&gt; 3           A2m     TRUE              A2m</span>
-<span class="co">#&gt; 4 E430008G22Rik    FALSE             &lt;NA&gt;</span></pre></div>
+<span class="co">#&gt; 4 E430008G22Rik    FALSE             &lt;NA&gt;</span></code></pre></div>
 <p>Mouse gene symbols containing any capital letter, except the first character, can not be fixed. For example, ‘E430008G22Rik’ is a symbol for <a href="http://www.informatics.jax.org/marker/MGI:87859">Abl1</a> gene, but we couldn’t fix it. <a href="https://github.com/waldronlab/HGNChelper/issues">Suggestions welcome</a> about how to build a more complete map of valid symbols. To be on the safe side, you could set <code>unmapped.as.na = FALSE</code> to keep unrecognized symbols as-is and only correct ones that have a definitive correction.</p>
 </div>
 <div id="what-exactly-checkgenesymbols-does" class="section level2">
@@ -156,11 +157,11 @@
 <li>fix symbols that are listed as aliases to a more recent symbol in the <a href="https://www.genenames.org/">HGNC</a> or <a href="http://www.informatics.jax.org/">MGI</a> (MGI_EntrezGene_rpt) database.</li>
 </ol>
 <p>Numbers 2 and 3 are done by comparing to a complete map of both valid and invalid but mappable symbols, shipped with HGNChelper:</p>
-<div class="sourceCode" id="cb4"><pre class="downlit">
-<span class="fu"><a href="https://rdrr.io/r/base/dim.html">dim</a></span><span class="op">(</span><span class="va">mouse.table</span><span class="op">)</span>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/dim.html">dim</a></span><span class="op">(</span><span class="va">mouse.table</span><span class="op">)</span>
 <span class="co">#&gt; [1] 371392      2</span>
 <span class="fu"><a href="https://rdrr.io/r/base/dim.html">dim</a></span><span class="op">(</span><span class="va">hgnc.table</span><span class="op">)</span>
-<span class="co">#&gt; [1] 99492     3</span></pre></div>
+<span class="co">#&gt; [1] 99492     3</span></code></pre></div>
 <p>These are a combination of manually generated Excel mogrifications that remain constant, and aliases that can become out of date with time.</p>
 </div>
 <div id="updating-maps-of-aliased-gene-symbols" class="section level2">
