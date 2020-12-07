@@ -2,6 +2,7 @@
 [![](https://cranlogs.r-pkg.org/badges/HGNChelper)](https://cran.r-project.org/package=HGNChelper)
 [![Coverage Status](https://codecov.io/github/waldronlab/HGNChelper/coverage.svg?branch=master)](https://codecov.io/github/waldronlab/HGNChelper?branch=master)
 [![Travis-CI Build Status](https://travis-ci.org/waldronlab/HGNChelper.svg?branch=master)](https://travis-ci.org/waldronlab/HGNChelper)
+[![Zenodo release](https://zenodo.org/badge/139589811.svg)](https://zenodo.org/account/settings/github/repository/waldronlab/HGNChelper)
 
 
 # HGNChelper: identification and correction of invalid gene symbols for human and mouse
@@ -19,14 +20,3 @@ R library to update the documentation.
 
 Alternatively, you can use updated maps without updating the package, see `?getCurrentMaps`.
 
-## Updating gh-pages
-
-Note to self - when updating the vignette, update the gh-pages website 
-(https://waldronlab.io/HGNChelper/) like this:
-
-```
-# pip install ghp-import
-R -e "pkgdown::build_site()"
-ghp-import docs/
-git push
-```
