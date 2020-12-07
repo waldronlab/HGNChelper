@@ -2,7 +2,7 @@
 [![](https://cranlogs.r-pkg.org/badges/HGNChelper)](https://cran.r-project.org/package=HGNChelper)
 [![Coverage Status](https://codecov.io/github/waldronlab/HGNChelper/coverage.svg?branch=master)](https://codecov.io/github/waldronlab/HGNChelper?branch=master)
 [![Travis-CI Build Status](https://travis-ci.org/waldronlab/HGNChelper.svg?branch=master)](https://travis-ci.org/waldronlab/HGNChelper)
-[![Zenodo release](https://zenodo.org/badge/139589811.svg)](https://zenodo.org/account/settings/github/repository/waldronlab/HGNChelper)
+[![DOI](https://zenodo.org/badge/139589811.svg)](https://zenodo.org/badge/latestdoi/139589811)
 
 
 # HGNChelper: identification and correction of invalid gene symbols for human and mouse
