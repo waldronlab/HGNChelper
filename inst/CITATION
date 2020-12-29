@@ -1,0 +1,18 @@
+citHeader("Please cite our software :)")
+
+citEntry(entry = "Article",
+    title = "HGNChelper: identification and correction of invalid gene symbols for human and mouse",
+    author = personList(as.person("Sehyun Oh"), as.person("Jasmine Abdelnabi"),
+        as.person("Ragheed Al-Dulaimi"), as.person("Ayush Aggarwal"), as.person("Marcel Ramos"),
+        as.person("Carmen Rodriguez Cabrera"), as.person("Tiffany Chan"),
+        as.person("Sean Davis"), as.person("Markus Riester"),
+        as.person("Levi Waldron")),
+    journal = "F1000 Research",
+    year = "2020",
+    volume = "9:1493",
+    textVersion =
+    paste("Sehyun Oh et al.",
+        "HGNChelper: identification and correction of invalid gene symbols for human and mouse.",
+        "F1000Research 2020, 9:1493.",
+        "DOI: https://doi.org/10.12688/f1000research.28033.1")
+)

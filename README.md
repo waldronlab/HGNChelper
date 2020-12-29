@@ -7,7 +7,12 @@
 
 # HGNChelper: identification and correction of invalid gene symbols for human and mouse
 
-A [pre-print is available on bioRxiv](https://www.biorxiv.org/content/10.1101/2020.09.16.300632v2). 
+Please cite our software:
+
+Oh S, Abdelnabi J, Al-Dulaimi R et al. HGNChelper: identification and
+correction of invalid gene symbols for human and mouse. F1000Research 2020, 9:1493
+(https://doi.org/10.12688/f1000research.28033.1)
+
 
 ## Updating
 

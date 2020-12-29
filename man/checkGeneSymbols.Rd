@@ -13,11 +13,11 @@ checkGeneSymbols(
 )
 }
 \arguments{
-\item{x}{A character vector of gene symbols to check for mogrified or outdated values}
+\item{x}{A character vector of gene symbols to check for modified or outdated values}
 
-\item{chromosome}{A integer vector containing the chromosome number you want to 
-specify for each gene provided through the argument \code{x}. It should be the 
-same length as the input for \code{x}. Currently, this argument is applicable
+\item{chromosome}{An optional integer vector containing the chromosome number of each gene
+provided through the argument \code{x}. It should be the 
+same length as the input for \code{x}. Currently, this argument is implemented
 only for human gene cases.}
 
 \item{unmapped.as.na}{If \code{TRUE} (default), unmapped symbols will appear as 
