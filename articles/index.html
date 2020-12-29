@@ -31,7 +31,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">HGNChelper</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.8.6</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.8.7</span>
       </span>
     </div>
 
@@ -39,7 +39,7 @@
       <ul class="nav navbar-nav">
 <li>
   <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -62,7 +62,7 @@
 <ul class="nav navbar-nav navbar-right">
 <li>
   <a href="https://github.com/waldronlab/HGNChelper/">
-    <span class="fab fa fab fa-github fa-lg"></span>
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -76,14 +76,13 @@
 
       
 
-      </header><script src="index_files/accessible-code-block-0.0.1/empty-anchor.js"></script><link href="index_files/anchor-sections-1.0/anchor-sections.css" rel="stylesheet">
-<script src="index_files/anchor-sections-1.0/anchor-sections.js"></script><div class="row">
+      </header><script src="index_files/accessible-code-block-0.0.1/empty-anchor.js"></script><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>HGNChelper Introduction</h1>
                         <h4 class="author">Levi Waldron and Markus Riester</h4>
             
-            <h4 class="date">2020-12-07</h4>
+            <h4 class="date">2020-12-29</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/waldronlab/HGNChelper/blob/master/vignettes/index.Rmd"><code>vignettes/index.Rmd</code></a></small>
       <div class="hidden name"><code>index.Rmd</code></div>
@@ -108,6 +107,11 @@
 <p><code>checkGeneSymbols</code> identifies HGNC human or MGI mouse gene symbols which are outdated or may have been mogrified by Excel or other spreadsheet programs. It returns a data.frame of the same number of rows as the input, with a second column indicating whether the symbols are valid and a third column with a corrected gene list.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/waldronlab/HGNChelper">HGNChelper</a></span><span class="op">)</span>
+<span class="co">#&gt; Please cite our software :) </span>
+<span class="co">#&gt;  </span>
+<span class="co">#&gt;  Sehyun Oh et al. HGNChelper: identification and correction of invalid gene symbols for human and mouse. F1000Research 2020, 9:1493. DOI: https://doi.org/10.12688/f1000research.28033.1 </span>
+<span class="co">#&gt;  </span>
+<span class="co">#&gt;  Type `citation('HGNChelper')` for a BibTeX entry.</span>
 <span class="va">human</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"FN1"</span>, <span class="st">"tp53"</span>, <span class="st">"UNKNOWNGENE"</span>,<span class="st">"7-Sep"</span>, <span class="st">"9/7"</span>, <span class="st">"1-Mar"</span>, <span class="st">"Oct4"</span>, <span class="st">"4-Oct"</span>,
       <span class="st">"OCT4-PG4"</span>, <span class="st">"C19ORF71"</span>, <span class="st">"C19orf71"</span><span class="op">)</span>
 <span class="fu"><a href="../reference/checkGeneSymbols.html">checkGeneSymbols</a></span><span class="op">(</span><span class="va">human</span><span class="op">)</span>
