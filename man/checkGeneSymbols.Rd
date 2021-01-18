@@ -4,35 +4,45 @@
 \alias{checkGeneSymbols}
 \title{Identify outdated or Excel-mogrified gene symbols}
 \usage{
-checkGeneSymbols(x, unmapped.as.na = TRUE, map = NULL, species = "human")
+checkGeneSymbols(
+  x,
+  chromosome = NULL,
+  unmapped.as.na = TRUE,
+  map = NULL,
+  species = "human"
+)
 }
 \arguments{
-\item{x}{A character vector of gene symbols to check for mogrified or outdated values}
+\item{x}{A character vector of gene symbols to check for modified or outdated values}
 
-\item{unmapped.as.na}{If \code{TRUE} (default), unmapped symbols will appear as NA in the
-\code{Suggested.Symbol} column. If \code{FALSE}, the original unmapped symbol
-will be kept.}
+\item{chromosome}{An optional integer vector containing the chromosome number of each gene
+provided through the argument \code{x}. It should be the 
+same length as the input for \code{x}. Currently, this argument is implemented
+only for human gene cases.}
 
-\item{map}{Specify if you do not want to use the default maps provided 
-by setting species equal to "mouse" or "human". 
-Map can be any other data.frame with colnames identical
-to \code{c("Symbol", "Approved.Symbol")}. The default maps can be updated 
+\item{unmapped.as.na}{If \code{TRUE} (default), unmapped symbols will appear as 
+NA in the \code{Suggested.Symbol} column. If \code{FALSE}, the original unmapped 
+symbol will be kept.}
+
+\item{map}{Specify if you do not want to use the default maps provided by setting 
+species equal to "mouse" or "human". Map can be any other data.frame with colnames 
+identical to \code{c("Symbol", "Approved.Symbol")}. The default maps can be updated 
 by running the interactive example below.}
 
 \item{species}{A character vector of length 1, either "human" (default) or "mouse". 
-If \code{NULL}, or anything other than "human" or "mouse", then the map
-argument must be provided.}
+If \code{NULL}, or anything other than "human" or "mouse", then the map argument 
+must be provided.}
 }
 \value{
-The function will return a data.frame of the same number of rows as the input,
-with corrections possible from map.
+The function will return a data.frame of the same number of rows as the 
+input, with corrections possible from map.
 }
 \description{
-This function identifies gene symbols which are outdated or may have been
- mogrified by Excel or other spreadsheet programs.  If output is
- assigned to a variable, it returns a data.frame of the same number of
- rows as the input, with a second column indicating whether the symbols
- are valid and a third column with a corrected gene list.
+This function identifies gene symbols which are outdated or may 
+have been mogrified by Excel or other spreadsheet programs. If output is assigned 
+to a variable, it returns a data.frame of the same number of rows as the input, 
+with a second column indicating whether the symbols are valid and a third column 
+with a corrected gene list.
 }
 \examples{
 library(HGNChelper)
@@ -60,6 +70,5 @@ if (interactive()) {
   
 }
 \seealso{
-\code{\link{mouse.table}} for the mouse lookup table, 
-\code{\link{hgnc.table}} for the human lookup table
+\code{\link{mouse.table}} for the mouse lookup table, \code{\link{hgnc.table}} for the human lookup table
 }

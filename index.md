@@ -2,7 +2,14 @@
 [![Coverage Status](https://codecov.io/github/waldronlab/HGNChelper/coverage.svg?branch=master)](https://codecov.io/github/waldronlab/HGNChelper?branch=master)
 [![](https://cranlogs.r-pkg.org/badges/HGNChelper)](https://cran.r-project.org/package=HGNChelper)
 
-# HGNChelper: Identify and correct invalid gene symbols
+# HGNChelper: Identification and correction of invalid gene symbols for human and mouse
+
+Please cite our software:
+
+Oh S, Abdelnabi J, Al-Dulaimi R et al. HGNChelper: identification and
+correction of invalid gene symbols for human and mouse. F1000Research
+2020, 9:1493
+[https://doi.org/10.12688/f1000research.28033.1](https://doi.org/10.12688/f1000research.28033.1)
 
 ## Why HGNChelper?
 
@@ -21,7 +28,7 @@ than to remember
 [7157](http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?db=gene&cmd=Retrieve&dopt=full_report&list_uids=7157)
 or
 [ENSG00000141510](http://www.ensembl.org/Homo_sapiens/geneview?gene=ENSG00000141510). They're
-a fact of life. So Markus Riester and I wrote HGNChelper to make them
+a fact of life. So Sehyun Oh, Markus Riester, and I wrote HGNChelper to make them
 a little more pleasant to bioinformaticians.
 
 * See the [Articles](articles/index.html) link above for a vignette

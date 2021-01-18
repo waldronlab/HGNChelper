@@ -1,5 +1,6 @@
 README.md
 inst/analyses
+inst/extdata/GPL_list
 ^.*\.Rout$
 update.sh
 .pre_script_build.sh
@@ -10,3 +11,7 @@ update.sh
 ^docs$
 index.md
 ^Meta$
+^\\.github$
+^_pkgdown\.yml$
+^pkgdown$
+^\.github$

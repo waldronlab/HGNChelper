@@ -5,7 +5,7 @@
 \alias{mouse.table}
 \title{All current and withdrawn MGI mouse symbols and Excel-mogrified symbols}
 \format{
-An object of class \code{data.frame} with 135712 rows and 2 columns.
+An object of class \code{data.frame} with 371392 rows and 2 columns.
 }
 \source{
 Extracted from \url{http://www.informatics.jax.org/downloads/reports/MGI_EntrezGene.rpt} and 
