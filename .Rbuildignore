@@ -4,7 +4,6 @@ inst/extdata/GPL_list
 ^.*\.Rout$
 update.sh
 .pre_script_build.sh
-.travis.yml
 ^.*\.Rproj$
 ^\.Rproj\.user$
 ^doc$
