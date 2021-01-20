@@ -103,6 +103,14 @@ checkGeneSymbols <- function(x,
   
   approved <- x %in% map$Approved.Symbol
   
+  if (!is.null(chromosome)) {
+    approved.chr <- sapply(1:length(chromosome), function(i)
+      ifelse(chromosome[i] %in% unique(map[map$Approved.Symbol %in% x[i], chromosome]), 
+             TRUE, 
+             FALSE))
+    approved <- approved & approved.chr
+  }
+  
   if (identical(species, "human")) {
     # change to uppercase, then change orfs back to lowercase
     x.casecorrected <- toupper(x)
