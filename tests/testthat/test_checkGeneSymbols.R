@@ -66,7 +66,7 @@ expect_equal(res[,5], c("14", "12", "14 /// 12 /// 2"))
 expect_warning(res <- checkGeneSymbols(c("TKT", "FFM","ABCA4", "TKT", "AAVS1"), chromosome = c(1, 1, 1, 3, 19)), 
                "x contains non-approved gene symbols") 
 expect_equal(res[,2], c(FALSE, FALSE, TRUE, TRUE, TRUE))
-expect_equal(res[,3], c("DDR2", "ABCA4", "ABCA4", "TKT", "AAVS1 /// PPP1R12C"))
+expect_equal(res[,3], c("DDR2", "ABCA4", "ABCA4", "TKT", "AAVS1"))
 expect_equal(res[,4], c(1, 1, 1, 3, 19))
 expect_equal(res[,5], c(1, 1, 1, 3, 19))
 
