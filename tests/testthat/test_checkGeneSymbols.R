@@ -55,7 +55,8 @@ expect_error(checkGeneSymbols(rep("Sip1", 2), chromosome = c(14, 12, 2)),
              "The length of gene symbols and chromosome lists should be same.")
 
 # wrong chromosome input
-expect_warning(res <- checkGeneSymbols(rep("Sip1", 3), chromosome = c(14, 12, 3))) 
+expect_warning(res <- checkGeneSymbols(rep("Sip1", 3), chromosome = c(14, 12, 3)), 
+               "Specified chromosome list contains wrong chromosome number for some genes.") 
 expect_equal(res[,2], c(FALSE, FALSE, FALSE))
 expect_equal(res[,3], c("GEMIN2", "SCAF11", "GEMIN2 /// SCAF11 /// ZEB2"))
 expect_equal(res[,4], c(14, 12, 3))
