@@ -1,10 +1,19 @@
 # GEO platform information is downloaded from https://www.ncbi.nlm.nih.gov/geo/browse/?view=platforms
 # in five `.csv` files and combined/saved as `platforms.csv`. As of March 27th, 2020, 
-# there are 20,716 platforms exist in GEO.
+# there are 20,716 platforms exist in GEO and 5,128 out of them are Homo sapiens.
 
 library(GEOquery)
-all.platforms <- read.csv("~/data2/HGNChelper/inst/extdata/GPL_list/platform.csv", as.is=TRUE)
-all.platforms = all.platforms[19823:19874,]
+# platforms1 <- read.csv("~/data/HGNChelper/inst/extdata/GPL_list/platform_1.csv", as.is=TRUE)
+# platforms2 <- read.csv("~/data/HGNChelper/inst/extdata/GPL_list/platform_2.csv", as.is=TRUE)
+# platforms3 <- read.csv("~/data/HGNChelper/inst/extdata/GPL_list/platform_3.csv", as.is=TRUE)
+# platforms4 <- read.csv("~/data/HGNChelper/inst/extdata/GPL_list/platform_4.csv", as.is=TRUE)
+# platforms5 <- read.csv("~/data/HGNChelper/inst/extdata/GPL_list/platform_5.csv", as.is=TRUE)
+# all.platforms <- rbind(platforms1, platforms2, platforms3, platforms4, platforms5)
+# write.csv(all.platforms, "~/data/HGNChelper/inst/extdata/GPL_list/platform.csv", row.names=FALSE)
+
+all.platforms <- read.csv("~/data/HGNChelper/inst/extdata/GPL_list/platform.csv", as.is=TRUE)
+hs_ind <- which(all.platforms$Taxonomy == "Homo sapiens")
+all.platforms <- all.platforms[hs_ind,]
 
 # human Entrez Gene identifier symbols
 library(org.Hs.eg.db)
@@ -15,7 +24,7 @@ library(HGNChelper)
 
 raw.platform.dir <- "platforms"
 # dir.create(raw.platform.dir)
-# 
+
 hgnc.vec.dir <- "hgnc.vecs"
 # dir.create(hgnc.vec.dir)
 
