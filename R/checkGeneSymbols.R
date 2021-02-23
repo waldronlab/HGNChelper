@@ -105,7 +105,7 @@ checkGeneSymbols <- function(x,
   
   if (!is.null(chromosome)) {
     approved.chr <- sapply(1:length(chromosome), function(i)
-      ifelse(chromosome[i] %in% unique(map[map$Approved.Symbol %in% x[i], chromosome]), 
+      ifelse(chromosome[i] %in% unique(map$chromosome[map$Approved.Symbol %in% x[i]]), 
              TRUE, 
              FALSE))
     approved <- approved & approved.chr
