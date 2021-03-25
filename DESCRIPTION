@@ -6,7 +6,7 @@ Authors@R: c(person("Sehyun", "Oh", email = "sehyun.oh@sph.cuny.edu", role = c("
   person("Markus", "Riester", email = "Markus.riester@novartis.com", role = c("aut")),
   person("Levi", "Waldron", email = "lwaldron.research@gmail.com", role = c("aut", "cre")))
 Version: 0.8.8
-Date: 2021-01-20
+Date: 2021-03-25
 License: GPL (>=2.0)
 Title: Identify and Correct Invalid HGNC Human Gene Symbols and MGI Mouse Gene Symbols
 Description: Contains functions for
