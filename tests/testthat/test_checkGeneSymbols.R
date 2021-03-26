@@ -134,8 +134,7 @@ expect_warning(res2 <- checkGeneSymbols(factor(c("a", "b", "A", "B", "BB")), map
 expect_identical(res, res2)
 
 # check for outdated symbols from extdata/mog_map.csv
-expect_warning(res3 <-
-                 checkGeneSymbols(c("MARC1", "MARC2", "MARCH6")))
+expect_warning(res3 <- checkGeneSymbols(c("MARC1", "MARC2", "MARCH6")))
 expect_equal(res3$Approved, rep(FALSE, 3))
 expect_equal(res3$Suggested.Symbol, c("MTARC1", "MTARC2", "MARCHF6"))
 
