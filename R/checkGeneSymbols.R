@@ -59,7 +59,7 @@ checkGeneSymbols <- function(x,
                              unmapped.as.na = TRUE,
                              map = NULL,
                              species = "human", 
-                             expand.ambigous = F) {
+                             expand.ambiguous = F) {
 
   lastupdate <- readLines(system.file(file.path("extdata", "date_of_last_update.txt"), 
                           package = "HGNChelper"))
@@ -152,7 +152,7 @@ checkGeneSymbols <- function(x,
                    Approved = approved,
                    Suggested.Symbol = sapply(1:length(x), function(i)
                      ifelse(approved[i],
-                            ifelse(expand.ambigous, 
+                            ifelse(expand.ambiguous, 
                                    ifelse(!(is.null(chromosome)) & chromosome.check[i], 
                                           paste(unique(c(x[i], map$Approved.Symbol[x[i] == map$Symbol
                                                                                    & chromosome[i] == map$chromosome])), 
