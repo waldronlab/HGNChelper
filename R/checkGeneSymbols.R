@@ -154,9 +154,10 @@ checkGeneSymbols <- function(x,
                      ifelse(approved[i],
                             ifelse(expand.ambigous, 
                                    ifelse(!(is.null(chromosome)) & chromosome.check[i], 
-                                          paste(map$Approved.Symbol[x[i] == map$Symbol
-                                                                    & chromosome[i] == map$chromosome], collapse = " /// "),
-                                          paste(map$Approved.Symbol[x[i] == map$Symbol], collapse = " /// ")),
+                                          paste(unique(c(x[i], map$Approved.Symbol[x[i] == map$Symbol
+                                                                                   & chromosome[i] == map$chromosome])), 
+                                                collapse = " /// "),
+                                          paste(unique(c(x[i], map$Approved.Symbol[x[i] == map$Symbol])), collapse = " /// ")),
                                    x[i]), 
                             ifelse(alias[i],   # format chromosome output
                                    ifelse(!(is.null(chromosome)) & chromosome.check[i], 

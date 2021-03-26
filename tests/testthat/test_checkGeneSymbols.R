@@ -70,6 +70,11 @@ expect_equal(res[,3], c("DDR2", "ABCA4", "ABCA4", "TKT", "AAVS1"))
 expect_equal(res[,4], c(1, 1, 1, 3, 19))
 expect_equal(res[,5], c(1, 1, 1, 3, 19))
 
+## human test 3 - expand.ambigous
+res <- checkGeneSymbols("AAVS1", expand.ambigous = T)
+expect_identical(res$Approved, TRUE)
+expect_identical(res$Suggested.Symbol, "AAVS1 /// PPP1R12C")
+
 
 ## mouse test 1
 data(mouse.table)
@@ -93,6 +98,12 @@ answer <- c(FALSE, FALSE, TRUE, TRUE, FALSE, FALSE, TRUE)
 expect_warning(res <- checkGeneSymbols(orig, species="mouse"))
 expect_equal(res$Approved, answer)
 expect_equal(res$Suggested.Symbol, correct)
+
+## mouse test 3 - expand.ambigous
+
+res <- checkGeneSymbols(c("Cpamd8", "Mug2"), species = "mouse", expand.ambigous = T)
+expect_identical(res$Approved, c(TRUE, TRUE))
+expect_identical(res$Suggested.Symbol, c("Cpamd8 /// Mug2", "Mug2 /// Cpamd8"))
 
 # check capitalization behavior
 orig <- c("tp53", "TP53")
