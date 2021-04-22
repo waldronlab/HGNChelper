@@ -78,6 +78,21 @@ Gene symbols are aliased much more frequently than I can update this package, li
 1. use the `getCurrentHumanMap()` or `getCurrentMouseMap()` function, and provide the returned result through the `map=` argument of `checkGeneSymbols()`, or
 2. See the instructions for updating your package locally at https://github.com/waldronlab/HGNChelper (it's just one command-line command as long as you have R and [roxygen2](https://cran.r-project.org/package=roxygen2) installed)
 
+## What does the expand.ambiguous argument do
+
+As mentioned above genes symbols are aliased very frequently. It is possible that a gene symbol which was earlier an alias is now an approved symbol.
+'checkGeneSymbols' by default will give out only the approved symbol of a gene. This can be an issue specifically when analyzing an older dataset which may be referencing to a previously aliased (now approved) gene symbol mapping to another approved symbol at that time. 
+This can be checked with 'expand.ambiguous = TRUE' which gives out all the mapping of a gene symbol irrespective of whether it's an approved symbol.
+
+```{r}
+checkGeneSymbols("AAVS1", expand.ambiguous = FALSE)
+checkGeneSymbols("AAVS1", expand.ambiguous = TRUE)
+
+checkGeneSymbols(c("Cpamd8", "Mug2"), species = "mouse", expand.ambiguous = FALSE)
+checkGeneSymbols(c("Cpamd8", "Mug2"), species = "mouse", expand.ambiguous = TRUE)
+```
+
+
 ## Where do I find HGNChelper?
 
 * CRAN: https://cran.r-project.org/package=HGNChelper

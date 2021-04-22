@@ -71,7 +71,7 @@ expect_equal(res[,4], c(1, 1, 1, 3, 19))
 expect_equal(res[,5], c(1, 1, 1, 3, 19))
 
 ## human test 3 - expand.ambiguous
-res <- checkGeneSymbols("AAVS1", expand.ambiguous = T)
+res <- checkGeneSymbols("AAVS1", expand.ambiguous = TRUE)
 expect_identical(res$Approved, TRUE)
 expect_identical(res$Suggested.Symbol, "AAVS1 /// PPP1R12C")
 
@@ -101,7 +101,7 @@ expect_equal(res$Suggested.Symbol, correct)
 
 ## mouse test 3 - expand.ambiguous
 
-res <- checkGeneSymbols(c("Cpamd8", "Mug2"), species = "mouse", expand.ambiguous = T)
+res <- checkGeneSymbols(c("Cpamd8", "Mug2"), species = "mouse", expand.ambiguous = TRUE)
 expect_identical(res$Approved, c(TRUE, TRUE))
 expect_identical(res$Suggested.Symbol, c("Cpamd8 /// Mug2", "Mug2 /// Cpamd8"))
 

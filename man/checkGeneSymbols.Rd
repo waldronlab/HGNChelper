@@ -9,7 +9,8 @@ checkGeneSymbols(
   chromosome = NULL,
   unmapped.as.na = TRUE,
   map = NULL,
-  species = "human"
+  species = "human",
+  expand.ambiguous = FALSE
 )
 }
 \arguments{
@@ -32,6 +33,10 @@ by running the interactive example below.}
 \item{species}{A character vector of length 1, either "human" (default) or "mouse". 
 If \code{NULL}, or anything other than "human" or "mouse", then the map argument 
 must be provided.}
+
+\item{expand.ambiguous}{If \code{FALSE} (default), genes with multiple mapping will only 
+map to its approved symbol as the correct one. If \code{TRUE}, genes with multiple/ambiguous mapping
+will map to all the symbols linked to it.}
 }
 \value{
 The function will return a data.frame of the same number of rows as the 
@@ -55,6 +60,18 @@ checkGeneSymbols(human)
 ## Mouse
 mouse <- c("1-Feb", "Pzp", "A2m")
 checkGeneSymbols(mouse, species="mouse")
+
+## expand.ambiguous
+
+## Human
+human <- "AAVS1"
+checkGeneSymbols(human, expand.ambiguous=FALSE)
+checkGeneSymbols(human, expand.ambiguous=TRUE)
+
+## Mouse
+mouse <- c("Cpamd8", "Mug2")
+checkGeneSymbols(mouse, species = "mouse", expand.ambiguous = FALSE)
+checkGeneSymbols(mouse, species = "mouse", expand.ambiguous = TRUE)
 
 ## Updating the map
 if (interactive()) {

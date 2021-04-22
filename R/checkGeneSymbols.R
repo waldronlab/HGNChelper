@@ -23,6 +23,9 @@
 #' @param species A character vector of length 1, either "human" (default) or "mouse". 
 #' If \code{NULL}, or anything other than "human" or "mouse", then the map argument 
 #' must be provided. 
+#' @param expand.ambiguous If \code{FALSE} (default), genes with multiple mapping will only 
+#' map to its approved symbol as the correct one. If \code{TRUE}, genes with multiple/ambiguous mapping
+#' will map to all the symbols linked to it.
 #'  
 #' @return The function will return a data.frame of the same number of rows as the 
 #' input, with corrections possible from map.
@@ -40,6 +43,18 @@
 #' ## Mouse
 #' mouse <- c("1-Feb", "Pzp", "A2m")
 #' checkGeneSymbols(mouse, species="mouse")
+#' 
+#' ## expand.ambiguous
+#' 
+#' ## Human
+#' human <- "AAVS1"
+#' checkGeneSymbols(human, expand.ambiguous=FALSE)
+#' checkGeneSymbols(human, expand.ambiguous=TRUE)
+#' 
+#' ## Mouse
+#' mouse <- c("Cpamd8", "Mug2")
+#' checkGeneSymbols(mouse, species = "mouse", expand.ambiguous = FALSE)
+#' checkGeneSymbols(mouse, species = "mouse", expand.ambiguous = TRUE)
 #' 
 #' ## Updating the map
 #' if (interactive()) {
@@ -59,7 +74,7 @@ checkGeneSymbols <- function(x,
                              unmapped.as.na = TRUE,
                              map = NULL,
                              species = "human", 
-                             expand.ambiguous = F) {
+                             expand.ambiguous = FALSE) {
 
   lastupdate <- readLines(system.file(file.path("extdata", "date_of_last_update.txt"), 
                           package = "HGNChelper"))
