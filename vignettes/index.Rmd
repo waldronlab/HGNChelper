@@ -7,6 +7,7 @@ vignette: >
   %\VignetteIndexEntry{HGNChelper Introduction}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
+Suggests: knitr
 ---
 
 ```{r setup, include = FALSE}
@@ -81,7 +82,7 @@ Gene symbols are aliased much more frequently than I can update this package, li
 ## What does the expand.ambiguous argument do
 
 As mentioned above genes symbols are aliased very frequently. It is possible that a gene symbol which was earlier an alias is now an approved symbol.
-'checkGeneSymbols' by default will give out only the approved symbol of a gene. This can be an issue specifically when analyzing an older dataset which may be referencing to a previously aliased (now approved) gene symbol mapping to another approved symbol at that time. 
+'checkGeneSymbols()' by default will give out only the approved symbol of a gene. This can be an issue specifically when analyzing an older dataset which may be referencing to a previously aliased (now approved) gene symbol mapping to another approved symbol at that time. 
 This can be checked with 'expand.ambiguous = TRUE' which gives out all the mapping of a gene symbol irrespective of whether it's an approved symbol.
 
 ```{r}
