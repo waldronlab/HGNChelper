@@ -7,7 +7,6 @@ vignette: >
   %\VignetteIndexEntry{HGNChelper Introduction}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
-Suggests: knitr, rmarkdown, markdown
 ---
 
 ```{r setup, include = FALSE}
