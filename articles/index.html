@@ -82,7 +82,7 @@
       <h1 data-toc-skip>HGNChelper Introduction</h1>
                         <h4 class="author">Levi Waldron and Markus Riester</h4>
             
-            <h4 class="date">2021-04-22</h4>
+            <h4 class="date">2021-04-26</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/waldronlab/HGNChelper/blob/master/vignettes/index.Rmd"><code>vignettes/index.Rmd</code></a></small>
       <div class="hidden name"><code>index.Rmd</code></div>
@@ -176,6 +176,31 @@
 <li>use the <code><a href="../reference/getCurrentMaps.html">getCurrentHumanMap()</a></code> or <code><a href="../reference/getCurrentMaps.html">getCurrentMouseMap()</a></code> function, and provide the returned result through the <code>map=</code> argument of <code><a href="../reference/checkGeneSymbols.html">checkGeneSymbols()</a></code>, or</li>
 <li>See the instructions for updating your package locally at <a href="https://github.com/waldronlab/HGNChelper" class="uri">https://github.com/waldronlab/HGNChelper</a> (it’s just one command-line command as long as you have R and <a href="https://cran.r-project.org/package=roxygen2">roxygen2</a> installed)</li>
 </ol>
+</div>
+<div id="what-does-the-expand-ambiguous-argument-do" class="section level2">
+<h2 class="hasAnchor">
+<a href="#what-does-the-expand-ambiguous-argument-do" class="anchor"></a>What does the expand.ambiguous argument do</h2>
+<p>As mentioned above genes symbols are aliased very frequently. It is possible that a gene symbol which was earlier an alias is now an approved symbol. ‘checkGeneSymbols()’ by default will give out only the approved symbol of a gene. This can be an issue specifically when analyzing an older dataset which may be referencing to a previously aliased (now approved) gene symbol mapping to another approved symbol at that time. This can be checked with ‘expand.ambiguous = TRUE’ which gives out all the mapping of a gene symbol irrespective of whether it’s an approved symbol.</p>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="../reference/checkGeneSymbols.html">checkGeneSymbols</a></span><span class="op">(</span><span class="st">"AAVS1"</span>, expand.ambiguous <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span>
+<span class="co">#&gt; Maps last updated on: Thu Mar 25 08:36:49 2021</span>
+<span class="co">#&gt;       x Approved Suggested.Symbol</span>
+<span class="co">#&gt; 1 AAVS1     TRUE            AAVS1</span>
+<span class="fu"><a href="../reference/checkGeneSymbols.html">checkGeneSymbols</a></span><span class="op">(</span><span class="st">"AAVS1"</span>, expand.ambiguous <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
+<span class="co">#&gt; Maps last updated on: Thu Mar 25 08:36:49 2021</span>
+<span class="co">#&gt;       x Approved   Suggested.Symbol</span>
+<span class="co">#&gt; 1 AAVS1     TRUE AAVS1 /// PPP1R12C</span>
+
+<span class="fu"><a href="../reference/checkGeneSymbols.html">checkGeneSymbols</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Cpamd8"</span>, <span class="st">"Mug2"</span><span class="op">)</span>, species <span class="op">=</span> <span class="st">"mouse"</span>, expand.ambiguous <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span>
+<span class="co">#&gt; Maps last updated on: Thu Mar 25 08:36:49 2021</span>
+<span class="co">#&gt;        x Approved Suggested.Symbol</span>
+<span class="co">#&gt; 1 Cpamd8     TRUE           Cpamd8</span>
+<span class="co">#&gt; 2   Mug2     TRUE             Mug2</span>
+<span class="fu"><a href="../reference/checkGeneSymbols.html">checkGeneSymbols</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Cpamd8"</span>, <span class="st">"Mug2"</span><span class="op">)</span>, species <span class="op">=</span> <span class="st">"mouse"</span>, expand.ambiguous <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
+<span class="co">#&gt; Maps last updated on: Thu Mar 25 08:36:49 2021</span>
+<span class="co">#&gt;        x Approved Suggested.Symbol</span>
+<span class="co">#&gt; 1 Cpamd8     TRUE  Cpamd8 /// Mug2</span>
+<span class="co">#&gt; 2   Mug2     TRUE  Mug2 /// Cpamd8</span></code></pre></div>
 </div>
 <div id="where-do-i-find-hgnchelper" class="section level2">
 <h2 class="hasAnchor">

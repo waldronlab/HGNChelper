@@ -142,7 +142,8 @@ with a corrected gene list.</p>
   chromosome <span class='op'>=</span> <span class='cn'>NULL</span>,
   unmapped.as.na <span class='op'>=</span> <span class='cn'>TRUE</span>,
   map <span class='op'>=</span> <span class='cn'>NULL</span>,
-  species <span class='op'>=</span> <span class='st'>"human"</span>
+  species <span class='op'>=</span> <span class='st'>"human"</span>,
+  expand.ambiguous <span class='op'>=</span> <span class='cn'>FALSE</span>
 <span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
@@ -177,6 +178,12 @@ by running the interactive example below.</p></td>
       <td><p>A character vector of length 1, either "human" (default) or "mouse". 
 If <code>NULL</code>, or anything other than "human" or "mouse", then the map argument 
 must be provided.</p></td>
+    </tr>
+    <tr>
+      <th>expand.ambiguous</th>
+      <td><p>If <code>FALSE</code> (default), genes with multiple mapping will only 
+map to its approved symbol as the correct one. If <code>TRUE</code>, genes with multiple/ambiguous mapping
+will map to all the symbols linked to it.</p></td>
     </tr>
     </table>
 
@@ -214,6 +221,24 @@ input, with corrections possible from map.</p>
 #&gt; 1 1-Feb    FALSE             Feb1
 #&gt; 2   Pzp     TRUE              Pzp
 #&gt; 3   A2m     TRUE              A2m</div><div class='input'>
+<span class='co'>## expand.ambiguous</span>
+
+<span class='co'>## Human</span>
+<span class='va'>human</span> <span class='op'>&lt;-</span> <span class='st'>"AAVS1"</span>
+<span class='fu'>checkGeneSymbols</span><span class='op'>(</span><span class='va'>human</span>, expand.ambiguous<span class='op'>=</span><span class='cn'>FALSE</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; <span class='message'>Maps last updated on: Thu Mar 25 08:36:49 2021</span></div><div class='output co'>#&gt;       x Approved Suggested.Symbol
+#&gt; 1 AAVS1     TRUE            AAVS1</div><div class='input'><span class='fu'>checkGeneSymbols</span><span class='op'>(</span><span class='va'>human</span>, expand.ambiguous<span class='op'>=</span><span class='cn'>TRUE</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; <span class='message'>Maps last updated on: Thu Mar 25 08:36:49 2021</span></div><div class='output co'>#&gt;       x Approved   Suggested.Symbol
+#&gt; 1 AAVS1     TRUE AAVS1 /// PPP1R12C</div><div class='input'>
+<span class='co'>## Mouse</span>
+<span class='va'>mouse</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"Cpamd8"</span>, <span class='st'>"Mug2"</span><span class='op'>)</span>
+<span class='fu'>checkGeneSymbols</span><span class='op'>(</span><span class='va'>mouse</span>, species <span class='op'>=</span> <span class='st'>"mouse"</span>, expand.ambiguous <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; <span class='message'>Maps last updated on: Thu Mar 25 08:36:49 2021</span></div><div class='output co'>#&gt;        x Approved Suggested.Symbol
+#&gt; 1 Cpamd8     TRUE           Cpamd8
+#&gt; 2   Mug2     TRUE             Mug2</div><div class='input'><span class='fu'>checkGeneSymbols</span><span class='op'>(</span><span class='va'>mouse</span>, species <span class='op'>=</span> <span class='st'>"mouse"</span>, expand.ambiguous <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; <span class='message'>Maps last updated on: Thu Mar 25 08:36:49 2021</span></div><div class='output co'>#&gt;        x Approved Suggested.Symbol
+#&gt; 1 Cpamd8     TRUE  Cpamd8 /// Mug2
+#&gt; 2   Mug2     TRUE  Mug2 /// Cpamd8</div><div class='input'>
 <span class='co'>## Updating the map</span>
 <span class='kw'>if</span> <span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/interactive.html'>interactive</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>{</span>
     <span class='va'>currentHumanMap</span> <span class='op'>&lt;-</span> <span class='fu'><a href='getCurrentMaps.html'>getCurrentHumanMap</a></span><span class='op'>(</span><span class='op'>)</span>
