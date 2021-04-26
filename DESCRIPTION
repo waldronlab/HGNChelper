@@ -22,5 +22,6 @@ Encoding: UTF-8
 Imports: splitstackshape
 Suggests: testthat,
     knitr,
-    rmarkdown
+    rmarkdown, 
+    markdown
 VignetteBuilder: knitr

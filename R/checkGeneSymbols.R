@@ -23,6 +23,9 @@
 #' @param species A character vector of length 1, either "human" (default) or "mouse". 
 #' If \code{NULL}, or anything other than "human" or "mouse", then the map argument 
 #' must be provided. 
+#' @param expand.ambiguous If \code{FALSE} (default), genes with multiple mapping will only 
+#' map to its approved symbol as the correct one. If \code{TRUE}, genes with multiple/ambiguous mapping
+#' will map to all the symbols linked to it.
 #'  
 #' @return The function will return a data.frame of the same number of rows as the 
 #' input, with corrections possible from map.
@@ -41,6 +44,18 @@
 #' mouse <- c("1-Feb", "Pzp", "A2m")
 #' checkGeneSymbols(mouse, species="mouse")
 #' 
+#' ## expand.ambiguous
+#' 
+#' ## Human
+#' human <- "AAVS1"
+#' checkGeneSymbols(human, expand.ambiguous=FALSE)
+#' checkGeneSymbols(human, expand.ambiguous=TRUE)
+#' 
+#' ## Mouse
+#' mouse <- c("Cpamd8", "Mug2")
+#' checkGeneSymbols(mouse, species = "mouse", expand.ambiguous = FALSE)
+#' checkGeneSymbols(mouse, species = "mouse", expand.ambiguous = TRUE)
+#' 
 #' ## Updating the map
 #' if (interactive()) {
 #'     currentHumanMap <- getCurrentHumanMap()
@@ -58,7 +73,8 @@ checkGeneSymbols <- function(x,
                              chromosome = NULL,
                              unmapped.as.na = TRUE,
                              map = NULL,
-                             species = "human") {
+                             species = "human", 
+                             expand.ambiguous = FALSE) {
 
   lastupdate <- readLines(system.file(file.path("extdata", "date_of_last_update.txt"), 
                           package = "HGNChelper"))
@@ -151,7 +167,13 @@ checkGeneSymbols <- function(x,
                    Approved = approved,
                    Suggested.Symbol = sapply(1:length(x), function(i)
                      ifelse(approved[i],
-                            x[i],
+                            ifelse(expand.ambiguous, 
+                                   ifelse(!(is.null(chromosome)) & chromosome.check[i], 
+                                          paste(unique(c(x[i], map$Approved.Symbol[x[i] == map$Symbol
+                                                                                   & chromosome[i] == map$chromosome])), 
+                                                collapse = " /// "),
+                                          paste(unique(c(x[i], map$Approved.Symbol[x[i] == map$Symbol])), collapse = " /// ")),
+                                   x[i]), 
                             ifelse(alias[i],   # format chromosome output
                                    ifelse(!(is.null(chromosome)) & chromosome.check[i], 
                                           paste(map$Approved.Symbol[x.casecorrected[i] == map$Symbol

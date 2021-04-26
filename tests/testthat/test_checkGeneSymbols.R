@@ -70,6 +70,11 @@ expect_equal(res[,3], c("DDR2", "ABCA4", "ABCA4", "TKT", "AAVS1"))
 expect_equal(res[,4], c(1, 1, 1, 3, 19))
 expect_equal(res[,5], c(1, 1, 1, 3, 19))
 
+## human test 3 - expand.ambiguous
+res <- checkGeneSymbols("AAVS1", expand.ambiguous = TRUE)
+expect_identical(res$Approved, TRUE)
+expect_identical(res$Suggested.Symbol, "AAVS1 /// PPP1R12C")
+
 
 ## mouse test 1
 data(mouse.table)
@@ -93,6 +98,12 @@ answer <- c(FALSE, FALSE, TRUE, TRUE, FALSE, FALSE, TRUE)
 expect_warning(res <- checkGeneSymbols(orig, species="mouse"))
 expect_equal(res$Approved, answer)
 expect_equal(res$Suggested.Symbol, correct)
+
+## mouse test 3 - expand.ambiguous
+
+res <- checkGeneSymbols(c("Cpamd8", "Mug2"), species = "mouse", expand.ambiguous = TRUE)
+expect_identical(res$Approved, c(TRUE, TRUE))
+expect_identical(res$Suggested.Symbol, c("Cpamd8 /// Mug2", "Mug2 /// Cpamd8"))
 
 # check capitalization behavior
 orig <- c("tp53", "TP53")
@@ -123,8 +134,7 @@ expect_warning(res2 <- checkGeneSymbols(factor(c("a", "b", "A", "B", "BB")), map
 expect_identical(res, res2)
 
 # check for outdated symbols from extdata/mog_map.csv
-expect_warning(res3 <-
-                 checkGeneSymbols(c("MARC1", "MARC2", "MARCH6")))
+expect_warning(res3 <- checkGeneSymbols(c("MARC1", "MARC2", "MARCH6")))
 expect_equal(res3$Approved, rep(FALSE, 3))
 expect_equal(res3$Suggested.Symbol, c("MTARC1", "MTARC2", "MARCHF6"))
 
