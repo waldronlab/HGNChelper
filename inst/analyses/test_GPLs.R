@@ -23,10 +23,10 @@ names(hgnc.reference) <- NULL
 library(HGNChelper)
 
 raw.platform.dir <- "platforms"
-# dir.create(raw.platform.dir)
+dir.create(raw.platform.dir)
 
 hgnc.vec.dir <- "hgnc.vecs"
-# dir.create(hgnc.vec.dir)
+dir.create(hgnc.vec.dir)
 
 
 ##### Create `gpls_already_tested.csv` file ####################################

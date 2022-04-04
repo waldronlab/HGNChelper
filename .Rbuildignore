@@ -1,8 +1,5 @@
 README.md
-inst/analyses
-inst/extdata/GPL_list
 ^.*\.Rout$
-update.sh
 .pre_script_build.sh
 ^.*\.Rproj$
 ^\.Rproj\.user$
@@ -14,3 +11,6 @@ index.md
 ^_pkgdown\.yml$
 ^pkgdown$
 ^\.github$
+^inst/analyses$
+^inst/extdata/GPL_list$
+^update\.sh$
