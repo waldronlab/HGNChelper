@@ -227,34 +227,30 @@ raw <- read.csv("gpls_already_tested.csv", as.is=TRUE)  # 20,713 raws
 raw$valid.after.hgnchelper.frac <- as.numeric(raw$valid.after.hgnchelper.frac)
 raw <- raw[!is.na(raw$valid.frac), ]   # 2,044 rows
 raw <- raw[raw$valid.frac > 0.2, ]   # 2,043 rows
-
 raw$year <- as.numeric(gsub(".+[ ]+", "", raw$submission_date))
 n.years <- length(unique(raw$year))
-
 boxplot(valid.frac ~ year, data=raw, boxwex=0.3, ylim = c(0.4, 1),
-        # main="Fig 1. Valid gene symbols for submission year",
+        # main="Fig 2. Valid gene symbols for submission year",
         xlab="Submission Year", ylab="Fraction of valid gene symbols", 
-        names=sub("20", "'", sort(unique(raw$year))))
+        names=sub("20", "'", sort(unique(raw$year))), col="white")
 boxplot(valid.after.hgnchelper.frac ~ year, data=raw, ylim = c(0.4, 1),
         boxwex=0.3, xaxt='n', at=(1:n.years)+0.35, add=TRUE, col="grey")
 legend("bottomleft", legend=c("Before", "After"), pch=c(0, 15), 
        col=c("black", "grey"), lty=-1, bty='n', cex=1)
 ```
 
-```{r save_eps, echo=FALSE}
-setEPS(width=9, height=5)
-postscript("Fig1.eps")
+```{r Fig1, echo=FALSE, eval=FALSE}
+png("~/data2/HGNChelper/inst/analyses/Fig1.png", width = 1400, height = 740)
 boxplot(valid.frac ~ year, data=raw, boxwex=0.3, ylim = c(0.4, 1),
-        # main="Fig 1. Valid gene symbols for submission year",
+        # main="Fig 2. Valid gene symbols for submission year",
         xlab="Submission Year", ylab="Fraction of valid gene symbols", 
-        names=sub("20", "'", sort(unique(raw$year))))
+        names=sub("20", "'", sort(unique(raw$year))), col="white")
 boxplot(valid.after.hgnchelper.frac ~ year, data=raw, ylim = c(0.4, 1),
         boxwex=0.3, xaxt='n', at=(1:n.years)+0.35, add=TRUE, col="grey")
 legend("bottomleft", legend=c("Before", "After"), pch=c(0, 15), 
        col=c("black", "grey"), lty=-1, bty='n', cex=1)
 dev.off()
 ```
-
 
 The number of unique platforms (= each dot in the above plot) each year
 ```{r}
