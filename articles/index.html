@@ -19,6 +19,8 @@
 <![endif]-->
 </head>
 <body data-spy="scroll" data-target="#toc">
+    
+
     <div class="container template-article">
       <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -31,23 +33,17 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">HGNChelper</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.8.8</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.8.8</span>
       </span>
     </div>
 
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
 <li>
-  <a href="../index.html">
-    <span class="fas fa-home fa-lg"></span>
-     
-  </a>
-</li>
-<li>
   <a href="../reference/index.html">Reference</a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Articles
      
     <span class="caret"></span>
@@ -61,7 +57,7 @@
       </ul>
 <ul class="nav navbar-nav navbar-right">
 <li>
-  <a href="https://github.com/waldronlab/HGNChelper/">
+  <a href="https://github.com/waldronlab/HGNChelper/" class="external-link">
     <span class="fab fa-github fa-lg"></span>
      
   </a>
@@ -80,39 +76,39 @@
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>HGNChelper Introduction</h1>
-                        <h4 class="author">Levi Waldron and Markus Riester</h4>
+                        <h4 data-toc-skip class="author">Levi Waldron and Markus Riester</h4>
             
-            <h4 class="date">2021-09-14</h4>
+            <h4 data-toc-skip class="date">2022-04-04</h4>
       
-      <small class="dont-index">Source: <a href="https://github.com/waldronlab/HGNChelper/blob/master/vignettes/index.Rmd"><code>vignettes/index.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/waldronlab/HGNChelper/blob/HEAD/vignettes/index.Rmd" class="external-link"><code>vignettes/index.Rmd</code></a></small>
       <div class="hidden name"><code>index.Rmd</code></div>
 
     </div>
 
     
     
-<div id="why-hgnchelper" class="section level2">
-<h2 class="hasAnchor">
-<a href="#why-hgnchelper" class="anchor"></a>Why HGNChelper?</h2>
-<p>Physicians and biologists like gene symbols and bioinformaticians hate’em. Why? For one thing, they change constantly and are given new names or aliases. For another, some get munged into dates when imported into spreadsheet programs - and not only Excel (Thank you <a href="https://twitter.com/kara_woo">@karawoo</a> for the <a href="https://twitter.com/kara_woo/status/1020054225022173184">picture</a>!):</p>
+<div class="section level2">
+<h2 id="why-hgnchelper">Why HGNChelper?<a class="anchor" aria-label="anchor" href="#why-hgnchelper"></a>
+</h2>
+<p>Physicians and biologists like gene symbols and bioinformaticians hate’em. Why? For one thing, they change constantly and are given new names or aliases. For another, some get munged into dates when imported into spreadsheet programs - and not only Excel (Thank you <a href="https://twitter.com/kara_woo" class="external-link">@karawoo</a> for the <a href="https://twitter.com/kara_woo/status/1020054225022173184" class="external-link">picture</a>!):</p>
 <p><img src="0DaysSince.png"></p>
-<p>Myself (Levi speaking), I don’t mind them. It’s way easier to remember <a href="http://www.genenames.org/cgi-bin/gene_symbol_report?hgnc_id=11998">TP53</a> than to remember <a href="http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?db=gene&amp;cmd=Retrieve&amp;dopt=full_report&amp;list_uids=7157">7157</a> or <a href="http://www.ensembl.org/Homo_sapiens/geneview?gene=ENSG00000141510">ENSG00000141510</a>. They’re a fact of life. So Markus Riester and I wrote HGNChelper to make them a little more pleasant to bioinformaticians.</p>
+<p>Myself (Levi speaking), I don’t mind them. It’s way easier to remember <a href="http://www.genenames.org/cgi-bin/gene_symbol_report?hgnc_id=11998" class="external-link">TP53</a> than to remember <a href="http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?db=gene&amp;cmd=Retrieve&amp;dopt=full_report&amp;list_uids=7157" class="external-link">7157</a> or <a href="http://www.ensembl.org/Homo_sapiens/geneview?gene=ENSG00000141510" class="external-link">ENSG00000141510</a>. They’re a fact of life. So Markus Riester and I wrote HGNChelper to make them a little more pleasant to bioinformaticians.</p>
 </div>
-<div id="hgnchelper-functionality" class="section level2">
-<h2 class="hasAnchor">
-<a href="#hgnchelper-functionality" class="anchor"></a>HGNChelper functionality</h2>
+<div class="section level2">
+<h2 id="hgnchelper-functionality">HGNChelper functionality<a class="anchor" aria-label="anchor" href="#hgnchelper-functionality"></a>
+</h2>
 <p>HGNChelper has several functions that seemed useful back in the day when we first wrote it, but really one has withstood the test of time and remained useful:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/checkGeneSymbols.html">checkGeneSymbols</a></span><span class="op">(</span><span class="va">x</span>, unmapped.as.na <span class="op">=</span> <span class="cn">TRUE</span>, map <span class="op">=</span> <span class="cn">NULL</span>, species <span class="op">=</span> <span class="st">"human"</span><span class="op">)</span></code></pre></div>
 <p><code>checkGeneSymbols</code> identifies HGNC human or MGI mouse gene symbols which are outdated or may have been mogrified by Excel or other spreadsheet programs. It returns a data.frame of the same number of rows as the input, with a second column indicating whether the symbols are valid and a third column with a corrected gene list.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/waldronlab/HGNChelper">HGNChelper</a></span><span class="op">)</span>
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/waldronlab/HGNChelper" class="external-link">HGNChelper</a></span><span class="op">)</span>
 <span class="co">#&gt; Please cite our software :) </span>
 <span class="co">#&gt;  </span>
 <span class="co">#&gt;  Sehyun Oh et al. HGNChelper: identification and correction of invalid gene symbols for human and mouse. F1000Research 2020, 9:1493. DOI: https://doi.org/10.12688/f1000research.28033.1 </span>
 <span class="co">#&gt;  </span>
 <span class="co">#&gt;  Type `citation('HGNChelper')` for a BibTeX entry.</span>
-<span class="va">human</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"FN1"</span>, <span class="st">"tp53"</span>, <span class="st">"UNKNOWNGENE"</span>,<span class="st">"7-Sep"</span>, <span class="st">"9/7"</span>, <span class="st">"1-Mar"</span>, <span class="st">"Oct4"</span>, <span class="st">"4-Oct"</span>,
+<span class="va">human</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"FN1"</span>, <span class="st">"tp53"</span>, <span class="st">"UNKNOWNGENE"</span>,<span class="st">"7-Sep"</span>, <span class="st">"9/7"</span>, <span class="st">"1-Mar"</span>, <span class="st">"Oct4"</span>, <span class="st">"4-Oct"</span>,
       <span class="st">"OCT4-PG4"</span>, <span class="st">"C19ORF71"</span>, <span class="st">"C19orf71"</span><span class="op">)</span>
 <span class="fu"><a href="../reference/checkGeneSymbols.html">checkGeneSymbols</a></span><span class="op">(</span><span class="va">human</span><span class="op">)</span>
 <span class="co">#&gt; Maps last updated on: Thu Mar 25 08:36:49 2021</span>
@@ -134,12 +130,12 @@
 <span class="co">#&gt; 11    C19orf71     TRUE           C19orf71</span></code></pre></div>
 <p>As you see, it even helps fix capitalization. How does it fix those Excel dates? I imported a column of all human gene symbols into Excel, then exported using a whole bunch of available date formats. Then I kept any that differed from the originals for HGNChelper’s map.</p>
 </div>
-<div id="mouse-gene-symbols" class="section level2">
-<h2 class="hasAnchor">
-<a href="#mouse-gene-symbols" class="anchor"></a>Mouse gene symbols</h2>
+<div class="section level2">
+<h2 id="mouse-gene-symbols">Mouse gene symbols<a class="anchor" aria-label="anchor" href="#mouse-gene-symbols"></a>
+</h2>
 <p>Mouse genes work the same way, but you need to specify the argument <code>species=mouse</code>:</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/checkGeneSymbols.html">checkGeneSymbols</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"1-Feb"</span>, <span class="st">"Pzp"</span>, <span class="st">"A2m"</span>, <span class="st">"E430008G22Rik"</span><span class="op">)</span>, species<span class="op">=</span><span class="st">"mouse"</span><span class="op">)</span>
+<code class="sourceCode R"><span class="fu"><a href="../reference/checkGeneSymbols.html">checkGeneSymbols</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"1-Feb"</span>, <span class="st">"Pzp"</span>, <span class="st">"A2m"</span>, <span class="st">"E430008G22Rik"</span><span class="op">)</span>, species<span class="op">=</span><span class="st">"mouse"</span><span class="op">)</span>
 <span class="co">#&gt; Maps last updated on: Thu Mar 25 08:36:49 2021</span>
 <span class="co">#&gt; Warning in checkGeneSymbols(c("1-Feb", "Pzp", "A2m", "E430008G22Rik"), species =</span>
 <span class="co">#&gt; "mouse"): x contains non-approved gene symbols</span>
@@ -148,38 +144,38 @@
 <span class="co">#&gt; 2           Pzp     TRUE              Pzp</span>
 <span class="co">#&gt; 3           A2m     TRUE              A2m</span>
 <span class="co">#&gt; 4 E430008G22Rik    FALSE             &lt;NA&gt;</span></code></pre></div>
-<p>Mouse gene symbols containing any capital letter, except the first character, can not be fixed. For example, ‘E430008G22Rik’ is a symbol for <a href="http://www.informatics.jax.org/marker/MGI:87859">Abl1</a> gene, but we couldn’t fix it. <a href="https://github.com/waldronlab/HGNChelper/issues">Suggestions welcome</a> about how to build a more complete map of valid symbols. To be on the safe side, you could set <code>unmapped.as.na = FALSE</code> to keep unrecognized symbols as-is and only correct ones that have a definitive correction.</p>
+<p>Mouse gene symbols containing any capital letter, except the first character, can not be fixed. For example, ‘E430008G22Rik’ is a symbol for <a href="http://www.informatics.jax.org/marker/MGI:87859" class="external-link">Abl1</a> gene, but we couldn’t fix it. <a href="https://github.com/waldronlab/HGNChelper/issues" class="external-link">Suggestions welcome</a> about how to build a more complete map of valid symbols. To be on the safe side, you could set <code>unmapped.as.na = FALSE</code> to keep unrecognized symbols as-is and only correct ones that have a definitive correction.</p>
 </div>
-<div id="what-exactly-checkgenesymbols-does" class="section level2">
-<h2 class="hasAnchor">
-<a href="#what-exactly-checkgenesymbols-does" class="anchor"></a>What exactly checkGeneSymbols does</h2>
+<div class="section level2">
+<h2 id="what-exactly-checkgenesymbols-does">What exactly checkGeneSymbols does<a class="anchor" aria-label="anchor" href="#what-exactly-checkgenesymbols-does"></a>
+</h2>
 <p>HGNChelper does the following corrections:</p>
 <ol style="list-style-type: decimal">
 <li>fix capitalization. For human, only <strong>orf</strong> genes are allowed to have lower-case letters.<br>
 </li>
 <li>fix Excel-mogrified symbols</li>
-<li>fix symbols that are listed as aliases to a more recent symbol in the <a href="https://www.genenames.org/">HGNC</a> or <a href="http://www.informatics.jax.org/">MGI</a> (MGI_EntrezGene_rpt) database.</li>
+<li>fix symbols that are listed as aliases to a more recent symbol in the <a href="https://www.genenames.org/" class="external-link">HGNC</a> or <a href="http://www.informatics.jax.org/" class="external-link">MGI</a> (MGI_EntrezGene_rpt) database.</li>
 </ol>
 <p>Numbers 2 and 3 are done by comparing to a complete map of both valid and invalid but mappable symbols, shipped with HGNChelper:</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/dim.html">dim</a></span><span class="op">(</span><span class="va">mouse.table</span><span class="op">)</span>
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/dim.html" class="external-link">dim</a></span><span class="op">(</span><span class="va">mouse.table</span><span class="op">)</span>
 <span class="co">#&gt; [1] 372145      2</span>
-<span class="fu"><a href="https://rdrr.io/r/base/dim.html">dim</a></span><span class="op">(</span><span class="va">hgnc.table</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/base/dim.html" class="external-link">dim</a></span><span class="op">(</span><span class="va">hgnc.table</span><span class="op">)</span>
 <span class="co">#&gt; [1] 100034      3</span></code></pre></div>
 <p>These are a combination of manually generated Excel mogrifications that remain constant, and aliases that can become out of date with time.</p>
 </div>
-<div id="updating-maps-of-aliased-gene-symbols" class="section level2">
-<h2 class="hasAnchor">
-<a href="#updating-maps-of-aliased-gene-symbols" class="anchor"></a>Updating maps of aliased gene symbols</h2>
+<div class="section level2">
+<h2 id="updating-maps-of-aliased-gene-symbols">Updating maps of aliased gene symbols<a class="anchor" aria-label="anchor" href="#updating-maps-of-aliased-gene-symbols"></a>
+</h2>
 <p>Gene symbols are aliased much more frequently than I can update this package, like every day. If you want the most current maps of aliases, you can either:</p>
 <ol style="list-style-type: decimal">
 <li>use the <code><a href="../reference/getCurrentMaps.html">getCurrentHumanMap()</a></code> or <code><a href="../reference/getCurrentMaps.html">getCurrentMouseMap()</a></code> function, and provide the returned result through the <code>map=</code> argument of <code><a href="../reference/checkGeneSymbols.html">checkGeneSymbols()</a></code>, or</li>
-<li>See the instructions for updating your package locally at <a href="https://github.com/waldronlab/HGNChelper" class="uri">https://github.com/waldronlab/HGNChelper</a> (it’s just one command-line command as long as you have R and <a href="https://cran.r-project.org/package=roxygen2">roxygen2</a> installed)</li>
+<li>See the instructions for updating your package locally at <a href="https://github.com/waldronlab/HGNChelper" class="external-link uri">https://github.com/waldronlab/HGNChelper</a> (it’s just one command-line command as long as you have R and <a href="https://cran.r-project.org/package=roxygen2" class="external-link">roxygen2</a> installed)</li>
 </ol>
 </div>
-<div id="what-does-the-expand-ambiguous-argument-do" class="section level2">
-<h2 class="hasAnchor">
-<a href="#what-does-the-expand-ambiguous-argument-do" class="anchor"></a>What does the expand.ambiguous argument do</h2>
+<div class="section level2">
+<h2 id="what-does-the-expand-ambiguous-argument-do">What does the expand.ambiguous argument do<a class="anchor" aria-label="anchor" href="#what-does-the-expand-ambiguous-argument-do"></a>
+</h2>
 <p>As mentioned above genes symbols are aliased very frequently. It is possible that a gene symbol which was earlier an alias is now an approved symbol. ‘checkGeneSymbols()’ by default will give out only the approved symbol of a gene. This can be an issue specifically when analyzing an older dataset which may be referencing to a previously aliased (now approved) gene symbol mapping to another approved symbol at that time. This can be checked with ‘expand.ambiguous = TRUE’ which gives out all the mapping of a gene symbol irrespective of whether it’s an approved symbol.</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/checkGeneSymbols.html">checkGeneSymbols</a></span><span class="op">(</span><span class="st">"AAVS1"</span>, expand.ambiguous <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span>
@@ -190,27 +186,28 @@
 <span class="co">#&gt; Maps last updated on: Thu Mar 25 08:36:49 2021</span>
 <span class="co">#&gt;       x Approved   Suggested.Symbol</span>
 <span class="co">#&gt; 1 AAVS1     TRUE AAVS1 /// PPP1R12C</span>
-<span class="fu"><a href="../reference/checkGeneSymbols.html">checkGeneSymbols</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Cpamd8"</span>, <span class="st">"Mug2"</span><span class="op">)</span>, species <span class="op">=</span> <span class="st">"mouse"</span>, expand.ambiguous <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span>
+
+<span class="fu"><a href="../reference/checkGeneSymbols.html">checkGeneSymbols</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Cpamd8"</span>, <span class="st">"Mug2"</span><span class="op">)</span>, species <span class="op">=</span> <span class="st">"mouse"</span>, expand.ambiguous <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span>
 <span class="co">#&gt; Maps last updated on: Thu Mar 25 08:36:49 2021</span>
 <span class="co">#&gt;        x Approved Suggested.Symbol</span>
 <span class="co">#&gt; 1 Cpamd8     TRUE           Cpamd8</span>
 <span class="co">#&gt; 2   Mug2     TRUE             Mug2</span>
-<span class="fu"><a href="../reference/checkGeneSymbols.html">checkGeneSymbols</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Cpamd8"</span>, <span class="st">"Mug2"</span><span class="op">)</span>, species <span class="op">=</span> <span class="st">"mouse"</span>, expand.ambiguous <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
+<span class="fu"><a href="../reference/checkGeneSymbols.html">checkGeneSymbols</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Cpamd8"</span>, <span class="st">"Mug2"</span><span class="op">)</span>, species <span class="op">=</span> <span class="st">"mouse"</span>, expand.ambiguous <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
 <span class="co">#&gt; Maps last updated on: Thu Mar 25 08:36:49 2021</span>
 <span class="co">#&gt;        x Approved Suggested.Symbol</span>
 <span class="co">#&gt; 1 Cpamd8     TRUE  Cpamd8 /// Mug2</span>
 <span class="co">#&gt; 2   Mug2     TRUE  Mug2 /// Cpamd8</span></code></pre></div>
 </div>
-<div id="where-do-i-find-hgnchelper" class="section level2">
-<h2 class="hasAnchor">
-<a href="#where-do-i-find-hgnchelper" class="anchor"></a>Where do I find HGNChelper?</h2>
+<div class="section level2">
+<h2 id="where-do-i-find-hgnchelper">Where do I find HGNChelper?<a class="anchor" aria-label="anchor" href="#where-do-i-find-hgnchelper"></a>
+</h2>
 <ul>
-<li>CRAN: <a href="https://cran.r-project.org/package=HGNChelper" class="uri">https://cran.r-project.org/package=HGNChelper</a>
+<li>CRAN: <a href="https://cran.r-project.org/package=HGNChelper" class="external-link uri">https://cran.r-project.org/package=HGNChelper</a>
 </li>
-<li>GitHub: <a href="https://github.com/waldronlab/HGNChelper" class="uri">https://github.com/waldronlab/HGNChelper</a>
+<li>GitHub: <a href="https://github.com/waldronlab/HGNChelper" class="external-link uri">https://github.com/waldronlab/HGNChelper</a>
 </li>
 </ul>
-<p>Please report any issues at <a href="https://github.com/waldronlab/HGNChelper/issues" class="uri">https://github.com/waldronlab/HGNChelper/issues</a></p>
+<p>Please report any issues at <a href="https://github.com/waldronlab/HGNChelper/issues" class="external-link uri">https://github.com/waldronlab/HGNChelper/issues</a></p>
 </div>
   </div>
 
@@ -225,11 +222,13 @@
 
 
       <footer><div class="copyright">
-  <p>Developed by Sehyun Oh, Ayush Aggarwal, Markus Riester, Levi Waldron.</p>
+  <p></p>
+<p>Developed by Sehyun Oh, Ayush Aggarwal, Markus Riester, Levi Waldron.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
+  <p></p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
 </div>
 
       </footer>
@@ -237,6 +236,8 @@
 
   
 
+
+  
 
   </body>
 </html>

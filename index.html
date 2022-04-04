@@ -23,6 +23,8 @@
 <![endif]-->
 </head>
 <body data-spy="scroll" data-target="#toc">
+    
+
     <div class="container template-home">
       <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -35,23 +37,17 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">HGNChelper</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.8.8</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.8.8</span>
       </span>
     </div>
 
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
 <li>
-  <a href="index.html">
-    <span class="fas fa-home fa-lg"></span>
-     
-  </a>
-</li>
-<li>
   <a href="reference/index.html">Reference</a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Articles
      
     <span class="caret"></span>
@@ -65,7 +61,7 @@
       </ul>
 <ul class="nav navbar-nav navbar-right">
 <li>
-  <a href="https://github.com/waldronlab/HGNChelper/">
+  <a href="https://github.com/waldronlab/HGNChelper/" class="external-link">
     <span class="fab fa-github fa-lg"></span>
      
   </a>
@@ -84,21 +80,21 @@
   <div class="contents col-md-9">
 
 
-<div id="hgnchelper-identification-and-correction-of-invalid-gene-symbols-for-human-and-mouse" class="section level1">
-<div class="page-header"><h1 class="hasAnchor">
-<a href="#hgnchelper-identification-and-correction-of-invalid-gene-symbols-for-human-and-mouse" class="anchor"></a>HGNChelper: Identification and correction of invalid gene symbols for human and mouse</h1></div>
+<div class="section level1">
+<div class="page-header"><h1 id="hgnchelper-identification-and-correction-of-invalid-gene-symbols-for-human-and-mouse">HGNChelper: Identification and correction of invalid gene symbols for human and mouse<a class="anchor" aria-label="anchor" href="#hgnchelper-identification-and-correction-of-invalid-gene-symbols-for-human-and-mouse"></a>
+</h1></div>
 <p>Please cite our software:</p>
-<p>Oh S, Abdelnabi J, Al-Dulaimi R et al. HGNChelper: identification and correction of invalid gene symbols for human and mouse. F1000Research 2020, 9:1493 <a href="https://doi.org/10.12688/f1000research.28033.1">https://doi.org/10.12688/f1000research.28033.1</a></p>
-<div id="why-hgnchelper" class="section level2">
-<h2 class="hasAnchor">
-<a href="#why-hgnchelper" class="anchor"></a>Why HGNChelper?</h2>
-<p>Physicians and biologists like gene symbols and bioinformaticians hate’em. Why? For one thing, they change constantly and are given new names or aliases. For another, some get munged into dates when imported into spreadsheet programs - and not only Excel (Thank you <a href="https://twitter.com/kara_woo">@karawoo</a> for the <a href="https://twitter.com/kara_woo/status/1020054225022173184">picture</a>!):</p>
+<p>Oh S, Abdelnabi J, Al-Dulaimi R et al. HGNChelper: identification and correction of invalid gene symbols for human and mouse. F1000Research 2020, 9:1493 <a href="https://doi.org/10.12688/f1000research.28033.1" class="external-link">https://doi.org/10.12688/f1000research.28033.1</a></p>
+<div class="section level2">
+<h2 id="why-hgnchelper">Why HGNChelper?<a class="anchor" aria-label="anchor" href="#why-hgnchelper"></a>
+</h2>
+<p>Physicians and biologists like gene symbols and bioinformaticians hate’em. Why? For one thing, they change constantly and are given new names or aliases. For another, some get munged into dates when imported into spreadsheet programs - and not only Excel (Thank you <a href="https://twitter.com/kara_woo" class="external-link">@karawoo</a> for the <a href="https://twitter.com/kara_woo/status/1020054225022173184" class="external-link">picture</a>!):</p>
 <p><img src="articles/0DaysSince.png"></p>
-<p>Myself (Levi speaking), I don’t mind them. It’s way easier to remember <a href="http://www.genenames.org/cgi-bin/gene_symbol_report?hgnc_id=11998">TP53</a> than to remember <a href="http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?db=gene&amp;cmd=Retrieve&amp;dopt=full_report&amp;list_uids=7157">7157</a> or <a href="http://www.ensembl.org/Homo_sapiens/geneview?gene=ENSG00000141510">ENSG00000141510</a>. They’re a fact of life. So Sehyun Oh, Markus Riester, and I wrote HGNChelper to make them a little more pleasant to bioinformaticians.</p>
+<p>Myself (Levi speaking), I don’t mind them. It’s way easier to remember <a href="http://www.genenames.org/cgi-bin/gene_symbol_report?hgnc_id=11998" class="external-link">TP53</a> than to remember <a href="http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?db=gene&amp;cmd=Retrieve&amp;dopt=full_report&amp;list_uids=7157" class="external-link">7157</a> or <a href="http://www.ensembl.org/Homo_sapiens/geneview?gene=ENSG00000141510" class="external-link">ENSG00000141510</a>. They’re a fact of life. So Sehyun Oh, Markus Riester, and I wrote HGNChelper to make them a little more pleasant to bioinformaticians.</p>
 <ul>
 <li>See the <a href="articles/index.html">Articles</a> link above for a vignette describing package use</li>
 <li>See the <a href="reference/index.html">Reference</a> for function documentation.</li>
-<li>See the <a href="https://github.com/waldronlab/HGNChelper">GitHub</a> page for creating your own package update with the most current gene lists, rather than updating within R as described in the vignette</li>
+<li>See the <a href="https://github.com/waldronlab/HGNChelper" class="external-link">GitHub</a> page for creating your own package update with the most current gene lists, rather than updating within R as described in the vignette</li>
 </ul>
 </div>
 </div>
@@ -107,30 +103,31 @@
 
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <div class="links">
-<h2>Links</h2>
+<h2 data-toc-skip>Links</h2>
 <ul class="list-unstyled">
-<li>Download from CRAN at <br><a href="https://cloud.r-project.org/package=HGNChelper">https://​cloud.r-project.org/​package=HGNChelper</a>
-</li>
-<li>Browse source code at <br><a href="https://github.com/waldronlab/HGNChelper/">https://​github.com/​waldronlab/​HGNChelper/​</a>
-</li>
-<li>Report a bug at <br><a href="https://github.com/waldronlab/HGNChelper/issues">https://​github.com/​waldronlab/​HGNChelper/​issues</a>
-</li>
+<li><a href="https://cloud.r-project.org/package=HGNChelper" class="external-link">View on CRAN</a></li>
+<li><a href="https://github.com/waldronlab/HGNChelper/" class="external-link">Browse source code</a></li>
+<li><a href="https://github.com/waldronlab/HGNChelper/issues" class="external-link">Report a bug</a></li>
 </ul>
 </div>
+
 <div class="license">
-<h2>License</h2>
+<h2 data-toc-skip>License</h2>
 <ul class="list-unstyled">
 <li>GPL (&gt;=2.0)</li>
 </ul>
 </div>
+
+
 <div class="citation">
-<h2>Citation</h2>
+<h2 data-toc-skip>Citation</h2>
 <ul class="list-unstyled">
-<li><a href="authors.html">Citing HGNChelper</a></li>
+<li><a href="authors.html#citation">Citing HGNChelper</a></li>
 </ul>
 </div>
+
 <div class="developers">
-<h2>Developers</h2>
+<h2 data-toc-skip>Developers</h2>
 <ul class="list-unstyled">
 <li>Sehyun Oh <br><small class="roles"> Author </small>  </li>
 <li>Ayush Aggarwal <br><small class="roles"> Author </small>  </li>
@@ -139,25 +136,28 @@
 </ul>
 </div>
 
-  <div class="dev-status">
-<h2>Dev status</h2>
+<div class="dev-status">
+<h2 data-toc-skip>Dev status</h2>
 <ul class="list-unstyled">
-<li><a href="https://github.com/waldronlab/HGNChelper/actions"><img src="https://github.com/waldronlab/HGNChelper/workflows/R-CMD-check/badge.svg" alt="R build status"></a></li>
-<li><a href="https://cran.r-project.org/package=HGNChelper"><img src="https://cranlogs.r-pkg.org/badges/HGNChelper"></a></li>
-<li><a href="https://codecov.io/github/waldronlab/HGNChelper?branch=master"><img src="https://codecov.io/github/waldronlab/HGNChelper/coverage.svg?branch=master" alt="Coverage Status"></a></li>
-<li><a href="https://zenodo.org/badge/latestdoi/139589811"><img src="https://zenodo.org/badge/139589811.svg" alt="DOI"></a></li>
+<li><a href="https://github.com/waldronlab/HGNChelper/actions" class="external-link"><img src="https://github.com/waldronlab/HGNChelper/workflows/R-CMD-check/badge.svg" alt="R build status"></a></li>
+<li><a href="https://cran.r-project.org/package=HGNChelper" class="external-link"><img src="https://cranlogs.r-pkg.org/badges/HGNChelper"></a></li>
+<li><a href="https://codecov.io/github/waldronlab/HGNChelper?branch=master" class="external-link"><img src="https://codecov.io/github/waldronlab/HGNChelper/coverage.svg?branch=master" alt="Coverage Status"></a></li>
+<li><a href="https://zenodo.org/badge/latestdoi/139589811" class="external-link"><img src="https://zenodo.org/badge/139589811.svg" alt="DOI"></a></li>
 </ul>
 </div>
-</div>
+
+  </div>
 </div>
 
 
       <footer><div class="copyright">
-  <p>Developed by Sehyun Oh, Ayush Aggarwal, Markus Riester, Levi Waldron.</p>
+  <p></p>
+<p>Developed by Sehyun Oh, Ayush Aggarwal, Markus Riester, Levi Waldron.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
+  <p></p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
 </div>
 
       </footer>
@@ -165,6 +165,8 @@
 
   
 
+
+  
 
   </body>
 </html>
