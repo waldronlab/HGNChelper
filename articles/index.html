@@ -33,7 +33,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">HGNChelper</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.8.8</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.8.9</span>
       </span>
     </div>
 
@@ -78,7 +78,7 @@
       <h1 data-toc-skip>HGNChelper Introduction</h1>
                         <h4 data-toc-skip class="author">Levi Waldron and Markus Riester</h4>
             
-            <h4 data-toc-skip class="date">2022-04-04</h4>
+            <h4 data-toc-skip class="date">2022-04-05</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/waldronlab/HGNChelper/blob/HEAD/vignettes/index.Rmd" class="external-link"><code>vignettes/index.Rmd</code></a></small>
       <div class="hidden name"><code>index.Rmd</code></div>
@@ -111,7 +111,7 @@
 <span class="va">human</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"FN1"</span>, <span class="st">"tp53"</span>, <span class="st">"UNKNOWNGENE"</span>,<span class="st">"7-Sep"</span>, <span class="st">"9/7"</span>, <span class="st">"1-Mar"</span>, <span class="st">"Oct4"</span>, <span class="st">"4-Oct"</span>,
       <span class="st">"OCT4-PG4"</span>, <span class="st">"C19ORF71"</span>, <span class="st">"C19orf71"</span><span class="op">)</span>
 <span class="fu"><a href="../reference/checkGeneSymbols.html">checkGeneSymbols</a></span><span class="op">(</span><span class="va">human</span><span class="op">)</span>
-<span class="co">#&gt; Maps last updated on: Thu Mar 25 08:36:49 2021</span>
+<span class="co">#&gt; Maps last updated on: Mon Apr  4 17:31:23 2022</span>
 <span class="co">#&gt; Warning in checkGeneSymbols(human): Human gene symbols should be all upper-</span>
 <span class="co">#&gt; case except for the 'orf' in open reading frames. The case of some letters was</span>
 <span class="co">#&gt; corrected.</span>
@@ -126,8 +126,8 @@
 <span class="co">#&gt; 7         Oct4    FALSE             POU5F1</span>
 <span class="co">#&gt; 8        4-Oct    FALSE             POU5F1</span>
 <span class="co">#&gt; 9     OCT4-PG4    FALSE           POU5F1P4</span>
-<span class="co">#&gt; 10    C19ORF71    FALSE           C19orf71</span>
-<span class="co">#&gt; 11    C19orf71     TRUE           C19orf71</span></code></pre></div>
+<span class="co">#&gt; 10    C19ORF71    FALSE            TEKTIP1</span>
+<span class="co">#&gt; 11    C19orf71    FALSE            TEKTIP1</span></code></pre></div>
 <p>As you see, it even helps fix capitalization. How does it fix those Excel dates? I imported a column of all human gene symbols into Excel, then exported using a whole bunch of available date formats. Then I kept any that differed from the originals for HGNChelper’s map.</p>
 </div>
 <div class="section level2">
@@ -136,7 +136,7 @@
 <p>Mouse genes work the same way, but you need to specify the argument <code>species=mouse</code>:</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/checkGeneSymbols.html">checkGeneSymbols</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"1-Feb"</span>, <span class="st">"Pzp"</span>, <span class="st">"A2m"</span>, <span class="st">"E430008G22Rik"</span><span class="op">)</span>, species<span class="op">=</span><span class="st">"mouse"</span><span class="op">)</span>
-<span class="co">#&gt; Maps last updated on: Thu Mar 25 08:36:49 2021</span>
+<span class="co">#&gt; Maps last updated on: Mon Apr  4 17:31:23 2022</span>
 <span class="co">#&gt; Warning in checkGeneSymbols(c("1-Feb", "Pzp", "A2m", "E430008G22Rik"), species =</span>
 <span class="co">#&gt; "mouse"): x contains non-approved gene symbols</span>
 <span class="co">#&gt;               x Approved Suggested.Symbol</span>
@@ -159,9 +159,9 @@
 <p>Numbers 2 and 3 are done by comparing to a complete map of both valid and invalid but mappable symbols, shipped with HGNChelper:</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/dim.html" class="external-link">dim</a></span><span class="op">(</span><span class="va">mouse.table</span><span class="op">)</span>
-<span class="co">#&gt; [1] 372145      2</span>
+<span class="co">#&gt; [1] 742379      2</span>
 <span class="fu"><a href="https://rdrr.io/r/base/dim.html" class="external-link">dim</a></span><span class="op">(</span><span class="va">hgnc.table</span><span class="op">)</span>
-<span class="co">#&gt; [1] 100034      3</span></code></pre></div>
+<span class="co">#&gt; [1] 101345      3</span></code></pre></div>
 <p>These are a combination of manually generated Excel mogrifications that remain constant, and aliases that can become out of date with time.</p>
 </div>
 <div class="section level2">
@@ -179,21 +179,21 @@
 <p>As mentioned above genes symbols are aliased very frequently. It is possible that a gene symbol which was earlier an alias is now an approved symbol. ‘checkGeneSymbols()’ by default will give out only the approved symbol of a gene. This can be an issue specifically when analyzing an older dataset which may be referencing to a previously aliased (now approved) gene symbol mapping to another approved symbol at that time. This can be checked with ‘expand.ambiguous = TRUE’ which gives out all the mapping of a gene symbol irrespective of whether it’s an approved symbol.</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/checkGeneSymbols.html">checkGeneSymbols</a></span><span class="op">(</span><span class="st">"AAVS1"</span>, expand.ambiguous <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span>
-<span class="co">#&gt; Maps last updated on: Thu Mar 25 08:36:49 2021</span>
+<span class="co">#&gt; Maps last updated on: Mon Apr  4 17:31:23 2022</span>
 <span class="co">#&gt;       x Approved Suggested.Symbol</span>
 <span class="co">#&gt; 1 AAVS1     TRUE            AAVS1</span>
 <span class="fu"><a href="../reference/checkGeneSymbols.html">checkGeneSymbols</a></span><span class="op">(</span><span class="st">"AAVS1"</span>, expand.ambiguous <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
-<span class="co">#&gt; Maps last updated on: Thu Mar 25 08:36:49 2021</span>
+<span class="co">#&gt; Maps last updated on: Mon Apr  4 17:31:23 2022</span>
 <span class="co">#&gt;       x Approved   Suggested.Symbol</span>
 <span class="co">#&gt; 1 AAVS1     TRUE AAVS1 /// PPP1R12C</span>
 
 <span class="fu"><a href="../reference/checkGeneSymbols.html">checkGeneSymbols</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Cpamd8"</span>, <span class="st">"Mug2"</span><span class="op">)</span>, species <span class="op">=</span> <span class="st">"mouse"</span>, expand.ambiguous <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span>
-<span class="co">#&gt; Maps last updated on: Thu Mar 25 08:36:49 2021</span>
+<span class="co">#&gt; Maps last updated on: Mon Apr  4 17:31:23 2022</span>
 <span class="co">#&gt;        x Approved Suggested.Symbol</span>
 <span class="co">#&gt; 1 Cpamd8     TRUE           Cpamd8</span>
 <span class="co">#&gt; 2   Mug2     TRUE             Mug2</span>
 <span class="fu"><a href="../reference/checkGeneSymbols.html">checkGeneSymbols</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Cpamd8"</span>, <span class="st">"Mug2"</span><span class="op">)</span>, species <span class="op">=</span> <span class="st">"mouse"</span>, expand.ambiguous <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
-<span class="co">#&gt; Maps last updated on: Thu Mar 25 08:36:49 2021</span>
+<span class="co">#&gt; Maps last updated on: Mon Apr  4 17:31:23 2022</span>
 <span class="co">#&gt;        x Approved Suggested.Symbol</span>
 <span class="co">#&gt; 1 Cpamd8     TRUE  Cpamd8 /// Mug2</span>
 <span class="co">#&gt; 2   Mug2     TRUE  Mug2 /// Cpamd8</span></code></pre></div>
