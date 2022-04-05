@@ -1,12 +1,12 @@
 Package: HGNChelper
 Maintainer: Levi Waldron <lwaldron.research@gmail.com>
-Depends: R (>= 3.5.0), methods, utils
+Depends: R (>= 4.1.0), methods, utils
 Authors@R: c(person("Sehyun", "Oh", email = "sehyun.oh@sph.cuny.edu", role = c("aut")),
   person("Ayush", "Aggarwal", email = "ayush.aggarwal@igib.in", role = c("aut")),
   person("Markus", "Riester", email = "Markus.riester@novartis.com", role = c("aut")),
   person("Levi", "Waldron", email = "lwaldron.research@gmail.com", role = c("aut", "cre")))
-Version: 0.8.8
-Date: 2021-03-25
+Version: 0.8.9
+Date: 2022-04-04
 License: GPL (>=2.0)
 Title: Identify and Correct Invalid HGNC Human Gene Symbols and MGI Mouse Gene Symbols
 Description: Contains functions for
@@ -17,7 +17,7 @@ Description: Contains functions for
 URL: https://github.com/waldronlab/HGNChelper
 BugReports: https://github.com/waldronlab/HGNChelper/issues
 LazyData: TRUE
-RoxygenNote: 7.1.1.9000
+RoxygenNote: 7.1.2
 Encoding: UTF-8
 Imports: splitstackshape
 Suggests: testthat,
