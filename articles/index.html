@@ -167,7 +167,7 @@
 <div class="section level2">
 <h2 id="updating-maps-of-aliased-gene-symbols">Updating maps of aliased gene symbols<a class="anchor" aria-label="anchor" href="#updating-maps-of-aliased-gene-symbols"></a>
 </h2>
-<p>Gene symbols are aliased much more frequently than I can update this package, like every day. If you want the most current maps of aliases, you can either:</p>
+<p>Gene symbols are aliased much more frequently than I can update this package, like every day. We intentionally avoid automatic update of the map to maintain reproducibility, because the same code from the same version of HGNChelper could produce different results at any time with automatic map update. If you want the most current maps of aliases, you can either:</p>
 <ol style="list-style-type: decimal">
 <li>use the <code><a href="../reference/getCurrentMaps.html">getCurrentHumanMap()</a></code> or <code><a href="../reference/getCurrentMaps.html">getCurrentMouseMap()</a></code> function, and provide the returned result through the <code>map=</code> argument of <code><a href="../reference/checkGeneSymbols.html">checkGeneSymbols()</a></code>, or</li>
 <li>See the instructions for updating your package locally at <a href="https://github.com/waldronlab/HGNChelper" class="external-link uri">https://github.com/waldronlab/HGNChelper</a> (it’s just one command-line command as long as you have R and <a href="https://cran.r-project.org/package=roxygen2" class="external-link">roxygen2</a> installed)</li>
