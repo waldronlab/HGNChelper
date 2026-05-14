@@ -1,0 +1,94 @@
+# --------------------------------------------
+# CITATION file created with {cffr} R package
+# See also: https://docs.ropensci.org/cffr/
+# --------------------------------------------
+ 
+cff-version: 1.2.0
+message: 'To cite package "HGNChelper" in publications use:'
+type: software
+title: 'HGNChelper: Identify and Correct Invalid HGNC Human Gene Symbols and MGI Mouse
+  Gene Symbols'
+version: 0.8.15
+identifiers:
+- type: doi
+  value: 10.32614/CRAN.package.HGNChelper
+abstract: Contains functions for identifying and correcting HGNC human gene symbols
+  and MGI mouse gene symbols which have been converted to date format by Excel, withdrawn,
+  or aliased. Also contains functions for reversibly converting between HGNC symbols
+  and valid R names.
+authors:
+- family-names: Oh
+  given-names: Sehyun
+  email: sehyun.oh@sph.cuny.edu
+- family-names: Aggarwal
+  given-names: Ayush
+  email: ayush.aggarwal@igib.in
+- family-names: Riester
+  given-names: Markus
+  email: Markus.riester@novartis.com
+- family-names: Waldron
+  given-names: Levi
+  email: lwaldron.research@gmail.com
+preferred-citation:
+  type: article
+  title: 'HGNChelper: identification and correction of invalid gene symbols for human
+    and mouse'
+  authors:
+  - family-names: Oh
+    given-names: Sehyun
+    email: sehyun.oh@sph.cuny.edu
+  - family-names: Abdelnabi
+    given-names: Jasmine
+  - family-names: Al-Dulaimi
+    given-names: Ragheed
+  - family-names: Aggarwal
+    given-names: Ayush
+    email: ayush.aggarwal@igib.in
+  - family-names: Ramos
+    given-names: Marcel
+  - family-names: Cabrera
+    given-names: Carmen Rodriguez
+  - family-names: Chan
+    given-names: Tiffany
+  - family-names: Davis
+    given-names: Sean
+  - family-names: Riester
+    given-names: Markus
+    email: Markus.riester@novartis.com
+  - family-names: Waldron
+    given-names: Levi
+    email: lwaldron.research@gmail.com
+  entry: Article
+  journal: F1000 Research
+  year: '2020'
+  volume: 9:1493
+repository: https://CRAN.R-project.org/package=HGNChelper
+repository-code: https://github.com/waldronlab/HGNChelper
+url: https://waldronlab.io/HGNChelper/
+date-released: '2024-11-16'
+contact:
+- family-names: Waldron
+  given-names: Levi
+  email: lwaldron.research@gmail.com
+keywords: u24ca289073
+references:
+- type: manual
+  title: 'HGNChelper: Identify and Correct Invalid HGNC Human Gene Symbols and MGI
+    Mouse Gene Symbols'
+  authors:
+  - family-names: Oh
+    given-names: Sehyun
+    email: sehyun.oh@sph.cuny.edu
+  - family-names: Aggarwal
+    given-names: Ayush
+    email: ayush.aggarwal@igib.in
+  - family-names: Riester
+    given-names: Markus
+    email: Markus.riester@novartis.com
+  - family-names: Waldron
+    given-names: Levi
+    email: lwaldron.research@gmail.com
+  year: '2024'
+  notes: R package version 0.8.15
+  url: https://github.com/waldronlab/HGNChelper
+
