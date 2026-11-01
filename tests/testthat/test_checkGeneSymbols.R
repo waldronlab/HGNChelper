@@ -1,7 +1,7 @@
 ## human test 1
 x = c("FN1", "TP53", "UNKNOWNGENE",
       "7-Sep", "9/7", "1-Mar", "Oct4", "4-Oct", "OCT4-PG4", 
-      "C2ORF88", "C2orf88")
+      "C9ORF72", "C9orf72")
 
 expect_warning(res <- checkGeneSymbols(x))
 
@@ -12,7 +12,7 @@ expect_equal(res[,2], c(TRUE, TRUE, FALSE,
 
 expected.correct <- c("FN1", "TP53", NA,
                       "SEPTIN7", "SEPTIN7", "MARCHF1 /// MTARC1",
-                      "POU5F1", "POU5F1", "POU5F1P4", "C2orf88", "C2orf88")
+                      "POU5F1", "POU5F1", "POU5F1P4", "C9orf72", "C9orf72")
 
 expect_equal(as.character(res[,3]), expected.correct)
 

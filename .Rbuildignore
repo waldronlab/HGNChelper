@@ -16,3 +16,4 @@ index.md
 ^update\.sh$
 MGI_EntrezGene.rpt
 hgnc_complete_set.txt
+^CITATION\.cff$

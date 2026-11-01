@@ -13,7 +13,7 @@
 #' data("mouse.table", package="HGNChelper")
 #' head(mouse.table)
 #' 
-#' @source Extracted from \url{http://www.informatics.jax.org/downloads/reports/MGI_EntrezGene.rpt} and 
+#' @source Extracted from \url{https://www.informatics.jax.org/downloads/reports/MGI_EntrezGene.rpt} and 
 #' system.file("extdata/HGNChelper_mog_map_MGI_AMC_2016_03_30.csv", package="HGNChelper")
 "mouse.table"
 

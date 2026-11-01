@@ -22,6 +22,7 @@ Useful links:
 
 Authors:
 \itemize{
+  \item Levi Waldron \email{lwaldron.research@gmail.com}
   \item Sehyun Oh \email{sehyun.oh@sph.cuny.edu}
   \item Ayush Aggarwal \email{ayush.aggarwal@igib.in}
   \item Markus Riester \email{Markus.riester@novartis.com}

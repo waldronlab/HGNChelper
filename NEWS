@@ -1,5 +1,10 @@
 # HGNChelper
 ----------------------------------------------------------------
+## Changes in version 0.8.16
+* Built-in maps updated to Nov 1 2026
+* MGI has re-issued its regulatory region (Rr) identifiers, so the mouse
+  map has large turnover in those entries; gene symbols are unaffected
+
 ## Changes in version 0.8.15
 * Update URL for HGNC map download
 * Built-in maps updated to Nov 16 2024

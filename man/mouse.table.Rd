@@ -5,14 +5,14 @@
 \alias{mouse.table}
 \title{All current and withdrawn MGI mouse symbols and Excel-mogrified symbols}
 \format{
-An object of class \code{data.frame} with 790110 rows and 2 columns.
+An object of class \code{data.frame} with 734324 rows and 2 columns.
 }
 \source{
-Extracted from \url{http://www.informatics.jax.org/downloads/reports/MGI_EntrezGene.rpt} and 
+Extracted from \url{https://www.informatics.jax.org/downloads/reports/MGI_EntrezGene.rpt} and 
 system.file("extdata/HGNChelper_mog_map_MGI_AMC_2016_03_30.csv", package="HGNChelper")
 }
 \usage{
-mouse.table
+data(mouse.table)
 }
 \description{
 A \code{data.frame} with the first column providing a gene symbol or 
