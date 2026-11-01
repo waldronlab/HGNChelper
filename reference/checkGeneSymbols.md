@@ -79,7 +79,7 @@ library(HGNChelper)
 human <- c("FN1", "TP53", "UNKNOWNGENE","7-Sep", "9/7", "1-Mar", "Oct4", "4-Oct",
       "OCT4-PG4", "C19ORF71", "C19orf71")
 checkGeneSymbols(human)
-#> Maps last updated on: Sat Nov 16 10:35:32 2024
+#> Maps last updated on: Sun Nov  1 00:25:13 2026
 #> Warning: Human gene symbols should be all upper-case except for the 'orf' in open reading frames. The case of some letters was corrected.
 #> Warning: x contains non-approved gene symbols
 #>              x Approved   Suggested.Symbol
@@ -98,11 +98,11 @@ checkGeneSymbols(human)
 ## Mouse
 mouse <- c("1-Feb", "Pzp", "A2m")
 checkGeneSymbols(mouse, species="mouse")
-#> Maps last updated on: Sat Nov 16 10:35:32 2024
+#> Maps last updated on: Sun Nov  1 00:25:13 2026
 #> Warning: x contains non-approved gene symbols
 #>       x Approved Suggested.Symbol
 #> 1 1-Feb    FALSE             Feb1
-#> 2   Pzp     TRUE              Pzp
+#> 2   Pzp    FALSE             Pzp2
 #> 3   A2m     TRUE              A2m
 
 ## expand.ambiguous
@@ -110,23 +110,23 @@ checkGeneSymbols(mouse, species="mouse")
 ## Human
 human <- "AAVS1"
 checkGeneSymbols(human, expand.ambiguous=FALSE)
-#> Maps last updated on: Sat Nov 16 10:35:32 2024
+#> Maps last updated on: Sun Nov  1 00:25:13 2026
 #>       x Approved Suggested.Symbol
 #> 1 AAVS1     TRUE            AAVS1
 checkGeneSymbols(human, expand.ambiguous=TRUE)
-#> Maps last updated on: Sat Nov 16 10:35:32 2024
+#> Maps last updated on: Sun Nov  1 00:25:13 2026
 #>       x Approved   Suggested.Symbol
 #> 1 AAVS1     TRUE AAVS1 /// PPP1R12C
 
 ## Mouse
 mouse <- c("Cpamd8", "Mug2")
 checkGeneSymbols(mouse, species = "mouse", expand.ambiguous = FALSE)
-#> Maps last updated on: Sat Nov 16 10:35:32 2024
+#> Maps last updated on: Sun Nov  1 00:25:13 2026
 #>        x Approved Suggested.Symbol
 #> 1 Cpamd8     TRUE           Cpamd8
 #> 2   Mug2     TRUE             Mug2
 checkGeneSymbols(mouse, species = "mouse", expand.ambiguous = TRUE)
-#> Maps last updated on: Sat Nov 16 10:35:32 2024
+#> Maps last updated on: Sun Nov  1 00:25:13 2026
 #>        x Approved Suggested.Symbol
 #> 1 Cpamd8     TRUE  Cpamd8 /// Mug2
 #> 2   Mug2     TRUE  Mug2 /// Cpamd8

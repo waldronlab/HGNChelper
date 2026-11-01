@@ -11,12 +11,12 @@ approved HGNC human gene symbol.
 ## Usage
 
 ``` r
-hgnc.table
+data(hgnc.table)
 ```
 
 ## Format
 
-An object of class `data.table` (inherits from `data.frame`) with 103939
+An object of class `data.table` (inherits from `data.frame`) with 106168
 rows and 3 columns.
 
 ## Source
@@ -33,9 +33,9 @@ head(hgnc.table)
 #>        Symbol Approved.Symbol chromosome
 #>        <char>          <char>     <char>
 #> 1:       A1BG            A1BG         19
-#> 2:   A1BG-AS1        A1BG-AS1         19
-#> 3:   FLJ23569        A1BG-AS1         19
-#> 4:     A1BGAS        A1BG-AS1         19
-#> 5:    A1BG-AS        A1BG-AS1         19
-#> 6: NCRNA00181        A1BG-AS1         19
+#> 2:   FLJ23569        A1BG-AS1         19
+#> 3:   A1BG-AS1        A1BG-AS1         19
+#> 4: NCRNA00181        A1BG-AS1         19
+#> 5:     A1BGAS        A1BG-AS1         19
+#> 6:    A1BG-AS        A1BG-AS1         19
 ```

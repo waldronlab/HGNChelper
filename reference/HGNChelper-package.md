@@ -21,6 +21,8 @@ Useful links:
 
 Authors:
 
+- Levi Waldron <lwaldron.research@gmail.com>
+
 - Sehyun Oh <sehyun.oh@sph.cuny.edu>
 
 - Ayush Aggarwal <ayush.aggarwal@igib.in>

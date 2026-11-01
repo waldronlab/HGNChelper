@@ -99,7 +99,7 @@ library(HGNChelper)
 human = c("FN1", "tp53", "UNKNOWNGENE","7-Sep", "9/7", "1-Mar", "Oct4", "4-Oct",
       "OCT4-PG4", "C19ORF71", "C19orf71")
 checkGeneSymbols(human)
-#> Maps last updated on: Sat Nov 16 10:35:32 2024
+#> Maps last updated on: Sun Nov  1 00:25:13 2026
 #> Warning in checkGeneSymbols(human): Human gene symbols should be all upper-case
 #> except for the 'orf' in open reading frames. The case of some letters was
 #> corrected.
@@ -131,12 +131,12 @@ Mouse genes work the same way, but you need to specify the argument
 ``` r
 
 checkGeneSymbols(c("1-Feb", "Pzp", "A2m", "E430008G22Rik"), species="mouse")
-#> Maps last updated on: Sat Nov 16 10:35:32 2024
+#> Maps last updated on: Sun Nov  1 00:25:13 2026
 #> Warning in checkGeneSymbols(c("1-Feb", "Pzp", "A2m", "E430008G22Rik"), species
 #> = "mouse"): x contains non-approved gene symbols
 #>               x Approved Suggested.Symbol
 #> 1         1-Feb    FALSE             Feb1
-#> 2           Pzp     TRUE              Pzp
+#> 2           Pzp    FALSE             Pzp2
 #> 3           A2m     TRUE              A2m
 #> 4 E430008G22Rik    FALSE             <NA>
 ```
@@ -168,9 +168,9 @@ and invalid but mappable symbols, shipped with HGNChelper:
 ``` r
 
 dim(mouse.table)
-#> [1] 790110      2
+#> [1] 734324      2
 dim(hgnc.table)
-#> [1] 103939      3
+#> [1] 106168      3
 ```
 
 These are a combination of manually generated Excel mogrifications that
@@ -213,21 +213,21 @@ an approved symbol.
 ``` r
 
 checkGeneSymbols("AAVS1", expand.ambiguous = FALSE)
-#> Maps last updated on: Sat Nov 16 10:35:32 2024
+#> Maps last updated on: Sun Nov  1 00:25:13 2026
 #>       x Approved Suggested.Symbol
 #> 1 AAVS1     TRUE            AAVS1
 checkGeneSymbols("AAVS1", expand.ambiguous = TRUE)
-#> Maps last updated on: Sat Nov 16 10:35:32 2024
+#> Maps last updated on: Sun Nov  1 00:25:13 2026
 #>       x Approved   Suggested.Symbol
 #> 1 AAVS1     TRUE AAVS1 /// PPP1R12C
 
 checkGeneSymbols(c("Cpamd8", "Mug2"), species = "mouse", expand.ambiguous = FALSE)
-#> Maps last updated on: Sat Nov 16 10:35:32 2024
+#> Maps last updated on: Sun Nov  1 00:25:13 2026
 #>        x Approved Suggested.Symbol
 #> 1 Cpamd8     TRUE           Cpamd8
 #> 2   Mug2     TRUE             Mug2
 checkGeneSymbols(c("Cpamd8", "Mug2"), species = "mouse", expand.ambiguous = TRUE)
-#> Maps last updated on: Sat Nov 16 10:35:32 2024
+#> Maps last updated on: Sun Nov  1 00:25:13 2026
 #>        x Approved Suggested.Symbol
 #> 1 Cpamd8     TRUE  Cpamd8 /// Mug2
 #> 2   Mug2     TRUE  Mug2 /// Cpamd8

@@ -11,17 +11,17 @@ approved MGI mouse gene symbol.
 ## Usage
 
 ``` r
-mouse.table
+data(mouse.table)
 ```
 
 ## Format
 
-An object of class `data.frame` with 790110 rows and 2 columns.
+An object of class `data.frame` with 734324 rows and 2 columns.
 
 ## Source
 
 Extracted from
-<http://www.informatics.jax.org/downloads/reports/MGI_EntrezGene.rpt>
+<https://www.informatics.jax.org/downloads/reports/MGI_EntrezGene.rpt>
 and system.file("extdata/HGNChelper_mog_map_MGI_AMC_2016_03_30.csv",
 package="HGNChelper")
 

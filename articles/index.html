@@ -7,8 +7,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <title>HGNChelper Introduction • HGNChelper</title>
 <script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<link href="../deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet">
-<script src="../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="../deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
+<link href="../deps/bootstrap-5.3.8/bootstrap.min.css" rel="stylesheet">
+<script src="../deps/bootstrap-5.3.8/bootstrap.bundle.min.js"></script><link href="../deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
 <link href="../deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet">
 <script src="../deps/headroom-0.11.0/headroom.min.js"></script><script src="../deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="../deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="../deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="../deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="../deps/search-1.0.0/fuse.min.js"></script><script src="../deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="HGNChelper Introduction">
 </head>
@@ -20,7 +20,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">HGNChelper</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.8.15</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.8.16</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -59,7 +59,7 @@
                         <h4 data-toc-skip class="author">Levi Waldron
 and Markus Riester</h4>
             
-            <h4 data-toc-skip class="date">2026-05-14</h4>
+            <h4 data-toc-skip class="date">2026-11-01</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/waldronlab/HGNChelper/blob/devel/vignettes/index.Rmd" class="external-link"><code>vignettes/index.Rmd</code></a></small>
       <div class="d-none name"><code>index.Rmd</code></div>
@@ -105,7 +105,7 @@ valid and a third column with a corrected gene list.</p>
 <span><span class="va">human</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"FN1"</span>, <span class="st">"tp53"</span>, <span class="st">"UNKNOWNGENE"</span>,<span class="st">"7-Sep"</span>, <span class="st">"9/7"</span>, <span class="st">"1-Mar"</span>, <span class="st">"Oct4"</span>, <span class="st">"4-Oct"</span>,</span>
 <span>      <span class="st">"OCT4-PG4"</span>, <span class="st">"C19ORF71"</span>, <span class="st">"C19orf71"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="../reference/checkGeneSymbols.html">checkGeneSymbols</a></span><span class="op">(</span><span class="va">human</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Maps last updated on: Sat Nov 16 10:35:32 2024</span></span>
+<span><span class="co">#&gt; Maps last updated on: Sun Nov  1 00:25:13 2026</span></span>
 <span><span class="co">#&gt; Warning in checkGeneSymbols(human): Human gene symbols should be all upper-case</span></span>
 <span><span class="co">#&gt; except for the 'orf' in open reading frames. The case of some letters was</span></span>
 <span><span class="co">#&gt; corrected.</span></span>
@@ -134,12 +134,12 @@ any that differed from the originals for HGNChelper’s map.</p>
 <code>species=mouse</code>:</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/checkGeneSymbols.html">checkGeneSymbols</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"1-Feb"</span>, <span class="st">"Pzp"</span>, <span class="st">"A2m"</span>, <span class="st">"E430008G22Rik"</span><span class="op">)</span>, species<span class="op">=</span><span class="st">"mouse"</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Maps last updated on: Sat Nov 16 10:35:32 2024</span></span>
+<span><span class="co">#&gt; Maps last updated on: Sun Nov  1 00:25:13 2026</span></span>
 <span><span class="co">#&gt; Warning in checkGeneSymbols(c("1-Feb", "Pzp", "A2m", "E430008G22Rik"), species</span></span>
 <span><span class="co">#&gt; = "mouse"): x contains non-approved gene symbols</span></span>
 <span><span class="co">#&gt;               x Approved Suggested.Symbol</span></span>
 <span><span class="co">#&gt; 1         1-Feb    FALSE             Feb1</span></span>
-<span><span class="co">#&gt; 2           Pzp     TRUE              Pzp</span></span>
+<span><span class="co">#&gt; 2           Pzp    FALSE             Pzp2</span></span>
 <span><span class="co">#&gt; 3           A2m     TRUE              A2m</span></span>
 <span><span class="co">#&gt; 4 E430008G22Rik    FALSE             &lt;NA&gt;</span></span></code></pre></div>
 <p>Mouse gene symbols containing any capital letter, except the first
@@ -168,9 +168,9 @@ database.</li>
 and invalid but mappable symbols, shipped with HGNChelper:</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/dim.html" class="external-link">dim</a></span><span class="op">(</span><span class="va">mouse.table</span><span class="op">)</span></span>
-<span><span class="co">#&gt; [1] 790110      2</span></span>
+<span><span class="co">#&gt; [1] 734324      2</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/dim.html" class="external-link">dim</a></span><span class="op">(</span><span class="va">hgnc.table</span><span class="op">)</span></span>
-<span><span class="co">#&gt; [1] 103939      3</span></span></code></pre></div>
+<span><span class="co">#&gt; [1] 106168      3</span></span></code></pre></div>
 <p>These are a combination of manually generated Excel mogrifications
 that remain constant, and aliases that can become out of date with
 time.</p>
@@ -208,21 +208,21 @@ gives out all the mapping of a gene symbol irrespective of whether it’s
 an approved symbol.</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/checkGeneSymbols.html">checkGeneSymbols</a></span><span class="op">(</span><span class="st">"AAVS1"</span>, expand.ambiguous <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Maps last updated on: Sat Nov 16 10:35:32 2024</span></span>
+<span><span class="co">#&gt; Maps last updated on: Sun Nov  1 00:25:13 2026</span></span>
 <span><span class="co">#&gt;       x Approved Suggested.Symbol</span></span>
 <span><span class="co">#&gt; 1 AAVS1     TRUE            AAVS1</span></span>
 <span><span class="fu"><a href="../reference/checkGeneSymbols.html">checkGeneSymbols</a></span><span class="op">(</span><span class="st">"AAVS1"</span>, expand.ambiguous <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Maps last updated on: Sat Nov 16 10:35:32 2024</span></span>
+<span><span class="co">#&gt; Maps last updated on: Sun Nov  1 00:25:13 2026</span></span>
 <span><span class="co">#&gt;       x Approved   Suggested.Symbol</span></span>
 <span><span class="co">#&gt; 1 AAVS1     TRUE AAVS1 /// PPP1R12C</span></span>
 <span></span>
 <span><span class="fu"><a href="../reference/checkGeneSymbols.html">checkGeneSymbols</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Cpamd8"</span>, <span class="st">"Mug2"</span><span class="op">)</span>, species <span class="op">=</span> <span class="st">"mouse"</span>, expand.ambiguous <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Maps last updated on: Sat Nov 16 10:35:32 2024</span></span>
+<span><span class="co">#&gt; Maps last updated on: Sun Nov  1 00:25:13 2026</span></span>
 <span><span class="co">#&gt;        x Approved Suggested.Symbol</span></span>
 <span><span class="co">#&gt; 1 Cpamd8     TRUE           Cpamd8</span></span>
 <span><span class="co">#&gt; 2   Mug2     TRUE             Mug2</span></span>
 <span><span class="fu"><a href="../reference/checkGeneSymbols.html">checkGeneSymbols</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Cpamd8"</span>, <span class="st">"Mug2"</span><span class="op">)</span>, species <span class="op">=</span> <span class="st">"mouse"</span>, expand.ambiguous <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Maps last updated on: Sat Nov 16 10:35:32 2024</span></span>
+<span><span class="co">#&gt; Maps last updated on: Sun Nov  1 00:25:13 2026</span></span>
 <span><span class="co">#&gt;        x Approved Suggested.Symbol</span></span>
 <span><span class="co">#&gt; 1 Cpamd8     TRUE  Cpamd8 /// Mug2</span></span>
 <span><span class="co">#&gt; 2   Mug2     TRUE  Mug2 /// Cpamd8</span></span></code></pre></div>
@@ -249,7 +249,7 @@ an approved symbol.</p>
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.0.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.1.</p>
 </div>
 
     </footer>
